@@ -9,48 +9,18 @@ const Block = (props) => {
     <div>
        <ChatBot /> 
        <div className="small-container">
-           <h2>Featured Products</h2>
-           <div className="row" style={{textAlign: "center"}}>
-               <div className="col-4">
-                    <a href="https://placeholder.com"><img src="https://via.placeholder.com/150"/></a>
-                    <h5>Product1: <b>Rs: 5000</b></h5>
-               </div>
-               <div className="col-4">
-                    <a href="https://placeholder.com"><img src="https://via.placeholder.com/150"/></a>
-                    <h5>Product2: <b>Rs: 5000</b></h5>
-               </div>
-               <div className="col-4">
-                    <a href="https://placeholder.com"><img src="https://via.placeholder.com/150"/></a>
-                    <h5>Product3: <b>Rs: 5000</b></h5>
-               </div>
-               <div className="col-4">
-                    <a href="https://placeholder.com"><img src="https://via.placeholder.com/150"/></a>
-                    <h5>Product4: <b>Rs: 5000</b></h5>
-               </div>
-               <div className="col-4">
-                    <a href="https://placeholder.com"><img src="https://via.placeholder.com/150"/></a>
-                    <h5>Product4: <b>Rs: 5000</b></h5>
-               </div>
-               <div className="col-4">
-                    <a href="https://placeholder.com"><img src="https://via.placeholder.com/150"/></a>
-                    <h5>Product4: <b>Rs: 5000</b></h5>
-               </div>
-               <div className="col-4">
-                    <a href="https://placeholder.com"><img src="https://via.placeholder.com/150"/></a>
-                    <h5>Product4: <b>Rs: 5000</b></h5>
-               </div>
-               <div className="col-4">
-                    <a href="https://placeholder.com"><img src="https://via.placeholder.com/150"/></a>
-                    <h5>Product4: <b>Rs: 5000</b></h5>
-               </div>
-               <div className="col-4">
-                    <a href="https://placeholder.com"><img src="https://via.placeholder.com/150"/></a>
-                    <h5>Product4: <b>Rs: 5000</b></h5>
-               </div>
-               <div className="col-4">
-                    <a href="https://placeholder.com"><img src="https://via.placeholder.com/150"/></a>
-                    <h5>Product4: <b>Rs: 5000</b></h5>
-               </div>
+           <h2 style={{textAlign:"center"}}>Featured Products</h2>
+           <div className="row" style={{textAlign: "center", marginBottom: '3cm'}}>
+               {props.featured.map((item)=>{
+                   return(
+                       <>
+                        <div className="col-4">
+                        <a><img src={item.pic} style={{height:"150px", width:"150px"}}/></a>
+                        <h5>{item.name} <b>Rs: {item.price}</b></h5>
+                        </div>
+                       </>
+                   )
+               })}
            </div>
        </div>
     </div>
