@@ -2,6 +2,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Block from './components/Block';
+import Product from './components/product';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
     <Navbar />
     <Block featured={featured} />
     <Footer />
+    {/* <Product /> */}
     </div>
   );
 }
