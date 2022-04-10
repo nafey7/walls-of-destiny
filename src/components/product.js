@@ -3,28 +3,10 @@ import Footer from './Footer';
 
 
 function Product() {
-    let wrapper={
-        width:"100%",
-        height:"100%",
-        display:"grid",
-        gridtemplatecolumns:"65% 35%",
-    }
-    let leftcontainer = {
-        width: "100%",
-        backgroundcolor: "#EDF3F8",
-        height: "100%",
-        zindex: "1"
-    }
-    let rightcontainer = {
-        width: "100%",
-        height: "100%",
-        backgroundcolor: "#B6E2F8",
-        zindex: "10"
-    }
     return (
-    <div className="App" style={{height:"100%", backgroundColor:"green", position:"relative", width:"100%"}}>
+    <div className="Product" style={{height:"100%", backgroundColor:"green", position:"relative", width:"100%"}}>
     <Navbar />
-    <div class="container">
+    <div class="container" style={{height:"100%", backgroundColor:"white", position:"relative", width:"100%"}}>
         <div class="row align-items-center">
         <div class="col-2">
             
