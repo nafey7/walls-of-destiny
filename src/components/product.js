@@ -26,15 +26,8 @@ function Product(props) {
     <h2 style={{textAlign:"center"}}>Featured Products</h2>
     <div className="row" style={{textAlign: "center", marginBottom: '3cm'}}>
     <div className="col-4">
-        {props.featured.map((item)=>{
-            return(
-                <> 
-                 <a><img src={item.pic} style={{height:"150px", width:"150px"}}/></a>
-                 <h5>{item.name} <b>Rs: {item.price}</b></h5>
-                 
-                </>
-            )
-        })}
+        <a><img src={props.pic} style={{height:"150px", width:"150px"}}/></a>
+        <h5>{props.name} <b>Rs: {props.price}</b></h5>
     </div>
     </div>
 </div>
