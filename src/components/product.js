@@ -2,37 +2,42 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 
 
-function Product() {
+function Product(props) {
+    let wrapper={
+        width:"100%",
+        height:"100%",
+        display:"grid",
+        gridtemplatecolumns:"65% 35%",
+    }
+    let leftcontainer = {
+        width: "100%",
+        backgroundcolor: "#EDF3F8",
+        height: "100%",
+        zindex: "1"
+    }
+    let rightcontainer = {
+        width: "100%",
+        height: "100%",
+        backgroundcolor: "#B6E2F8",
+        zindex: "10"
+    }
     return (
-    <div className="Product" style={{height:"100%", backgroundColor:"green", position:"relative", width:"100%"}}>
-    <Navbar />
-    <div class="container" style={{height:"100%", backgroundColor:"white", position:"relative", width:"100%"}}>
-        <div class="row align-items-center">
-        <div class="col-2">
-            
-            </div>
-            <div class="col-4">
-            
-            <a href="https://placeholder.com"><img src="https://via.placeholder.com/150"/></a>
-                    
-            </div>
-            <div class="col-4">
-            <h1>Product Details:</h1>
-            <h5><b>Price: </b>Rs: 5000</h5>
-            <h5><b>Color: </b>black</h5>
-            <h5><b>Dimensions:(LxWxB) </b>idk</h5>
-            <h5><b>Product Description:</b>nice product pls buy</h5>
-            <br></br>
-            <br></br>
-            <br></br>
-            <button type="button" class="btn btn-dark">Add to cart</button>
-            <button type="button" class="btn btn-success">Buy Now</button>
-            </div>
-        </div>
-    </div> 
-    <Footer />
-    
+    <div className="small-container">
+    <h2 style={{textAlign:"center"}}>Featured Products</h2>
+    <div className="row" style={{textAlign: "center", marginBottom: '3cm'}}>
+    <div className="col-4">
+        {props.featured.map((item)=>{
+            return(
+                <> 
+                 <a><img src={item.pic} style={{height:"150px", width:"150px"}}/></a>
+                 <h5>{item.name} <b>Rs: {item.price}</b></h5>
+                 
+                </>
+            )
+        })}
     </div>
+    </div>
+</div>
   );
 }
 
