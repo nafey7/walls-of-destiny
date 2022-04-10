@@ -2,7 +2,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 
 
-function Product() {
+function Product(props) {
     let wrapper={
         width:"100%",
         height:"100%",
@@ -23,7 +23,7 @@ function Product() {
     }
     return (
     <div className="App" style={{height:"100%", backgroundColor:"green", position:"relative", width:"100%"}}>
-    <Navbar />
+    {/* <Navbar /> */}
     <div class="container">
         <div class="row align-items-center">
         <div class="col-2">
@@ -31,15 +31,15 @@ function Product() {
             </div>
             <div class="col-4">
             
-            <a href="https://placeholder.com"><img src="https://via.placeholder.com/150"/></a>
+            <a><img src={props.pic}/></a>
                     
             </div>
             <div class="col-4">
-            <h1>Product Details:</h1>
-            <h5><b>Price: </b>Rs: 5000</h5>
-            <h5><b>Color: </b>black</h5>
-            <h5><b>Dimensions:(LxWxB) </b>idk</h5>
-            <h5><b>Product Description:</b>nice product pls buy</h5>
+            <h1>{props.name}:</h1>
+            <h5><b>{props.price}: </b>Rs: 5000</h5>
+            <h5><b>{props.color}: </b>black</h5>
+            <h5><b>{props.dimen}:(LxWxB) </b>idk</h5>
+            <h5><b>Product Description:</b>{props.details}</h5>
             <br></br>
             <br></br>
             <br></br>
@@ -48,7 +48,7 @@ function Product() {
             </div>
         </div>
     </div> 
-    <Footer />
+    {/* <Footer /> */}
     
     </div>
   );
