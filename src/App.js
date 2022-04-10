@@ -3,14 +3,18 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Block from './components/Block';
 import Product from './components/product';
+import Cart from './components/cart';
+import ChatBot from './components/ChatBot';
 
 function App() {
   return (
-    <div className="App" style={{height:"100%", backgroundColor:"red", position:"relative", width:"100%"}}>
+    <div className="App" style={{height:"100%", backgroundColor:"#FFE5B4", position:"relative", width:"100%"}}>
     <Navbar />
     {/* <Product /> */}
-    <Block featured={featured} />
+    {/* <Block featured={featured} /> */}
+    <Cart featured={featured}/>
     <Footer />
+    <ChatBot />
     
     </div>
   );
@@ -25,6 +29,7 @@ let featured = [
   dim: "3x5x6",
   details: "nice product pls buy",
   pic: "https://d2wd2j5j7vio4j.cloudfront.net/data/carpets/Medium/2x/273-15890-150x150-01.jpg"},
+
   {name: "Carpet2",
   price: 3000,
   color: "Red",
