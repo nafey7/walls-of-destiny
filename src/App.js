@@ -11,8 +11,8 @@ function App() {
     <div className="App" style={{height:"100%", backgroundColor:"#FFE5B4", position:"relative", width:"100%"}}>
     <Navbar />
     {/* <Product /> */}
-    {/* <Block featured={featured} /> */}
-    <Cart featured={featured}/>
+    <Block featured={featured} />
+    {/* <Cart featured={featured}/> */}
     <Footer />
     <ChatBot />
     
