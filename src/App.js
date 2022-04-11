@@ -1,18 +1,25 @@
 import './App.css';
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Block from './components/Block';
-import Product from './components/product';
+import ChatBot from './components/ChatBot';
 import AddProduct from './components/AddProductAdmin';
 // import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
+    <Router>
       <div className="App" style={{height:"100%", backgroundColor:"white", position:"relative", width:"100%"}}>
-        <Navbar />
-          <Block featured={featured}/>
-        <Footer />
-      </div>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Block featured={featured}/>}/>
+            <Route path="/AddProduct" element={<AddProduct/>}/>
+          </Routes>    
+          <ChatBot />
+          <Footer />
+        </div>
+    </Router>        
   );
 }
 // dummy data
