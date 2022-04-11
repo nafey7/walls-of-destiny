@@ -4,10 +4,11 @@ const Schema = mongoose.Schema;
 const productSchema = new Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true
 
     },
-    picture: {
+    picture_url: {
         type: String,
         required: true
     },
@@ -28,6 +29,10 @@ const productSchema = new Schema({
         required: true
     },
     category: {
+        type: String,
+        required: true
+    },
+    featured: {
         type: String,
         required: true
     }
