@@ -13,7 +13,11 @@ function Cart(props) {
     }
     function handleChange(e,id){
         const { value } = e.target;
+        if (value<1){
+            removeItem(id);
+        }else{
 
+        
         const newItems = items.map(item => {
           if (item.id !== id) {
             return { ...item };
@@ -30,6 +34,7 @@ function Cart(props) {
           return { id, name, price, color, pic, quantity: value };
         })
         setItems(newItems);
+    }
     };
     if(items.length < 1){
         return(
@@ -62,7 +67,7 @@ function Cart(props) {
             </li>
             <li class="nav-item col" style={{margin:"25px 0 0 0"}}>
                 <div className="product-quantity" style={{float: "left", width: '10%'}}>
-                    <input type="number" onChange={(e) => handleChange(e, item.id)} value={item.quantity} min="1" style={{width: "40px"}}/>
+                    <input type="number" onChange={(e) => handleChange(e, item.id)} value={item.quantity} min="0" style={{width: "40px"}}/>
                     {console.log(item.quantity)}
                 </div>
             </li>
