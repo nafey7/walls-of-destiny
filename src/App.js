@@ -1,10 +1,12 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Block from './components/Block';
 import ChatBot from './components/ChatBot';
+import ErrorPage from './components/ErrorPage';
 import AddProduct from './components/AddProductAdmin';
+import Cart from './components/Cart';
 // import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -15,11 +17,14 @@ function App() {
           <Routes>
             <Route path="/" element={<Block featured={featured}/>}/>
             <Route path="/AddProduct" element={<AddProduct/>}/>
+            <Route path="/cart" element={<Cart featured={featured}/>}/>
+            <Route path="*" element={<ErrorPage message={{message: "404 not found"}}/>}/>
           </Routes>    
           <ChatBot />
           <Footer />
         </div>
     </Router>        
+    
   );
 }
 // dummy data
