@@ -8,43 +8,64 @@ import AddProduct from './components/AddProductAdmin';
 
 function App() {
   return (
-    <div className="App" style={{height:"100%", backgroundColor:"red", position:"relative", width:"100%"}}>
-    <Navbar />
-    {/* <Block /> */}
-    {/* <AddProduct /> */}
-    <Product props={featured[0]}/>
-    
-    <Footer />
-    
-    </div>
+      <div className="App" style={{height:"100%", backgroundColor:"white", position:"relative", width:"100%"}}>
+        <Navbar />
+          <Block featured={featured}/>
+        <Footer />
+      </div>
   );
 }
 // dummy data
+let prod = {name: "Carpet",
+id: 0,
+price: 3000,
+color: "Black",
+dim: "3x5x6",
+details: "nice product pls buy",
+pic: "https://d2wd2j5j7vio4j.cloudfront.net/data/carpets/Medium/2x/273-15890-150x150-01.jpg"}
 let featured = [
   {name: "Carpet",
-  price: 3000,
+  id: 0,
+  price: 4000,
+  color: "Black",
+  dim: "3x5x6",
+  details: "nice product pls buy",
   pic: "https://d2wd2j5j7vio4j.cloudfront.net/data/carpets/Medium/2x/273-15890-150x150-01.jpg"},
-  {name: "Carpet",
+
+  {name: "Carpet2",
+  id: 1,
   price: 3000,
+  color: "Red",
+  dim: "3x5x6",
+  details: "nice product pls buy now",
   pic: "https://d2wd2j5j7vio4j.cloudfront.net/data/carpets/Medium/2x/273-15890-150x150-01.jpg"},
-  {name: "Carpet",
+  {name: "Carpet3S",
+  price: 1000,
+  id: 2,
+  color: "Red",
+  dim: "3x5x6",
+  details: "nice product pls buy now",
+  pic: "https://d2wd2j5j7vio4j.cloudfront.net/data/carpets/Medium/2x/273-15890-150x150-01.jpg"},
+  {name: "Carpet2",
   price: 3000,
+  id: 3,
+  color: "Red",
+  dim: "3x5x6",
+  details: "nice product pls buy now",
   pic: "https://d2wd2j5j7vio4j.cloudfront.net/data/carpets/Medium/2x/273-15890-150x150-01.jpg"},
-  {name: "Carpet",
+  {name: "Carpet2",
   price: 3000,
+  color: "Red",
+  dim: "3x5x6",
+  details: "nice product pls buy now",
   pic: "https://d2wd2j5j7vio4j.cloudfront.net/data/carpets/Medium/2x/273-15890-150x150-01.jpg"},
-  {name: "Carpet",
+  {name: "Carpet2",
   price: 3000,
+  color: "Red",
+  dim: "3x5x6",
+  details: "nice product pls buy now",
   pic: "https://d2wd2j5j7vio4j.cloudfront.net/data/carpets/Medium/2x/273-15890-150x150-01.jpg"},
-  {name: "Carpet",
-  price: 3000,
-  pic: "https://d2wd2j5j7vio4j.cloudfront.net/data/carpets/Medium/2x/273-15890-150x150-01.jpg"},
-  {name: "Carpet",
-  price: 3000,
-  pic: "https://d2wd2j5j7vio4j.cloudfront.net/data/carpets/Medium/2x/273-15890-150x150-01.jpg"},
-  {name: "Carpet",
-  price: 3000,
-  pic: "https://d2wd2j5j7vio4j.cloudfront.net/data/carpets/Medium/2x/273-15890-150x150-01.jpg"},
+  
 ]
 
 export default App;
