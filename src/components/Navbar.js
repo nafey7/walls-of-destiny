@@ -1,13 +1,14 @@
 import React from 'react'
 import { ReactComponent as Logo } from './logo.svg';
 import Modal from 'react-modal';
-import { render } from '@testing-library/react';
+
 
 Modal.setAppElement('#root');
 
 function Navbar() {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [Check, setCheck] = React.useState(false);
+
 
   function openModal() {
     setCheck(false);
@@ -47,7 +48,7 @@ function Navbar() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">Home</a>
+                <a className="nav-link active" onClick='' aria-current="page" href="#">Home</a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#">Clocks</a>
