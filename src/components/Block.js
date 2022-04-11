@@ -1,7 +1,6 @@
 import React from 'react'
-
 import product from './product';
-import MediaCard from './card1';
+// import MediaCard from './card1';
 
 
 

@@ -1,6 +1,7 @@
 import Navbar from './Navbar';
 import Footer from './Footer';
 import ImageUploadPreviewComponent from './ImageUploadPreview'
+// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
  
 
 
@@ -14,8 +15,8 @@ function AddProduct() {
             
             </div>
             <div class="col-4">
-            <ImageUploadPreviewComponent/>
-            {/* <a href="https://placeholder.com"><img src="https://via.placeholder.com/150"/></a> */}
+            {/* <ImageUploadPreviewComponent/> */}
+            <a href="https://placeholder.com"><img src="https://via.placeholder.com/150"/></a>
                     
             </div>
             <div class="col-4">
