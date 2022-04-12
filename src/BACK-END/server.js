@@ -25,113 +25,30 @@ app.use(express.static('public'));
 app.use(morgan('dev'));
 
 
-app.post('/signup', (req,res) => {
+
+app.post('/add_product', (req,res) => {
     // let username = req.body.username;
     // let name = req.body.name;
-        // let username_1 = req.body.username;
-        // let name_1 = req.body.name;
-        // let contact_1 = req.body.contact;
-        // let email_1 = req.body.email;
-        // let password_1 = req.body.password;
-        // let address_1 = req.body.address;
-        console.log(req);
-        res.send("hi");
-    // const customer = new Customer({        
-        
-    //     username: username_1,
-    //     name: name_1,
-    //     contact: contact_1,
-    //     email: email_1,
-    //     password: password_1,
-    //     address: address_1
-        
+    const product = new Product({
+        name: 'Fancy Wall Clock 6',
+        picture_url: 'url',
+        price: 1000,
+        dimensions: '4x4',
+        color: 'Yellow',
+        description: 'This is the purple wall',
+        category: 'Frame',
+        featured: '0'
+    });
 
-
-    //     // username: req.body.username,
-    //     // name: req.body.name,
-    //     // contact: req.body.contact,
-    //     // email: req.body.email,
-    //     // password: req.body.password,
-    //     // address: req.body.address
-    // });
-    // customer.save()
-    //     .then ((res) => {
-    //         console.log(res);
-    //         res.send("Customer Sccessfully Registered")
-    //     })
-    //     .catch ((err) => {
-    //         console.log(err);
-    //     });
-    
+    product.save()
+    .then ((res) => {
+        console.log(res);
     })
+    .catch ((err) => {
+        console.log(err);
+    });
 
-
-
-// api call to add the customer to the database
-// app.get('/customer_signup', (req,res) => {
-//     // let username = req.body.username;
-//     // let name = req.body.name;
-//     const customer = new Customer({
-//         username: 'Mahad123',
-//         name: 'Mahad Beg',
-//         contact: '0321949089',
-//         email: 'mahad@gmail.com',
-//         password: 'mahad',
-//         address: '222 A-2'
-//     });
-
-//     customer.save()
-//     .then ((res) => {
-//         console.log(res);
-//     })
-//     .catch ((err) => {
-//         console.log(err);
-//     });
-
-// })
-
-// api call for the login of the admin
-// app.get('/manager_login', (req,res) => {
-//     // let username = req.body.username;
-//     // let name = req.body.name;
-//     const admin = new Admin({
-//         username: 'Tarar123',
-//         name: 'Arslan Tarar',
-//         password: 'tarar'
-//     });
-
-//     admin.save()
-//     .then ((res) => {
-//         console.log(res);
-//     })
-//     .catch ((err) => {
-//         console.log(err);
-//     });
-
-// })
-
-// app.get('/add_product', (req,res) => {
-//     // let username = req.body.username;
-//     // let name = req.body.name;
-//     const product = new Product({
-//         name: 'Fancy Wall Clock',
-//         picture: 'url',
-//         price: 1000,
-//         dimensions: '4x4',
-//         color: 'Black',
-//         description: 'This is the black wall',
-//         category: 'Clocks'
-//     });
-
-//     product.save()
-//     .then ((res) => {
-//         console.log(res);
-//     })
-//     .catch ((err) => {
-//         console.log(err);
-//     });
-
-// })
+})
 
 // app.get('/discount', (req,res) => {
 //     // let username = req.body.username;
@@ -152,26 +69,24 @@ app.post('/signup', (req,res) => {
 
 // })
 
-// app.get('/cart', (req,res) => {
-//     // let username = req.body.username;
-//     // let name = req.body.name;
-//     const cart = new Cart({
-//         customer_username: 'Mahad123',
-//         customer_email: 'mahad@gmail.com',
-//         product_name: 'Black Clock',
-//         product_id: 1,
-//         quantity: 2
-//     });
+app.get('/cart', (req,res) => {
+    // let username = req.body.username;
+    // let name = req.body.name;
+    const cart = new Cart({
+        customer_username: 'Mahad123',
+        product_name: 'Black Clock',
+        quantity: 2
+    });
 
-//     cart.save()
-//     .then ((res) => {
-//         console.log(res);
-//     })
-//     .catch ((err) => {
-//         console.log(err);
-//     });
+    cart.save()
+    .then ((res) => {
+        console.log(res);
+    })
+    .catch ((err) => {
+        console.log(err);
+    });
 
-// })
+})
 
 // api call to view the data in array of objects
 // app.post('/login', (req,res) =>{
