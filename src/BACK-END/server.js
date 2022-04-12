@@ -152,26 +152,24 @@ app.post('/signup', (req,res) => {
 
 // })
 
-// app.get('/cart', (req,res) => {
-//     // let username = req.body.username;
-//     // let name = req.body.name;
-//     const cart = new Cart({
-//         customer_username: 'Mahad123',
-//         customer_email: 'mahad@gmail.com',
-//         product_name: 'Black Clock',
-//         product_id: 1,
-//         quantity: 2
-//     });
+app.get('/cart', (req,res) => {
+    // let username = req.body.username;
+    // let name = req.body.name;
+    const cart = new Cart({
+        customer_username: 'Mahad123',
+        product_name: 'Black Clock',
+        quantity: 2
+    });
 
-//     cart.save()
-//     .then ((res) => {
-//         console.log(res);
-//     })
-//     .catch ((err) => {
-//         console.log(err);
-//     });
+    cart.save()
+    .then ((res) => {
+        console.log(res);
+    })
+    .catch ((err) => {
+        console.log(err);
+    });
 
-// })
+})
 
 // api call to view the data in array of objects
 // app.post('/login', (req,res) =>{
