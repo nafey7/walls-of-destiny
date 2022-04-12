@@ -1,15 +1,21 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 function Cart(props) {
     const [items, setItems] = React.useState(props.featured)
     let x = items.reduce((accumulator, object) => {
         return accumulator + object.price * object.quantity;
       }, 0);
+    const [total, setTotal] = React.useState(x+200)
     function removeItem(id){
         const newItems = items.filter(function(item) {
             return item.id !== id
         })
-        setItems(newItems);      
+        setItems(newItems);  
+        let x = items.reduce((accumulator, object) => {
+            return accumulator + object.price * object.quantity;
+          }, 0);
+        setTotal(x+200);    
     }
     function handleChange(e,id){
         const { value } = e.target;
@@ -33,6 +39,10 @@ function Cart(props) {
         }   
           return { id, name, price, color, pic, quantity: value };
         })
+        let x = items.reduce((accumulator, object) => {
+            return accumulator + object.price * object.quantity;
+          }, 0);
+        setTotal(x+200);
         setItems(newItems);
     }
     };
@@ -83,12 +93,20 @@ function Cart(props) {
     <div class="card" style={{textAlign: "center", margin:"50px 50px 50px 620px", width:"300px"}}>
   <div class="card-header">
   <h4 class="card-title" >Total Bill</h4>
-  <h5>Subtotal: PKR {x}</h5>
+  <h5>Subtotal: PKR {total-200}</h5>
   <h5>Delivery: PKR 200</h5>
-  <h5>Total:    PKR {x+200}</h5>
+  <h5>Total:    PKR {total}</h5>
   </div>
   <div class="card-body">
-  <button className="btn btn-success">Checkout</button>
+  <Link
+  to={{
+    pathname: "/checkout",
+  }}
+  state={total}
+>
+<button className="btn btn-success">Checkout</button>
+</Link>
+  
 
   </div>
 </div>  

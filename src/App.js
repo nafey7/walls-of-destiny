@@ -7,6 +7,7 @@ import ChatBot from './components/ChatBot';
 import ErrorPage from './components/ErrorPage';
 import AddProduct from './components/AddProductAdmin';
 import Cart from './components/Cart';
+import Checkout from './components/Checkout';
 // import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<Block featured={featured}/>}/>
             <Route path="/AddProduct" element={<AddProduct/>}/>
             <Route path="/cart" element={<Cart featured={featured}/>}/>
+            <Route path="/checkout" element={<Checkout/>}/>
             <Route path="*" element={<ErrorPage message={{message: "404 not found"}}/>}/>
           </Routes>    
           <ChatBot />
@@ -28,13 +30,6 @@ function App() {
   );
 }
 // dummy data
-let prod = {name: "Carpet",
-id: 0,
-price: 3000,
-color: "Black",
-dim: "3x5x6",
-details: "nice product pls buy",
-pic: "https://d2wd2j5j7vio4j.cloudfront.net/data/carpets/Medium/2x/273-15890-150x150-01.jpg"}
 let featured = [
   {name: "Carpet",
   id: 0,
