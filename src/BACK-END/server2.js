@@ -7,6 +7,7 @@ const Admin = require('./Models/admin');
 const Product = require('./Models/products');
 const Discount = require('./Models/discount');
 const Cart = require('./Models/cart');
+const Order = require('./Models/order');
 
 
 const app = express();
