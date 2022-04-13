@@ -89,22 +89,22 @@ app.post('/add_product', (req,res) => {
 
 // })
 
-app.get('/order_one', (req, res) => {
-    const order = new Order({
-        customer_username: 'Arslan123',
-        product_name: 'Fancy Wall Clock 2',
-        quantity: 2,
-        status: 'delivered',
-    });
+// app.get('/order_one', (req, res) => {
+//     const order = new Order({
+//         customer_username: 'Arslan123',
+//         product_name: 'Fancy Wall Clock 2',
+//         quantity: 2,
+//         status: 'delivered',
+//     });
 
-    order.save()
-    .then ((res) => {
-        console.log(res);
-    })
-    .catch ((err) => {
-        console.log(err);
-    });
-})
+//     order.save()
+//     .then ((res) => {
+//         console.log(res);
+//     })
+//     .catch ((err) => {
+//         console.log(err);
+//     });
+// })
 
 // api call to view the data in array of objects
 // app.post('/login', (req,res) =>{
