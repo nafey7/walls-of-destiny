@@ -1,6 +1,8 @@
 import React from 'react'
 import { ReactComponent as Logo } from './logo.svg';
 import Modal from 'react-modal';
+import {Link} from 'react-router-dom'
+
 
 
 Modal.setAppElement('#root');
@@ -48,19 +50,19 @@ function Navbar() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link active" onClick='' aria-current="page" href="#">Home</a>
+                <a className="nav-link active" onClick='' aria-current="page">Home</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Clocks</a>
+                <a className="nav-link">Clocks</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Decor</a>
+                <a className="nav-link">Decor</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Art</a>
+                <a className="nav-link">Art</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Lights</a>
+                <a className="nav-link">Lights</a>
               </li>
             </ul>
             
@@ -74,7 +76,12 @@ function Navbar() {
           </form>
           </div>
           <div>
-          <button className='btn btn-outline-success' style={{fontSize:"20px"}}><a href='#' ><i className="glyphicon glyphicon-shopping-cart" style={{fontSize:"20px",color:"white"}}></i></a></button>
+            <Link
+            to={{
+              pathname: "/cart",
+              state: Check // your data array of objects
+            }}
+            ><button className='btn btn-outline-success' style={{fontSize:"20px"}}><a href='#' ><i className="glyphicon glyphicon-shopping-cart" style={{fontSize:"20px",color:"white"}}></i></a></button></Link>
           <button className='btn btn-outline-success' style={{fontSize:"20px"}} onClick= {openModal}
           ><a><i className="fa fa-user" style={{fontSize:"20px",color:"white"}}/></a></button>
           </div>

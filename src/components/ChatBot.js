@@ -8,9 +8,9 @@ function ChatBot() {
     <WhatsAppWidget
 			phoneNo="923314365546"
 			position="right"
-			widgetWidth="300px"
+			widgetWidth="200px"
 			widgetWidthMobile="260px"
-			autoOpen={true}
+			autoOpen={false}
 			autoOpenTimer={5000}
 			messageBox={false}
 			messageBoxTxt="Hi Team, is there any related service available ?"
