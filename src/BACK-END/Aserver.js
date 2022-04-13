@@ -61,7 +61,6 @@ app.post('/AddToCart', (req, res) => {
                 res.send("Product added")
             }
             else {
-                console.log("here2");
                 Cart.insertMany({
                     customer_username: cust_username,
                     product_name: product_name,
@@ -252,5 +251,47 @@ app.get('/ViewSales', (req, res) => {
                 res.send('No orders yet')
             }
         }
+    })
+});
+
+//Add Promocode Admin
+app.post('/AddCode', async (req, res) => {
+    let promo = req.body.promocode;
+    let discount = req.body.percentage;
+    let customer_count = await Customer.count();
+    let num = Math.ceil(customer_count / 10);
+    let index = []
+    let customer_arr = []
+    for (let i = 0; i < num; i++) {
+        let number = Math.floor(Math.random() * (customer_count));
+        while (number in index) {
+            number = Math.floor(Math.random() * (customer_count));
+        }
+        index.push(number);
+    }
+    console.log(index);
+    Customer.find({}, (err, data) => {
+        for (let i = 0; i < data.length; i++) {
+            for (let j = 0; j < index.length; j++) {
+                if (i == index[j]) {
+                    customer_arr.push(data[i].username);
+                }
+            }
+        }
+        Discount.insertMany({
+            percentage: discount,
+            promocode: promo,
+            customers: customer_arr
+        }, (err, data) => {
+            if (!err) {
+                console.log("Hogya");
+                console.log(data);
+                res.send("Promocode Sent");
+            }
+            else{
+                console.log("F");
+                res.send("Something went wrong, please try again");
+            }
+        })
     })
 });
