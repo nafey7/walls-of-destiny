@@ -8,11 +8,19 @@ const productSchema = new Schema({
         unique: true
 
     },
-    picture_url: {
+    pic: {
         type: String,
         required: true
     },
-    price: {
+    cost_price: {
+        type: Number,
+        required: true
+    },
+    sales_price: {
+        type: Number,
+        required: true
+    },
+    profit: {
         type: Number,
         required: true
     },
@@ -24,7 +32,7 @@ const productSchema = new Schema({
         type: String,
         required: true
     },
-    description: {
+    details: {
         type: String,
         required: true
     },

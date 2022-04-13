@@ -31,12 +31,14 @@ app.post('/add_product', (req,res) => {
     // let username = req.body.username;
     // let name = req.body.name;
     const product = new Product({
-        name: 'Fancy Wall Clock 6',
-        picture_url: 'url',
-        price: 1000,
+        name: 'Fancy Wall Clock 2',
+        pic: 'url',
+        cost_price: 1000,
+        sales_price: 1200,
+        profit: 200,
         dimensions: '4x4',
         color: 'Yellow',
-        description: 'This is the purple wall',
+        details: 'This is the purple wall',
         category: 'Frame',
         featured: '0'
     });

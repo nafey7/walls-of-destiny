@@ -185,3 +185,20 @@ app.post('/Payment', (req, res) => {
         }
     })
 });
+
+//View Orders Admin
+app.get('/adminOrders', (req, res) => {
+    Order.find({}, (err, data) => {
+        if (err) {
+            console.log(err);
+            res.send('Something went wrong');
+        }
+        else {
+            if (data.length >= 1) {
+                for (let i = 0; i < data.length; i++) {
+                    let found = await Product.find({})
+                }
+            }
+        }
+    })
+});
