@@ -6,7 +6,7 @@ import Block from './components/Block';
 import ChatBot from './components/ChatBot';
 import ErrorPage from './components/ErrorPage';
 import AddProduct from './components/AddProductAdmin';
-import Cart from './components/Cart';
+import Cart from './components/cart';
 import Checkout from './components/Checkout';
 // import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 

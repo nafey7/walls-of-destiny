@@ -1,21 +1,21 @@
 import Navbar from './Navbar';
 import Footer from './Footer';
 import ImageUploadPreviewComponent from './ImageUploadPreview'
+// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
  
 
 
 function AddProduct() {
     return (
-    <div className="Product" style={{height:"100%", backgroundColor:"green", position:"relative", width:"100%"}}>
-    <Navbar />
-    <div class="container" style={{height:"100%", backgroundColor:"white", position:"relative", width:"100%"}}>
+    <div className="Product" style={{height:"100%", backgroundColor:"white", position:"relative", width:"100%"}}>
+    <div class="container" style={{margin: "50px 150px", height:"100%", backgroundColor:"white", position:"relative", width:"100%"}}>
         <div class="row align-items-center">
         <div class="col-2">
             
             </div>
             <div class="col-4">
-            <ImageUploadPreviewComponent/>
-            {/* <a href="https://placeholder.com"><img src="https://via.placeholder.com/150"/></a> */}
+            {/* <ImageUploadPreviewComponent/> */}
+            <a href="https://placeholder.com"><img src="https://via.placeholder.com/150"/></a>
                     
             </div>
             <div class="col-4">
@@ -31,12 +31,11 @@ function AddProduct() {
             <br></br>
             <br></br>
             <br></br>
-            <button type="button" class="btn btn-dark">Back</button>
-            <button type="button" class="btn btn-success">Add</button>
+            <button type="button" class="btn btn-dark" style ={{margin: "Auto 10px"}}>Back</button>
+            <button type="button" class="btn btn-success" style = {{margin: "Auto 10px"}}>Add</button>
             </div>
         </div>
     </div> 
-    <Footer />
     
     </div>
   );
