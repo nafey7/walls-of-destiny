@@ -6,7 +6,6 @@ const productSchema = new Schema({
         type: String,
         required: true,
         unique: true
-
     },
     pic: {
         type: String,

@@ -187,17 +187,69 @@ app.post('/Payment', (req, res) => {
 });
 
 //View Orders Admin
-app.get('/adminOrders', (req, res) => {
-    Order.find({}, (err, data) => {
+app.get('/ViewOrdersAd', (req, res) => {
+    Order.find({}, async (err, data) => {
         if (err) {
             console.log(err);
             res.send('Something went wrong');
         }
         else {
             if (data.length >= 1) {
+                let final = []
                 for (let i = 0; i < data.length; i++) {
-                    let found = await Product.find({})
+                    let result = await Product.find({name: data[i].product_name});
+                    let variables = {
+                        "name" : result[0].name,
+                        "sales_price" : result[0].sales_price,
+                        "pic" : result[0].pic,
+                        "quantity" : data[i].quantity,
+                        "status" : data[i].status,
+                        "order_id" : data[i]._id
+                    }
+                    final.push(variables);
                 }
+                console.log(final);
+                res.send(final);
+            }
+            else {
+                res.send('No orders yet')
+            }
+        }
+    })
+});
+
+//Sales Admin
+app.get('/ViewSales', (req, res) => {
+    Order.find({quantity : {$gte : 1}}, async (err, data) => {
+        if (err) {
+            console.log(err);
+            res.send('Something went wrong');
+        }
+        else {
+            if (data.length >= 1) {
+                let income = 0;
+                let profit = 0;
+                let customer_count = await Customer.count();
+                let order_count = data.length;
+                for (let i = 0; i < data.length; i++) {
+                    let result = await Product.find({name: data[i].product_name});
+                    let sales = result[0].sales_price * data[i].quantity;
+                    let p = result[0].profit * data[i].quantity;
+                    income = income + sales;
+                    profit = profit + p;
+
+                }
+                let final = {
+                    "Income" : income,
+                    "Profit" : profit,
+                    "Users" : customer_count,
+                    "Orders" : order_count
+                }
+                console.log(final);
+                res.send(final);
+            }
+            else {
+                res.send('No orders yet')
             }
         }
     })
