@@ -8,7 +8,6 @@ import ErrorPage from './components/ErrorPage';
 import AddProduct from './components/AddProductAdmin';
 import Cart from './components/cart';
 import Checkout from './components/Checkout';
-// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

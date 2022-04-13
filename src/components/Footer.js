@@ -4,18 +4,21 @@ export const Footer =() => {
   let footerStyle={
     position: "sticky",
     top: "100vh",
-    width: "100%"
+    width: "100%",
+    backgroundColor: "#E5E5E5",
+    opacity: "90%"
   }
     return (
-    <footer className="bg-dark text-light py-5" style={footerStyle}>
+    <footer className="text-light py-5" style={footerStyle}>
       <div className="row">
-        <p className="text-center">Copywrite &copy; WallsOfDestiny</p>
-        <p className="text-center"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique officiis eaque non inventore optio nemo provident, ipsa eos expedita rerum tempora a eius, error sequi quam doloribus officia ipsam odit.</p>
-
-      </div>
-      <div className='d-flex justify-content-center'>
-      <button type="button" className="btn btn-primary btn-sm" style={{ margin:"10px"}}><b>About Us</b></button>
-      <button type="button" className="btn btn-primary btn-sm" style={{ margin:"10px"}}><b>Contact Us</b></button>
+        <div className="col">
+          <h4 style={{margin:"0px 0px 5px 50px", color:"#a7ac38"}}><b>Walls Of Destiny</b></h4>
+          <p className="text text-dark" style={{margin:"0px 0px 0px 50px", color:"#959932"}}>Copywrite &copy; WallsOfDestiny</p>
+        </div>
+        <div className='col'>
+        <button type="button" className="btn btn-primary btn-sm" style={{ margin:"10px"}}><b>About Us</b></button>
+        <button type="button" className="btn btn-primary btn-sm" style={{ margin:"10px"}}><b>Contact Us</b></button>
+        </div>
       </div>
     </footer>
   )

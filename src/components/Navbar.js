@@ -38,31 +38,28 @@ function Navbar() {
   };
   return (
       <>
-      <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" style={{backgroundColor:"black"}}>
+      <nav className="navbar sticky-top navbar-expand-lg navbar-dark" style={{backgroundColor:"black"}}>
         <div className="container-fluid">
-          <a className="navbar-brand" >
-          <Logo width="100" height="40" className="d-inline-block" style={{backgroundColor:"white"}}/>
-            Walls Of Destiny
-          </a>
+          <Logo width="99" height="59" className="d-inline-block" style={{backgroundColor:"#a7ac38"}}/>
           <button className="navbar-toggler" type="button" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <a className="nav-link active" onClick='' aria-current="page">Home</a>
+          <div className="collapse navbar-collapse" id="navbarNav" style= {{backgroundColor:"",margin:"0 40px 0px"}}>
+            <ul className="navbar-nav"style= {{backgroundColor:"",margin:"0 225px 0px"}}>
+              <li className="nav-item active">
+                <Link to={{pathname: "/"}} style={{backgroundColor:"",margin:"0 20px", fontSize:"18px"}}>Home</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link">Clocks</a>
+                <Link to={{pathname: "/clocks"}} style={{backgroundColor:"",margin:"0 20px", fontSize:"18px"}}>Clocks</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link">Decor</a>
+                <Link to={{pathname: "/decor"}} style={{backgroundColor:"",margin:"0 20px", fontSize:"18px"}}>Decor</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link">Art</a>
+                <Link to={{pathname: "/art"}} style={{backgroundColor:"",margin:"0 20px", fontSize:"18px"}}>Art</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link">Lights</a>
+                <Link to={{pathname: "/lights"}} style={{backgroundColor:"",margin:"0 20px", fontSize:"18px"}}>Lights</Link>
               </li>
             </ul>
             
