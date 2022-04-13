@@ -49,7 +49,7 @@ app.post('/CategoryMenu', (req, res) => {
 app.post('/AddToCart', (req, res) => {
     let cust_username = req.body.username;
     let product_name = req.body.product_name;
-    let quantity = req.body.quantity;
+    let quantity = 1;
     Cart.find({customer_username: cust_username, product_name: product_name}, async (err, data) => {
         if (!err) {
             if (data.length >= 1) {
@@ -123,21 +123,24 @@ app.post('/ViewCart', (req, res) => {
         }
         else {
             if (data.length >= 1) {
-                let product_arr = [];
-                let quantity_arr = [];
+                let final = []
                 for (let i = 0; i < data.length; i++) {
                     let name_product = data[i].product_name;
-                    quantity_arr.push(data[i].quantity);
                     let result = await Product.find({name: name_product});
-                    product_arr.push(result[0]);
+                    let variables = {
+                        "name" : result[0].name,
+                        "price" : result[0].price,
+                        "id" : result[0]._id,
+                        "pic" : result[0].picture_url,
+                        "color" : result[0].color,
+                        "quantity" : data[i].quantity
+                    }
+                    console.log(variables);
+                    final.push(variables);
                 }
-                let final = [];
-                for (let i = 0; i < product_arr.length; i++) {
-                    final.push(product_arr[i]);
-                }
-                final.push(quantity_arr);
-                console.log(final[2]);
+                console.log("Hogya");
                 res.send(final);
+                
             }
             else {
                 res.send("Cart is empty");
