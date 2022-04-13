@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const cartSchema = new Schema({
+const orderSchema = new Schema({
     customer_username: {
         type: String,
         required: true
@@ -14,9 +14,13 @@ const cartSchema = new Schema({
     quantity: {
         type: Number,
         required: true
+    },
+    status: {
+        type: String,
+        required: true
     }
 
 }, {timestamps: true});
 
-const Cart = mongoose.model('Cart', cartSchema);
-module.exports = Cart;
+const Order = mongoose.model('Order', orderSchema);
+module.exports = Order;
