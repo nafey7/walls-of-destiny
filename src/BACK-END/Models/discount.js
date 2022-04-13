@@ -1,7 +1,3 @@
-// percentage
-// used
-// active
-
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -11,12 +7,12 @@ const discountSchema = new Schema({
         required: true
 
     },
-    used: {
-        type: Number,
+    promocode: {
+        type: String,
         required: true
     },
-    active: {
-        type: Number,
+    customers: {
+        type: Object,
         required: true
     }
 
