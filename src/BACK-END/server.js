@@ -7,6 +7,7 @@ const Admin = require('./Models/admin');
 const Product = require('./Models/products');
 const Discount = require('./Models/discount');
 const Cart = require('./Models/cart');
+const Order = require('./Models/order');
 
 const app = express();
 
@@ -69,23 +70,40 @@ app.post('/add_product', (req,res) => {
 
 // })
 
-app.get('/cart', (req,res) => {
-    // let username = req.body.username;
-    // let name = req.body.name;
-    const cart = new Cart({
-        customer_username: 'Mahad123',
-        product_name: 'Black Clock',
-        quantity: 2
+// app.get('/cart', (req,res) => {
+//     // let username = req.body.username;
+//     // let name = req.body.name;
+//     const cart = new Cart({
+//         customer_username: 'Mahad123',
+//         product_name: 'Black Clock',
+//         quantity: 2
+//     });
+
+//     cart.save()
+//     .then ((res) => {
+//         console.log(res);
+//     })
+//     .catch ((err) => {
+//         console.log(err);
+//     });
+
+// })
+
+app.get('/order_one', (req, res) => {
+    const order = new Order({
+        customer_username: 'Arslan123',
+        product_name: 'Fancy Wall Clock 2',
+        quantity: 2,
+        status: 'delivered',
     });
 
-    cart.save()
+    order.save()
     .then ((res) => {
         console.log(res);
     })
     .catch ((err) => {
         console.log(err);
     });
-
 })
 
 // api call to view the data in array of objects
