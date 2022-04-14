@@ -6,7 +6,7 @@ export const Footer =() => {
     top: "100vh",
     width: "100%",
     backgroundColor: "#E5E5E5",
-    opacity: "90%"
+    opacity: "90%",
   }
     return (
     <footer className="text-light py-5" style={footerStyle}>

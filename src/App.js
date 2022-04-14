@@ -8,6 +8,7 @@ import ErrorPage from './components/ErrorPage';
 import AddProduct from './components/AddProductAdmin';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
+import Login from './components/Login';
 // import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <Route path="/lights" element={<Block featured={lights} title={"Lights"}/>}/>
             <Route path="/AddProduct" element={<AddProduct/>}/>
             <Route path="/cart" element={<Cart featured={featured}/>}/>
+            <Route path="/login" element={<Login/>}/>
             <Route path="/checkout" element={<Checkout/>}/>
             <Route path="*" element={<ErrorPage message={{message: "404 not found"}}/>}/>
           </Routes>    
