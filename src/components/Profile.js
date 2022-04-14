@@ -1,12 +1,13 @@
 import Avatar from '@mui/material/Avatar';
+import {Link} from 'react-router-dom'
 
 function Profile() {
     return (
-        <div class="container" style={{ margin: "50px 150px", height:"100%", backgroundColor:"white", position:"relative", width:"100%"}}>
+        <div class="container" style={{ margin: "50px 150px", height:"50%", backgroundColor:"white", position:"relative", width:"100%"}}>
         <div class="row">
-            <h1>Edit Profile</h1>
+            <h1 style={{textAlign: "center"}}>My Profile</h1>
         </div>
-        <div class="row" style ={{ margin: "50px"}}>
+        <div class="row" style ={{ margin: "20px"}}>
             <Avatar
                 alt="Remy Sharp"
                 // src="https://via.placeholder.com/150"
@@ -29,7 +30,8 @@ function Profile() {
             <label for="contactInput" class="form-label">Contact</label>
             <input class="form-control" id = "contactInput" type="text" placeholder="+92 300 *******" />
             <br></br>
-            <button type="button" class="btn btn-dark">Back</button>
+            <Link to={{pathname: "/"}} style={{backgroundColor:"",margin:"0 20px", fontSize:"18px"}}>
+            <button type="button" class="btn btn-dark">Back</button></Link>
             <br></br>
             </div>
 

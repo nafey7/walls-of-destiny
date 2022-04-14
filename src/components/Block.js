@@ -15,8 +15,8 @@ const Block = (props) => {
   return (
     Check?(
     <>
-      <h2 style={{textAlign:"center"}}>Featured Products</h2>
-             <div class="row">
+      <h2 style={{textAlign:"center"}}>{props.title}</h2>
+             <div class="row" style={{margin:"0 0 55px 0cm"}}>
                  {props.featured.map((item)=>{
                    
                      return(

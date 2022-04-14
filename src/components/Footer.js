@@ -1,4 +1,6 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
+
 
 export const Footer =() => {
   let footerStyle={
@@ -6,7 +8,7 @@ export const Footer =() => {
     top: "100vh",
     width: "100%",
     backgroundColor: "#E5E5E5",
-    opacity: "90%"
+    opacity: "90%",
   }
     return (
     <footer className="text-light py-5" style={footerStyle}>
@@ -17,7 +19,7 @@ export const Footer =() => {
           <p className="text text-dark" style={{margin:"0px 0px 0px 50px", color:"#959932"}}>We aim to add color to your walls</p>
         </div>
         <div className='col'>
-        <button type="button" className="btn btn-sm" style={{fontSize:"13px",color:"none", padding: "8px 30px", border:"3px solid #a7ac38", margin:"0 0 0 440px"}}><b>About Us</b></button>
+        <Link to={{pathname: "/about"}}><button type="button" className="btn btn-sm" style={{fontSize:"13px",color:"none", padding: "8px 30px", border:"3px solid #a7ac38", margin:"0 0 0 440px"}}><b>About Us</b></button></Link>
         <button type="button" className="btn btn-sm" style={{fontSize:"13px",color:"none", padding: "8px 30px", border:"3px solid #a7ac38", margin:"0 25px 0 5px"}}><b>Contact Us</b></button>
         </div>
       </div>
