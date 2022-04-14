@@ -9,6 +9,9 @@ import AddProduct from './components/AddProductAdmin';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import Login from './components/Login';
+import Profile from './components/Profile';
+import Rewards from './components/Rewards';
+import About from './components/About';
 // import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -27,6 +30,9 @@ function App() {
             <Route path="/cart" element={<Cart featured={featured}/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/checkout" element={<Checkout/>}/>
+            <Route path="/profile" element={<Profile/>}/>
+            <Route path="/rewards" element={<Rewards/>}/>
+            <Route path="/about" element={<About/>}/>
             <Route path="*" element={<ErrorPage message={{message: "404 not found"}}/>}/>
           </Routes>    
           <ChatBot />

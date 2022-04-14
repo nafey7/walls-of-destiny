@@ -1,4 +1,6 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
+
 
 export const Footer =() => {
   let footerStyle={
@@ -16,7 +18,7 @@ export const Footer =() => {
           <p className="text text-dark" style={{margin:"0px 0px 0px 50px", color:"#959932"}}>Copywrite &copy; WallsOfDestiny</p>
         </div>
         <div className='col'>
-        <button type="button" className="btn btn-primary btn-sm" style={{ margin:"10px"}}><b>About Us</b></button>
+        <Link to={{pathname: "/about"}}><button type="button" className="btn btn-primary btn-sm" style={{ margin:"10px"}}><b>About Us</b></button></Link>
         <button type="button" className="btn btn-primary btn-sm" style={{ margin:"10px"}}><b>Contact Us</b></button>
         </div>
       </div>
