@@ -47,19 +47,19 @@ function Navbar() {
           <div className="collapse navbar-collapse" id="navbarNav" style= {{backgroundColor:"",margin:"0 40px 0px"}}>
             <ul className="navbar-nav"style= {{backgroundColor:"",margin:"0 225px 0px"}}>
               <li className="nav-item active">
-                <Link to={{pathname: "/"}} style={{backgroundColor:"",margin:"0 20px", fontSize:"18px"}}>Home</Link>
+                <Link to={{pathname: "/"}} style={{margin:"0 20px", fontSize:"18px", color: "#a7ac38"}}>Home</Link>
               </li>
               <li className="nav-item">
-                <Link to={{pathname: "/clocks"}} style={{backgroundColor:"",margin:"0 20px", fontSize:"18px"}}>Clocks</Link>
+                <Link to={{pathname: "/clocks"}} style={{margin:"0 20px", fontSize:"18px", color: "white"}}>Clocks</Link>
               </li>
               <li className="nav-item">
-                <Link to={{pathname: "/decor"}} style={{backgroundColor:"",margin:"0 20px", fontSize:"18px"}}>Decor</Link>
+                <Link to={{pathname: "/decor"}} style={{margin:"0 20px", fontSize:"18px", color: "white"}}>Decor</Link>
               </li>
               <li className="nav-item">
-                <Link to={{pathname: "/art"}} style={{backgroundColor:"",margin:"0 20px", fontSize:"18px"}}>Art</Link>
+                <Link to={{pathname: "/art"}} style={{margin:"0 20px", fontSize:"18px", color: "white"}}>Art</Link>
               </li>
               <li className="nav-item">
-                <Link to={{pathname: "/lights"}} style={{backgroundColor:"",margin:"0 20px", fontSize:"18px"}}>Lights</Link>
+                <Link to={{pathname: "/lights"}} style={{margin:"0 20px", fontSize:"18px", color: "white"}}>Lights</Link>
               </li>
             </ul>
             

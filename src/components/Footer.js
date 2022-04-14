@@ -12,14 +12,24 @@ export const Footer =() => {
     <footer className="text-light py-5" style={footerStyle}>
       <div className="row">
         <div className="col">
-          <h4 style={{margin:"0px 0px 5px 50px", color:"#a7ac38"}}><b>Walls Of Destiny</b></h4>
-          <p className="text text-dark" style={{margin:"0px 0px 0px 50px", color:"#959932"}}>Copywrite &copy; WallsOfDestiny</p>
+          <h4 style={{margin:"0px 0px 10px 50px", color:"#a7ac38"}}><b>Walls Of Destiny</b></h4>
+          <p className="text text-dark" style={{margin:"0px 0px 0px 50px", color:"#959932"}}>We are a wall decor website offering a wide product range</p>
+          <p className="text text-dark" style={{margin:"0px 0px 0px 50px", color:"#959932"}}>We aim to add color to your walls</p>
         </div>
         <div className='col'>
-        <button type="button" className="btn btn-primary btn-sm" style={{ margin:"10px"}}><b>About Us</b></button>
-        <button type="button" className="btn btn-primary btn-sm" style={{ margin:"10px"}}><b>Contact Us</b></button>
+        <button type="button" className="btn btn-sm" style={{fontSize:"13px",color:"none", padding: "8px 30px", border:"3px solid #a7ac38", margin:"0 0 0 440px"}}><b>About Us</b></button>
+        <button type="button" className="btn btn-sm" style={{fontSize:"13px",color:"none", padding: "8px 30px", border:"3px solid #a7ac38", margin:"0 25px 0 5px"}}><b>Contact Us</b></button>
         </div>
       </div>
+      <hr  style={{margin:"20px 0 0 40px", color: '#000000',backgroundColor: '#000000',width:"37.5cm",height: ".5",borderColor : '#000000'}}/>
+    <div className="row">
+      <div className="col">
+        <p className="text text-dark" style={{margin:"20px 0px 0px 50px", color:"#959932"}}>&copy; 2022. All rights reserved</p>
+      </div>
+      <div className="col">
+        <p className="text text-dark" style={{margin:"20px 0px 0px 270px", color:"#959932"}}>https://github.com/nafey7/walls-of-destiny/tree/master/src/components</p>
+      </div>
+    </div>
     </footer>
   )
 }
