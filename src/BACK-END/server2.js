@@ -305,7 +305,7 @@ app.post('/update_admin_info', (req,res) => {
 app.post('/addproduct', (req,res) => {
     // handle username and email not repeat
 
-    if(typeof req.body.name === "undefined" || typeof req.body.picture_url === "undefined" || typeof req.body.price === "undefined" || typeof req.body.dimensions === "undefined" || typeof req.body.color === "undefined" || typeof req.body.description === "undefined" || typeof req.body.category === "undefined" || typeof req.body.description === "undefined" || typeof req.body.featured === "undefined")
+    if(typeof req.body.name === "undefined" || typeof req.body.pic === "undefined" || typeof req.body.cost_price === "undefined" || typeof req.body.sales_price === "undefined" || typeof req.body.details === "undefined" || typeof req.body.profit === "undefined" || typeof req.body.color === "undefined" || typeof req.body.dimensions === "undefined" || typeof req.body.category === "undefined" || typeof req.body.featured === "undefined")
     {
         res.send("Please fill all spaces");
         return;
@@ -314,15 +314,17 @@ app.post('/addproduct', (req,res) => {
 
     Product.insertMany({
         name: req.body.name,
-        picture_url: req.body.picture_url,
-        price: req.body.price,
-        dimensions: req.body.dimensions,
+        pic: req.body.pic,
+        cost_price: req.body.cost_price,
+        sales_price: req.body.sales_price,
+        profit: req.body.sales_price - req.body.cost_price,
+        details: req.body.details,
         color: req.body.color,
-        description: req.body.description,
+        dimensions: req.body.dimensions,
         category: req.body.category,
-        featured: req.body.featured
-    }, (err,data) => {
-        if (!err){
+        featured: req.body.featured }, (err,data) => {
+        
+            if (!err){
             console.log("SAVE HOGYA HAI"); 
             console.log(data);
             res.send("Success");
@@ -340,17 +342,19 @@ app.post('/addproduct', (req,res) => {
 // Edit Product (Admin)
 app.post('/editproduct', (req,res) => {
 
-    // handle case where price might contain letters
+    // handle case where cost_price might contain letters
 
 
     Product.updateMany({name: req.body.name}, {$set: {
-        picture_url: req.body.picture_url,
-        price: req.body.price,
-        dimensions: req.body.dimensions,
+        pic: req.body.pic,
+        cost_price: req.body.cost_price,
+        sales_price: req.body.sales_price,
+        profit: req.body.profit,
+        details: req.body.details,
         color: req.body.color,
-        description: req.body.description,
+        dimensions: req.body.dimensions,
         category: req.body.category,
-        featured: req.body.featured}}, (err,data) => {
+        featured: req.body.featured }}, (err,data) => {
 
         if (!err){ 
             res.send(data);
@@ -368,8 +372,13 @@ app.post('/editproduct', (req,res) => {
 app.post('/deleteproduct', (req,res) => {
 
     Product.deleteMany({name: req.body.name}, (err,data) => {
-            res.send("Product Deleted");
-            console.log("Product Deleted");
+
+        if (!err){
+            res.send("Product Deleted")
+        }
+        else{
+            res.send("Error");
+        }
     });
         
 });
