@@ -14,7 +14,8 @@ const customerSchema = new Schema({
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        minlength: 5
     },
     email: {
         type: String,
