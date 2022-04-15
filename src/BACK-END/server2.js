@@ -9,9 +9,14 @@ const Product = require('./Models/products');
 const Discount = require('./Models/discount');
 const Cart = require('./Models/cart');
 const Order = require('./Models/order');
+const cors = require('cors');
+
 
 
 const app = express();
+var corsOptions = {
+    origin: 'http://localhost:3000',
+}
 
 const dbURI = 'mongodb+srv://moiz_nafey:abcd1234@cluster0.fkrxm.mongodb.net/DB?retryWrites=true&w=majority';
 
@@ -25,6 +30,7 @@ app.set('view engine','ejs');
 app.use(express.static('public'));
 app.use(bodyparser.json());
 app.use(morgan('dev'));
+app.use(cors(corsOptions));
 
 
 // CUSTOMER USE CASES
