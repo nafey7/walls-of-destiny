@@ -12,7 +12,8 @@ import Login from './components/Login';
 import Profile from './components/Profile';
 import Rewards from './components/Rewards';
 import About from './components/About';
-// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import Contactus from './components/ContactUs';
+
 
 function App() {
   
@@ -33,13 +34,14 @@ function App() {
             <Route path="/profile" element={<Profile/>}/>
             <Route path="/rewards" element={<Rewards/>}/>
             <Route path="/about" element={<About/>}/>
+            <Route path="/ContactUs" element={<Contactus/>}/>
             <Route path="*" element={<ErrorPage message={{message: "404 not found"}}/>}/>
 
           </Routes>    
           
         </div>
     </Router>        
-    
+    // <Navbar />
   );
 }
 // dummy data

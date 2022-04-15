@@ -1,7 +1,7 @@
 import Navbar from './Navbar';
 import Footer from './Footer';
 import ImageUploadPreviewComponent from './ImageUploadPreview'
-// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
  
 
 
