@@ -19,9 +19,9 @@ function App() {
   return (
     <Router>
       <div className="App" style={{height:"100%", backgroundColor:"white", position:"relative", width:"100%", backgroundSize: "cover"}}>
-          <Navbar />
+          
           <Routes>
-            <Route path="/" element={<Block featured={featured} title={"Featured Products"}/>}/>
+            <Route path="/" element={<><Navbar /> <Block featured={featured} title={"Featured Products"}/><ChatBot /><Footer /></>}/>
             <Route path="/clocks" element={<Block featured={clocks} title={"Clocks"}/>}/>
             <Route path="/decor" element={<Block featured={decor} title={"Decorations"}/>}/>
             <Route path="/art" element={<Block featured={art} title={"Art"}/>}/>
@@ -34,9 +34,9 @@ function App() {
             <Route path="/rewards" element={<Rewards/>}/>
             <Route path="/about" element={<About/>}/>
             <Route path="*" element={<ErrorPage message={{message: "404 not found"}}/>}/>
+
           </Routes>    
-          <ChatBot />
-          <Footer />
+          
         </div>
     </Router>        
     
