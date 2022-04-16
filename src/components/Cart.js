@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-
+ 
 function Cart(props) {
     const [items, setItems] = React.useState(props.featured)
     let x = items.reduce((accumulator, object) => {

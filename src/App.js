@@ -17,6 +17,8 @@ import Contactus from './components/ContactUs';
 // import Trackorder from './components/trackOrder';
 import Orders from './components/orderhistory';
 import AdminHome from './components/AdminHome';
+import ViewOrders from './components/ViewOrders';
+import Summary from './components/Summary';
 import AdminNavbar from './components/AdminNavbar';
 
 
@@ -47,6 +49,8 @@ function App() {
             {/* Admin  */}
             <Route path="/AddProduct" element={<AddProduct/>}/>
             <Route path="/AdminHome" element={<><AdminNavbar /><AdminHome featured={featured} title={"Art"}/></>}/>
+            <Route path="/ViewOrders" element={<><Navbar /><ViewOrders/><Footer /></>}/>
+            <Route path="/Summary" element={<><Navbar /><Summary/><Footer /></>}/>
             <Route path="/12232OP43FF546TT765G768a53/435434234324253655756554/AdminLogin" element={<AdminLogin/>}/>
 
           </Routes>    

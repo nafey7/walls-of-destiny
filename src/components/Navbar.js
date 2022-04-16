@@ -7,21 +7,18 @@ import {reactLocalStorage} from 'reactjs-localstorage';
 function Navbar(props) {
   const [Check, setCheck] = React.useState(false);
 
-  
-  const  checker = async ()=>{
-
-    const username = await reactLocalStorage.get('username');
-    console.log(username);
-    if(username.length>0){
+  let username
+  React.useEffect(() => {
+    username = reactLocalStorage.get('username', "", true);
+    if(username !== ""){
       setCheck(true);
     }
 
-  }
+  }, username)
   
 
   return (
       <>
-      {checker}
       <nav className="navbar sticky-top navbar-expand-lg navbar-dark" style={{backgroundColor:"black"}}>
         <div className="container-fluid">
           <Logo width="99" height="59" className="d-inline-block" style={{backgroundColor:"#a7ac38"}}/>
@@ -30,7 +27,7 @@ function Navbar(props) {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav" style= {{backgroundColor:"",margin:"0 40px 0px"}}>
             <ul className="navbar-nav"style= {{backgroundColor:"",margin:"0 225px 0px"}}>
-              <li className="nav-item active">
+              <li className="nav-item">
                 <Link to={{pathname: "/"}} style={{margin:"0 20px", fontSize:"18px", color: "#a7ac38"}}>Home</Link>
               </li>
               <li className="nav-item">
