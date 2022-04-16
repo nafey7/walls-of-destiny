@@ -3,7 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const Customer = require('./Models/customers');
-const passwordHash = require('password-hash');
+// const passwordHash = require('password-hash');
 
 const app = express();
 
@@ -22,28 +22,28 @@ app.use(morgan('dev'));
 
 // SENDING EMAIL CODE
 
-// var transporter = nodemailer.createTransport({
-//   service: 'gmail',
-//   auth: {
-//     user: 'nafeymoiz@gmail.com',
-//     pass: 'blahahah.'
-//   }
-// });
+let transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'wallsofdestiny123@gmail.com',
+    pass: 'wallsofdestiny'
+  }
+});
 
-// var mailOptions = {
-//   from: 'nafeymoiz@gmail.com',
-//   to: 'nafeymoiz07@gmail.com',
-//   subject: 'Sending Email using Node.js',
-//   text: 'That was easy!'
-// };
+let mailOptions = {
+  from: 'wallsofdestiny123@gmail.com',
+  to: 'nafeymoiz07@gmail.com',
+  subject: 'Welcome to the Walls of Destiny',
+  text: 'Enter the following pin for successful sign-up \n4565'
+};
 
-// transporter.sendMail(mailOptions, function(error, info){
-//   if (error) {
-//     console.log(error);
-//   } else {
-//     console.log('Email sent: ' + info.response);
-//   }
-// });
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
+});
 
 
 

@@ -2,15 +2,16 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const bodyparser = require('body-parser');
-// const passwordHash = require('password-hash');
+const pbkdf2 = require('pbkdf2');
 const Customer = require('./Models/customers');
 const Admin = require('./Models/admin');
 const Product = require('./Models/products');
 const Discount = require('./Models/discount');
 const Cart = require('./Models/cart');
 const Order = require('./Models/order');
+const generateString = require('./helperFunctions');
 const cors = require('cors');
-
+const nodemailer = require("nodemailer");
 
 
 const app = express();
@@ -35,8 +36,50 @@ app.use(cors(corsOptions));
 
 // CUSTOMER USE CASES
 
+let user_data = {};
+let randomstring = '';
+
 // Customer's Signup
-app.post('/signup', (req,res) => {
+app.post('/signup_further', (req,res) => {
+    if (req.body.pin == randomstring){
+        // res.send("Success");
+
+        Customer.insertMany({
+            username: user_data.username,
+            name: user_data.name,
+            contact: user_data.contact,
+            email: user_data.email,
+            password:pbkdf2.pbkdf2Sync(user_data.password, 'habibi', 1, 32, 'sha512'),
+            address: user_data.address
+        }, (err,data) => {
+            if (!err){
+
+                delete user_data.username;
+                delete user_data.name;
+                delete user_data.address;
+                delete user_data.contact;
+                delete user_data.password;
+                delete user_data.email;
+
+                console.log("SAVE HOGYA HAI"); 
+                console.log(data);
+                res.send("SAVE HOGYA HAI");
+            }
+            else{
+                console.log("Error aggya hai");
+                console.log(err);
+                // username corner case handle
+                res.send("Username already taken");
+            }
+        })
+    }
+    else{
+        res.send("Failure");
+    }
+})
+
+
+app.post('/signup', async (req,res) => {
     // handle username and email not repeat
 
     if(typeof req.body.username === "undefined" || typeof req.body.password === "undefined" || typeof req.body.name === "undefined" || typeof req.body.contact === "undefined" || typeof req.body.address === "undefined" || typeof req.body.email === "undefined")
@@ -44,34 +87,59 @@ app.post('/signup', (req,res) => {
         res.send("Please fill all spaces");
         return;
     }
+    // add email check
+    if (req.body.email.slice(-10)=='@gmail.com' || req.body.email.slice(-10)=='@yahoo.com'){
+        // res.send("Enter a valid email address. Only Gmail and Yahoo email accounts are valid");
+        // return;
+    // }
 
     if (req.body.password.length <= 5){
         res.send("Password should be greater than 5 characters");
         return;
     }
-    
-    Customer.insertMany({
-        username: req.body.username,
-        name: req.body.name,
-        contact: req.body.contact,
-        email: req.body.email,
-        password: req.body.password,
-        address: req.body.address
-    }, (err,data) => {
-        if (!err){
-            console.log("SAVE HOGYA HAI"); 
-            console.log(data);
-            res.send("SAVE HOGYA HAI");
-        }
-        else{
-            console.log("Error aggya hai");
-            console.log(err);
-            // username corner case handle
-            res.send("Username already taken");
-        }
-    })
 
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'wallsofdestiny123@gmail.com',
+          pass: 'wallsofdestiny'
+        }
+      });
+      randomstring = generateString();
+      
+      let mailOptions = {
+        from: 'wallsofdestiny123@gmail.com',
+        to: req.body.email,
+        subject: 'Welcome to the Walls of Destiny',
+        html: `<p>Enter the following pin for successful sign-up</p> <h2><b>${randomstring}</b></h2>`
+      };
+      
+      await transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+            console.log("yesss");
+            console.log("lololol");
+            user_data = {};
+            user_data.username = req.body.username;
+            user_data.name = req.body.name;
+            user_data.address = req.body.address;
+            user_data.contact = req.body.contact;
+            user_data.password = req.body.password;
+            user_data.email = req.body.email;
+            
+            
+            res.send("Email Sent");
+        }
+      });
     
+
+}
+else{
+        res.send("Enter a valid email address. Only Gmail and Yahoo email accounts are valid");
+        return;
+}
     });
 
 
@@ -85,7 +153,8 @@ app.post('/login', (req,res) => {
         return;
     }
 
-    Customer.find({username: req.body.username, password: req.body.password}, (err,data) => {
+
+    Customer.find({username: req.body.username, password: pbkdf2.pbkdf2Sync(req.body.password, 'habibi', 1, 32, 'sha512')}, (err,data) => {
 
         if (!err){
             if (data.length >= 1){
@@ -119,7 +188,7 @@ app.post('/loginAdmin', (req,res) => {
         return;
     }
 
-    Admin.find({username: req.body.username, password: req.body.password}, (err,data) => {
+    Admin.find({username: req.body.username, password: pbkdf2.pbkdf2Sync(req.body.password, 'habibi', 1, 32, 'sha512')}, (err,data) => {
 
         if (!err){
             if (data.length >= 1){
@@ -221,9 +290,14 @@ app.post('/update_customer_info', (req,res) => {
         return;
     }
 
-    Customer.updateMany({username: req.body.username}, {$set: {name: req.body.name, address: req.body.address, contact: req.body.contact, email: req.body.email, password: req.body.password}}, (err,data) => {
-
-        res.send(data);
+    Customer.updateMany({username: req.body.username}, {$set: {name: req.body.name, address: req.body.address, contact: req.body.contact, email: req.body.email, password: pbkdf2.pbkdf2Sync(req.body.password, 'habibi', 1, 32, 'sha512')}}, (err,data) => {
+        if (!err){
+            res.send("Success");
+        }
+        else{
+            res.send("Error");
+        }
+        
     });
         
 });
@@ -258,7 +332,7 @@ app.post('/signupAdmin', (req,res) => {
     
     Admin.insertMany({
         username: req.body.username,
-        password: req.body.password
+        password: pbkdf2.pbkdf2Sync(req.body.password, 'habibi', 1, 32, 'sha512')
     }, (err,data) => {
         if (!err){
             console.log(data);
@@ -290,7 +364,7 @@ app.post('/deactivate_account_admin', (req,res) => {
 app.post('/update_admin_info', (req,res) => {
     // req.body will be an object
 
-    Admin.updateMany({username: req.body.username}, {$set: {password: req.body.password}}, (err,data) => {
+    Admin.updateMany({username: req.body.username}, {$set: {password: pbkdf2.pbkdf2Sync(req.body.password, 'habibi', 1, 32, 'sha512')}}, (err,data) => {
         if (req.body.password.length <= 5){
             res.send("Password should be greater than 5 characters");
             return;
