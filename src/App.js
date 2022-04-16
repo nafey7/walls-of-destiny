@@ -14,7 +14,7 @@ import Rewards from './components/Rewards';
 import About from './components/About';
 import Contactus from './components/ContactUs';
 import Trackorder from './components/trackOrder';
-
+import Orders from './components/orderhistory';
 
 function App() {
   
@@ -37,6 +37,7 @@ function App() {
             <Route path="/about" element={<About/>}/>
             <Route path="/ContactUs" element={<Contactus/>}/>
             <Route path="/trackOrder" element={<Trackorder/>}/>
+            <Route path="/orderhistory" element={<Orders/>}/>
             <Route path="*" element={<ErrorPage message={{message: "404 not found"}}/>}/>
 
           </Routes>    

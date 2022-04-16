@@ -3,7 +3,7 @@ import { ReactComponent as Logo } from './logo.svg';
 import {Link} from 'react-router-dom'
 
 function Navbar(props) {
-  const [Check, setCheck] = React.useState(false);
+  const [Check, setCheck] = React.useState(true);
 
   return (
       <>
@@ -51,7 +51,7 @@ function Navbar(props) {
           <Link to={{pathname: "/profile"}}
             ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}><a href='#' >Profile</a></button></Link>
           <div class="dropdown-divider"></div>
-          <Link to={{pathname: "/history"}}
+          <Link to={{pathname: "/orderhistory"}}
             ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}><a href='#' >History</a></button></Link>
           <div class="dropdown-divider"></div>
           <Link to={{pathname: "/trackOrder"}}
