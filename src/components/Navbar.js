@@ -37,31 +37,31 @@ function Navbar(props) {
           <div className='justify-content-end'>
           <form  id="search" className="d-flex" style={{display:'inline-flex'}}>
                 <input id="searchbar" className="form-control me-2" type="search" placeholder="Search" aria-label="Search" style={{borderRadius: '15px', margin: "5px 0px 0px 0px"}}/>
-                <button className="btn btn-outline-success" type="submit"><a><i className="material-icons" style={{fontSize:"25px",color:"white"}}>search</i></a></button>
+                <button className="btn btn-outline-success" type="submit"><i className="material-icons" style={{fontSize:"25px",color:"white"}}>search</i></button>
                 
           </form>
           </div>
           <div>
           <Link to={{pathname: "/cart",}}
-            ><button className='btn btn-outline-success' style={{fontSize:"20px"}}><a href='#' ><i className="glyphicon glyphicon-shopping-cart" style={{fontSize:"20px",color:"white"}}></i></a></button></Link>
+            ><button className='btn btn-outline-success' style={{fontSize:"20px"}}><i className="glyphicon glyphicon-shopping-cart" style={{fontSize:"20px",color:"white"}}></i></button></Link>
           {Check?(
           <div className="btn-group dropleft">
-          <button className='btn btn-outline-success dropdown-toggle' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{fontSize:"20px"}}><a><i className="fa fa-user" style={{fontSize:"20px",color:"white"}}/></a></button>
+          <button className='btn btn-outline-success dropdown-toggle' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{fontSize:"20px"}}><i className="fa fa-user" style={{fontSize:"20px",color:"white"}}/></button>
           <div className="dropdown-menu">
           <Link to={{pathname: "/profile"}}
-            ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}><a href='#' >Profile</a></button></Link>
-          <div class="dropdown-divider"></div>
+            ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>Profile</button></Link>
+          <div className="dropdown-divider"></div>
           <Link to={{pathname: "/history"}}
-            ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}><a href='#' >History</a></button></Link>
-          <div class="dropdown-divider"></div>
+            ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>History</button></Link>
+          <div className="dropdown-divider"></div>
           <Link to={{pathname: "/track"}}
-            ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}><a href='#' >Track</a></button></Link>
-          <div class="dropdown-divider"></div>
+            ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>Track</button></Link>
+          <div className="dropdown-divider"></div>
           <Link to={{pathname: "/rewards"}}
-            ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}><a href='#' >Rewards</a></button></Link>
-          <div class="dropdown-divider"></div>
+            ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>Rewards</button></Link>
+          <div className="dropdown-divider"></div>
           <Link to={{pathname: "/history"}}
-            ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}><a href='#' >Logout</a></button></Link>
+            ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>Logout</button></Link>
           </div>
           </div>):(<Link to={{pathname: "/login"}} style={{backgroundColor:"",margin:"0 20px", fontSize:"18px"}}>
           <button className='btn btn-primary' style={{fontSize:"10px"}}>Sign In</button></Link>)}

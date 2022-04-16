@@ -43,7 +43,7 @@ function Contactus(){
             </div>
             <div class="mb-3">
             {/* <input type="text" style={{ height:"200px", backgroundColor:"black"}} class="form-control" id="queryinput" placeholder="Please write your query or the description of the problem you are facing."/> */}
-            <textarea class="form-control text-dark" id="queryinput" style={{width:"4500px",margin:"25px 0 50px 0",backgroundColor:"#E5E5E5"}} rows="10" placeholder="Please write your query or the description of the problem you are facing."></textarea>
+            <textarea class="form-control text-dark" id="queryinput" style={{width:"450px",margin:"25px 0 50px 0",backgroundColor:"#E5E5E5"}} rows="10" placeholder="Please write your query or the description of the problem you are facing."></textarea>
             </div>
             </div>
             </div>

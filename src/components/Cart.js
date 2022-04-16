@@ -11,10 +11,11 @@ function Cart(props) {
         const newItems = items.filter(function(item) {
             return item.id !== id
         })
-        setItems(newItems);  
-        let x = items.reduce((accumulator, object) => {
+         
+        let x = newItems.reduce((accumulator, object) => {
             return accumulator + object.price * object.quantity;
           }, 0);
+        setItems(newItems); 
         setTotal(x+200);    
     }
     function handleChange(e,id){
