@@ -18,17 +18,26 @@ function Login() {
     },
     onSubmit: values => {
       // alert(JSON.stringify(values, null, 2));
-      axios.post('http://104.131.61.109/api/login', {
+      axios.post('http://localhost:8000/login', {
         username: values.username,
         password: values.password
       })
       .then(function (response) {
-        reactLocalStorage.set('username',values.username);
-        console.log(response.data);
-        navigate('/');
+        if(response.data === "USER HAS BEEN FOUND")
+        {
+          reactLocalStorage.set('username',values.username);
+          console.log(response.data);
+          navigate('/');
+        }
+        else
+        {
+          alert("Incorrect Fields");
+        }
+        
       })
       .catch(function (error) {
         console.log(error);
+        navigate('/error');
       });
     },
   });
@@ -43,8 +52,8 @@ function Login() {
       password: '',
     },
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
-      axios.post('http://104.131.61.109/api/login', {
+      // alert(JSON.stringify(values, null, 2));
+      axios.post('http://localhost:8000/signup', {
         username: values.username,
         name: values.name,
         email: values.email,
@@ -53,11 +62,18 @@ function Login() {
         password: values.password
       })
       .then(function (response) {
-        console.log(response.data);
-        navigate('/login');
+        console.log(response);
+        if (response.data === "SAVE HOGYA HAI") {
+        alert(response.data)
+        setCheck(false)
+      }
+      else{
+        alert(response.data)
+      }
       })
       .catch(function (error) {
         console.log(error);
+        alert(error)
       });
     },
   });
@@ -94,7 +110,7 @@ function Login() {
                   </div>
 
           <button type="submit" id="log" className="btn" style={{color:"white",backgroundColor:"#a7ac38", width:"100px", display: "block", margin: '30px auto', textAlign: 'center'}}>SIGN UP</button>
-          <p>Already have an account? <a href="#" style={{color: '#a7ac38'}}>Sign In</a></p>
+          <p>Already have an account? <a href="#" onClick={()=>{setCheck(false)}} style={{color: '#a7ac38'}}>Sign In</a></p>
 
     </form>
     ):(

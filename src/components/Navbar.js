@@ -1,12 +1,27 @@
 import React from 'react'
 import { ReactComponent as Logo } from './logo.svg';
 import {Link} from 'react-router-dom'
+import {reactLocalStorage} from 'reactjs-localstorage';
+
 
 function Navbar(props) {
-  const [Check, setCheck] = React.useState(true);
+  const [Check, setCheck] = React.useState(false);
+
+  
+  const  checker = async ()=>{
+
+    const username = await reactLocalStorage.get('username');
+    console.log(username);
+    if(username.length>0){
+      setCheck(true);
+    }
+
+  }
+  
 
   return (
       <>
+      {checker}
       <nav className="navbar sticky-top navbar-expand-lg navbar-dark" style={{backgroundColor:"black"}}>
         <div className="container-fluid">
           <Logo width="99" height="59" className="d-inline-block" style={{backgroundColor:"#a7ac38"}}/>

@@ -9,12 +9,16 @@ import AddProduct from './components/AddProductAdmin';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import Login from './components/Login';
+import AdminLogin from './components/AdminLogin';
 import Profile from './components/Profile';
 import Rewards from './components/Rewards';
 import About from './components/About';
 import Contactus from './components/ContactUs';
 // import Trackorder from './components/trackOrder';
-// import Orders from './components/orderhistory';
+import Orders from './components/orderhistory';
+import AdminHome from './components/AdminHome';
+import AdminNavbar from './components/AdminNavbar';
+
 
 function App() {
   
@@ -33,12 +37,17 @@ function App() {
             <Route path="/checkout" element={ <><Navbar /> <Checkout/><Footer /></>}/>
             <Route path="/profile" element={ <><Navbar /> <Profile/><Footer /></>}/>
             <Route path="/rewards" element={ <><Navbar /> <Rewards/><Footer /></>}/>
+            {/* <Route path="/trackorders" element={ <><Navbar /> <Trackorder/><Footer /></>}/> */}
+            <Route path="/orders" element={ <><Navbar /> <Orders/><Footer /></>}/>
             <Route path="/about" element={ <><Navbar /> <About/><Footer /></>}/>
             <Route path="/ContactUs" element={<><Navbar /> <Contactus/><Footer /></>}/>
             <Route path="*" element={<ErrorPage message={{message: "404 not found"}}/>}/>
+            <Route path= '/error' element={<ErrorPage/>}/>
 
             {/* Admin  */}
             <Route path="/AddProduct" element={<AddProduct/>}/>
+            <Route path="/AdminHome" element={<><AdminNavbar /><AdminHome featured={featured} title={"Art"}/></>}/>
+            <Route path="/12232OP43FF546TT765G768a53/435434234324253655756554/AdminLogin" element={<AdminLogin/>}/>
 
           </Routes>    
           
