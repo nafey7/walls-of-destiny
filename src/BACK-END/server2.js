@@ -61,13 +61,13 @@ app.post('/signup', (req,res) => {
         if (!err){
             console.log("SAVE HOGYA HAI"); 
             console.log(data);
-            res.send(data[0]);
+            res.send("SAVE HOGYA HAI");
         }
         else{
             console.log("Error aggya hai");
             console.log(err);
             // username corner case handle
-            res.send("Make sure username is unique");
+            res.send("Username already taken");
         }
     })
 
@@ -78,7 +78,7 @@ app.post('/signup', (req,res) => {
 
 // Customer's Login
 app.post('/login', (req,res) => {
-
+    console.log(req)
     if(typeof req.body.username === "undefined" || typeof req.body.password === "undefined")
     {
         res.send("Please fill all spaces");
@@ -90,7 +90,7 @@ app.post('/login', (req,res) => {
         if (!err){
             if (data.length >= 1){
             console.log("USER HAS BEEN FOUND");
-            res.send(data);
+            res.send("USER HAS BEEN FOUND");
         }
         else if (data.length == 0){
             console.log("USER NOT FOUND");
@@ -124,7 +124,7 @@ app.post('/loginAdmin', (req,res) => {
         if (!err){
             if (data.length >= 1){
             console.log("USER HAS BEEN FOUND");
-            res.send(data[0]);
+            res.send("In kara isko");
         }
         else if (data.length == 0){
             console.log("USER NOT FOUND");
