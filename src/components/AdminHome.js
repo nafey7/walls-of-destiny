@@ -1,9 +1,11 @@
 import React from 'react'
 import axios from 'axios';
+import {Link} from 'react-router-dom'
 
 
 
-function AdminHome(props) {
+
+function AdminHome() {
     const [prod,setProd] = React.useState([{}]);
     React.useEffect(()=> {
       axios.get('http://localhost:8000/home')
@@ -17,7 +19,10 @@ function AdminHome(props) {
 
     return (
       <>
+    <Link to={{pathname: "/AddProduct"}}>
     <button className="btn btn-dark">Add Product</button>
+    </Link>
+    
 
         <h2 style={{textAlign:"center"}}>All Products</h2>
                <div class="row" style={{margin:"0 0 55px 0cm"}}>

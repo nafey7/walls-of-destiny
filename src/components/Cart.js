@@ -1,27 +1,64 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import {reactLocalStorage} from 'reactjs-localstorage';
+import axios from 'axios';
 
 function Cart(props) {
-    const [items, setItems] = React.useState(props.featured)
-    let x = items.reduce((accumulator, object) => {
+  const [items, setItems] = React.useState([{}])
+  React.useEffect(()=> {
+    let username = reactLocalStorage.get('username', "", true);
+    axios.post('http://localhost:8000/ViewCart',{
+      username: username
+    })
+    .then(function(res) {
+      console.log(res)
+        setItems(res.data)          
+    }, items)
+    .catch(function(err) {
+        console.log(err);
+    })
+  }, [])
+    
+    React.useEffect(()=>{
+      let x = items.reduce((accumulator, object) => {
         return accumulator + object.price * object.quantity;
       }, 0);
-    const [total, setTotal] = React.useState(x+200)
+      setTotal(x+200); 
+    })
+    
+    const [total, setTotal] = React.useState(0)
     function removeItem(id){
+      let i = items.findIndex( item => id === item.id );
+      let username = reactLocalStorage.get('username', "", true);
+        
+      axios.post('http://localhost:8000/DeleteItem', {
+        username: username,
+        product_name: items[i].name
+        })
+
         const newItems = items.filter(function(item) {
             return item.id !== id
         })
          
-        let x = newItems.reduce((accumulator, object) => {
-            return accumulator + object.price * object.quantity;
-          }, 0);
         setItems(newItems); 
-        setTotal(x+200);    
     }
+
     function handleChange(e,id){
         const { value } = e.target;
+        let i = items.findIndex( item => id === item.id );
+        let username = reactLocalStorage.get('username', "", true);
+        if(value>items[i].quantity){
+          axios.post('http://localhost:8000/AddToCart', {
+          username: username,
+          product_name: items[i].name
+      })}
+      else if(value<items[i].quantity){
+        axios.post('http://localhost:8000/DeleteFromCart', {
+        username: username,
+        product_name: items[i].name
+    })}
         if (value<1){
-            removeItem(id);
+            removeItem(i);
         }else{
 
         
@@ -40,10 +77,6 @@ function Cart(props) {
         }   
           return { id, name, price, color, pic, quantity: value };
         })
-        let x = items.reduce((accumulator, object) => {
-            return accumulator + object.price * object.quantity;
-          }, 0);
-        setTotal(x+200);
         setItems(newItems);
     }
     };

@@ -11,6 +11,7 @@ import Checkout from './components/Checkout';
 import Login from './components/Login';
 import AdminLogin from './components/AdminLogin';
 import Profile from './components/Profile';
+import Product from './components/product';
 import Rewards from './components/Rewards';
 import About from './components/About';
 import Contactus from './components/ContactUs';
@@ -32,6 +33,7 @@ function App() {
             <Route path="/decor" element={ <><Navbar /> <Block featured={decor} title={"Decorations"}/><Footer /></>}/>
             <Route path="/art" element={ <><Navbar /> <Block featured={art} title={"Art"}/><Footer /></>}/>
             <Route path="/lights" element={ <><Navbar /> <Block featured={lights} title={"Lights"}/><Footer /></>}/>
+            <Route path="/product" element={ <><Navbar /> <Product/><Footer /></>}/>
             <Route path="/cart" element={<><Navbar /> <Cart featured={featured}/> <Footer /></>}/>
             <Route path="/login" element={ <><Navbar /> <Login/><Footer /></>}/>
             <Route path="/checkout" element={ <><Navbar /> <Checkout/><Footer /></>}/>
@@ -45,8 +47,8 @@ function App() {
             <Route path= '/error' element={<ErrorPage/>}/>
 
             {/* Admin  */}
-            <Route path="/AddProduct" element={<AddProduct/>}/>
-            <Route path="/AdminHome" element={<><AdminNavbar /><AdminHome featured={featured} title={"Art"}/></>}/>
+            <Route path="/AddProduct" element={<><AdminNavbar /><AddProduct/></>}/>
+            <Route path="/AdminHome" element={<><AdminNavbar /><AdminHome/></>}/>
             <Route path="/12232OP43FF546TT765G768a53/435434234324253655756554/AdminLogin" element={<AdminLogin/>}/>
 
           </Routes>    

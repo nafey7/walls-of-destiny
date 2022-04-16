@@ -388,3 +388,115 @@ app.post('/deleteproduct', (req,res) => {
     });
         
 });
+
+
+app.post('/AddToCart', (req, res) => {
+    let cust_username = req.body.username;
+    let product_name = req.body.product_name;
+    let quantity = 1;
+    Cart.find({customer_username: cust_username, product_name: product_name}, async (err, data) => {
+        if (!err) {
+            if (data.length >= 1) {
+                let total = data[0].quantity;
+                let id = data[0]._id;
+                total = total + quantity;
+                await Cart.updateOne({"_id": id}, {$set: {quantity: total}});
+                res.send("Product added");
+            }
+            else {
+                Cart.insertMany({
+                    customer_username: cust_username,
+                    product_name: product_name,
+                    quantity: quantity
+                }, (err, data) => {
+                    if (!err) {
+                        console.log("Hogya");
+                        console.log(data);
+                        res.send("Product added to cart");
+                    }
+                    else{
+                        console.log("F");
+                        res.send("Something went wrong, please try again");
+                    }
+                })
+            }
+        }
+        else {
+            console.log("F");
+            res.send("Something went wrong");
+        }
+    })
+});
+
+app.post('/DeleteFromCart', (req, res) => {
+    let cust_username = req.body.username;
+    let product_name = req.body.product_name;
+    Cart.find({customer_username: cust_username, product_name: product_name}, async (err, data) => {
+        if (!err) {
+            if (data != null) {
+                let total = data[0].quantity;
+                let id = data[0]._id;
+                if (total > 1) {
+                    total = total - 1;
+                    await Cart.updateOne({"_id": id}, {$set: {quantity: total}});
+                    res.send("Success");
+                }
+                else {
+                    await Cart.deleteMany({customer_username: cust_username, product_name: product_name});
+                    res.send("Deleted Product");
+                }
+            }
+        }
+        else {
+            console.log("F");
+            res.send("Something went wrong");
+        }
+    })
+});
+
+//Deleting Item Completely From Cart
+app.post('/DeleteItem', async (req, res) => {
+    let cust_username = req.body.username;
+    let product_name = req.body.product_name;
+    await Cart.deleteMany({customer_username: cust_username, product_name: product_name});
+    res.send("Item Deleted Successfully");
+});
+
+// View Cart
+app.post('/ViewCart', (req, res) => {
+    let cust_username = req.body.username;
+    console.log(req.body.username)
+    Cart.find({customer_username: cust_username}, async (err, data) => {
+        if (err) {
+            console.log("F");
+            console.log(err);
+            res.send("Error");
+        }
+        else {
+            if (data.length >= 1) {
+                let final = []
+                for (let i = 0; i < data.length; i++) {
+                    let name_product = data[i].product_name;
+                    let result = await Product.find({name: name_product});
+                    let variables = {
+                        "name" : result[0].name,
+                        "price" : result[0].sales_price,
+                        "id" : result[0]._id,
+                        "pic" : result[0].pic,
+                        "color" : result[0].color,
+                        "quantity" : data[i].quantity
+                    }
+                    console.log(variables);
+                    final.push(variables);
+                }
+                console.log("Hogya");
+                res.send(final);
+                
+            }
+            else {
+                console.log("here")
+                res.send("Cart is empty");
+            }
+        }
+    })
+});
