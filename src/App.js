@@ -8,6 +8,7 @@ import ErrorPage from './components/ErrorPage';
 import AddProduct from './components/AddProductAdmin';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
+import ViewOrders from './components/ViewOrders';
 // import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -25,6 +26,10 @@ function App() {
             <Route path="/AddProduct" element={<AddProduct/>}/>
             <Route path="/cart" element={<Cart featured={featured}/>}/>
             <Route path="/checkout" element={<Checkout/>}/>
+            <Route path="/ViewOrders" element={<ViewOrders/>}/>
+            <Route path="/Summary" element={<Summary/>}/>
+
+
             <Route path="*" element={<ErrorPage message={{message: "404 not found"}}/>}/>
           </Routes>    
           <ChatBot />
