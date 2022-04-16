@@ -1,7 +1,7 @@
 import Navbar from './Navbar';
 import Footer from './Footer';
 import ImageUploadPreviewComponent from './ImageUploadPreview'
-// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
  
 
 
@@ -15,7 +15,31 @@ function AddProduct() {
             </div>
             <div class="col-4">
             {/* <ImageUploadPreviewComponent/> */}
-            <a href="https://placeholder.com"><img src="https://via.placeholder.com/150"/></a>
+            <form method="post" enctype="multipart/form-data">
+                <div>
+                    <label for="image_uploads">Choose image to upload (PNG, JPG)</label>
+                    <input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png"/>
+
+                    {/* {
+    const fileInput = document.querySelector('input');
+
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            console.log(reader.result);
+        };
+        reader.readAsDataURL(file);
+    });} */}
+                </div>
+                <div class="preview">
+                    <p>No files currently selected for upload</p>
+                </div>
+                <div>
+                    <button>Submit</button>
+                </div>
+            </form>
                     
             </div>
             <div class="col-4">

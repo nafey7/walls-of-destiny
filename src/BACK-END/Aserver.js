@@ -58,7 +58,7 @@ app.post('/AddToCart', (req, res) => {
                 let id = data[0]._id;
                 total = total + quantity;
                 await Cart.updateOne({"_id": id}, {$set: {quantity: total}});
-                res.send("Product added")
+                res.send("Product added");
             }
             else {
                 Cart.insertMany({
@@ -185,6 +185,55 @@ app.post('/Payment', (req, res) => {
     })
 });
 
+//Discount application customer
+app.post('/DiscountCust', (req, res) => {
+    let promo = req.body.promocode;
+    let cust_username = req.body.username;
+    Discount.find({promocode: promo}, async (err, data) => {
+        if (err) {
+            console.log(err);
+            res.send('Something went wrong');
+        }
+        else {
+            if (data.length >= 1) {
+                for (let i = 0; i < data.length; i++) {
+                    let cust_arr = data[i].customers;
+                    let length1 = cust_arr.length;
+                    let id = data[i]._id;
+                    for (let j = 0; j < cust_arr.length; j++) {
+                        if (cust_username == cust_arr[j]) {
+                            cust_arr.splice(j, 1);
+                        }
+                    }
+                    let length2 = cust_arr.length;
+                    if (length1 == length2) {
+                        res.send('Incorrect Promocode');
+                    }
+                    else {
+                        let final = {
+                            "discount" : data[i].percentage
+                        }
+                        if (cust_arr.length == 0) {
+                            console.log("Here");
+                            await Discount.deleteMany({promocode: promo});
+                            res.send(final);
+                        }
+                        else {
+                            console.log("ELSEHERE")
+                            await Discount.updateOne({"_id": id}, {$set: {customers: cust_arr}});
+                            res.send(final);
+                        }
+                    }
+                }
+            }
+            else {
+                console.log("Jhoot bolta saala");
+                res.send("Incorrect Promocode");
+            }
+        }
+    })
+});
+
 //View Orders Admin
 app.get('/ViewOrdersAd', (req, res) => {
     Order.find({}, async (err, data) => {
@@ -232,11 +281,20 @@ app.get('/ViewSales', (req, res) => {
                 let order_count = data.length;
                 for (let i = 0; i < data.length; i++) {
                     let result = await Product.find({name: data[i].product_name});
-                    let sales = result[0].sales_price * data[i].quantity;
-                    let p = result[0].profit * data[i].quantity;
-                    income = income + sales;
-                    profit = profit + p;
-
+                    if (data[i].discount != 0) {
+                        let dis = (1 - (data[i].discount / 100));
+                        let sales = result[0].sales_price * data[i].quantity * dis;
+                        let cost = result[0].cost_price * data[i].quantity;
+                        let p = sales - cost;
+                        income = income + sales;
+                        profit = profit + p;
+                    }
+                    else {
+                        let sales = result[0].sales_price * data[i].quantity;
+                        let p = result[0].profit * data[i].quantity;
+                        income = income + sales;
+                        profit = profit + p;
+                    }
                 }
                 let final = {
                     "Income" : income,

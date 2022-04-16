@@ -32,7 +32,7 @@ function Checkout(props) {
                     <label htmlFor="email">Phone Number</label>
                     <input type="text" className="form-control" name="number" id="number" placeholder="+92-XXX-XXXXXXX" style={{margin:"0px 0px 0px 20px", width: '350px', height: '30px', border: 'none', borderRadius: '3px', paddingLeft: '18px'}}/>
                 </div>
-                <button type="submit" id="log" className="btn btn-primary" style={{display: "block", margin: '0 auto', textAlign: 'center'}}>Place Order</button>
+                <button type="submit" id="log" className="btn btn-success" style={{display: "block", margin: '0 auto', textAlign: 'center'}}>Place Order</button>
                 </form>
                 <br></br>
                 <br></br>

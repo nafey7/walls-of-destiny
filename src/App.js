@@ -8,35 +8,56 @@ import ErrorPage from './components/ErrorPage';
 import AddProduct from './components/AddProductAdmin';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
+import Login from './components/Login';
+import AdminLogin from './components/AdminLogin';
+import Profile from './components/Profile';
+import Rewards from './components/Rewards';
+import About from './components/About';
+import Contactus from './components/ContactUs';
+// import Trackorder from './components/trackOrder';
+import Orders from './components/orderhistory';
+import AdminHome from './components/AdminHome';
 import ViewOrders from './components/ViewOrders';
-// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import Summary from './components/Summary';
+import AdminNavbar from './components/AdminNavbar';
+
 
 function App() {
   
   return (
     <Router>
       <div className="App" style={{height:"100%", backgroundColor:"white", position:"relative", width:"100%", backgroundSize: "cover"}}>
-          <Navbar />
+          
           <Routes>
-            <Route path="/" element={<Block featured={featured} title={"Featured Products"}/>}/>
-            <Route path="/clocks" element={<Block featured={clocks} title={"Clocks"}/>}/>
-            <Route path="/decor" element={<Block featured={decor} title={"Decorations"}/>}/>
-            <Route path="/art" element={<Block featured={art} title={"Art"}/>}/>
-            <Route path="/lights" element={<Block featured={lights} title={"Lights"}/>}/>
-            <Route path="/AddProduct" element={<AddProduct/>}/>
-            <Route path="/cart" element={<Cart featured={featured}/>}/>
-            <Route path="/checkout" element={<Checkout/>}/>
-            <Route path="/ViewOrders" element={<ViewOrders/>}/>
-            <Route path="/Summary" element={<Summary/>}/>
-
-
+            <Route path="/" element={<><Navbar /> <Block featured={featured} title={"Featured Products"}/><Footer /></>}/>
+            <Route path="/clocks" element={ <><Navbar /> <Block featured={clocks} title={"Clocks"}/><Footer /></>}/>
+            <Route path="/decor" element={ <><Navbar /> <Block featured={decor} title={"Decorations"}/><Footer /></>}/>
+            <Route path="/art" element={ <><Navbar /> <Block featured={art} title={"Art"}/><Footer /></>}/>
+            <Route path="/lights" element={ <><Navbar /> <Block featured={lights} title={"Lights"}/><Footer /></>}/>
+            <Route path="/cart" element={<><Navbar /> <Cart featured={featured}/> <Footer /></>}/>
+            <Route path="/login" element={ <><Navbar /> <Login/><Footer /></>}/>
+            <Route path="/checkout" element={ <><Navbar /> <Checkout/><Footer /></>}/>
+            <Route path="/profile" element={ <><Navbar /> <Profile/><Footer /></>}/>
+            <Route path="/rewards" element={ <><Navbar /> <Rewards/><Footer /></>}/>
+            {/* <Route path="/trackorders" element={ <><Navbar /> <Trackorder/><Footer /></>}/> */}
+            <Route path="/orders" element={ <><Navbar /> <Orders/><Footer /></>}/>
+            <Route path="/about" element={ <><Navbar /> <About/><Footer /></>}/>
+            <Route path="/ContactUs" element={<><Navbar /> <Contactus/><Footer /></>}/>
             <Route path="*" element={<ErrorPage message={{message: "404 not found"}}/>}/>
+            <Route path= '/error' element={<ErrorPage/>}/>
+
+            {/* Admin  */}
+            <Route path="/AddProduct" element={<AddProduct/>}/>
+            <Route path="/AdminHome" element={<><AdminNavbar /><AdminHome featured={featured} title={"Art"}/></>}/>
+            <Route path="/ViewOrders" element={<><Navbar /><ViewOrders/><Footer /></>}/>
+            <Route path="/Summary" element={<><Navbar /><Summary/><Footer /></>}/>
+            <Route path="/12232OP43FF546TT765G768a53/435434234324253655756554/AdminLogin" element={<AdminLogin/>}/>
+
           </Routes>    
-          <ChatBot />
-          <Footer />
+          
         </div>
     </Router>        
-    
+    // <Navbar />
   );
 }
 // dummy data

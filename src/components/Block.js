@@ -16,7 +16,7 @@ const Block = (props) => {
     Check?(
     <>
       <h2 style={{textAlign:"center"}}>{props.title}</h2>
-             <div class="row">
+             <div class="row" style={{margin:"0 0 55px 0cm"}}>
                  {props.featured.map((item)=>{
                    
                      return(

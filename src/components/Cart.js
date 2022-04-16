@@ -11,10 +11,11 @@ function Cart(props) {
         const newItems = items.filter(function(item) {
             return item.id !== id
         })
-        setItems(newItems);  
-        let x = items.reduce((accumulator, object) => {
+         
+        let x = newItems.reduce((accumulator, object) => {
             return accumulator + object.price * object.quantity;
           }, 0);
+        setItems(newItems); 
         setTotal(x+200);    
     }
     function handleChange(e,id){
@@ -48,7 +49,7 @@ function Cart(props) {
     };
     if(items.length < 1){
         return(
-            <div style={{height:"380px", textAlign:"center", backgroundColor:"white", margin: "4cm 0cm 0cm 9cm", position:"relative", width:"850px"}}>
+            <div style={{height:"380px", textAlign:"center", backgroundColor:"white", margin: "4cm 0cm 1cm 9cm", position:"relative", width:"850px"}}>
     <h2>Nothing in Cart</h2>
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3PokqMe-w1F3IzUuz8b8xcvHessPvz_TCAw&usqp=CAU"/>
     </div>
