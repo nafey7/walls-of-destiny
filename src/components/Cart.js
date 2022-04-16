@@ -31,7 +31,7 @@ function Cart(props) {
       let i = items.findIndex( item => id === item.id );
       let username = reactLocalStorage.get('username', "", true);
         
-      axios.post('http://localhost:8000/DeleteItem', {
+      axios.post('http://localhost:8000/DeleteItemFromCart', {
         username: username,
         product_name: items[i].name
         })
