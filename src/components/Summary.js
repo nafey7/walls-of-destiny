@@ -9,8 +9,10 @@ function Summary () {
             </div>
         </header>
         
-        
+        <div className = "income-container" style = {{width: '91.5%', height: '15rem', backgroundColor: '#E5E5E5', margin: '20px auto 30px auto', display: 'grid', gridTemplateColumns: '200px 300px auto auto', padding: '20px'}}></div>
         
         </>
     )
+
 }
+export default Summary;
