@@ -13,6 +13,7 @@ import Profile from './components/Profile';
 import Rewards from './components/Rewards';
 import About from './components/About';
 import Contactus from './components/ContactUs';
+import Trackorder from './components/trackOrder';
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
             <Route path="/rewards" element={<Rewards/>}/>
             <Route path="/about" element={<About/>}/>
             <Route path="/ContactUs" element={<Contactus/>}/>
+            <Route path="/trackOrder" element={<Trackorder/>}/>
             <Route path="*" element={<ErrorPage message={{message: "404 not found"}}/>}/>
           </Routes>    
           {/* <ChatBot /> */}

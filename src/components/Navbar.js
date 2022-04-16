@@ -54,7 +54,7 @@ function Navbar(props) {
           <Link to={{pathname: "/history"}}
             ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}><a href='#' >History</a></button></Link>
           <div class="dropdown-divider"></div>
-          <Link to={{pathname: "/track"}}
+          <Link to={{pathname: "/trackOrder"}}
             ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}><a href='#' >Track</a></button></Link>
           <div class="dropdown-divider"></div>
           <Link to={{pathname: "/rewards"}}
