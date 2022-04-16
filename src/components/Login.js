@@ -17,7 +17,7 @@ function Login() {
       password: '',
     },
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+      // alert(JSON.stringify(values, null, 2));
       axios.post('http://104.131.61.109/api/login', {
         username: values.username,
         password: values.password
@@ -63,58 +63,59 @@ function Login() {
   });
 
   return (
-    <div style={{ height: '166%' }}>
-      <div className="split left">
-        <div className="centered">
-          {/* <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUpZbDo4CyRqjJD_lTxD1zLpgmcMA1te95cA&usqp=CAU' alt="Avatar woman"/>
-          <h2>Jane Flex</h2>
-          <p>Some text.</p> */}
-        </div>
-      </div>
+    <div style={{ height: '195%' }}>
+    <div className="split left">
+    <div class="centered">
+      <img style ={{width:"110vh",height:"100vh"}} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUpZbDo4CyRqjJD_lTxD1zLpgmcMA1te95cA&usqp=CAU' alt="Avatar woman"/>
+    </div>
 
-      <div className="split right">
-      <div className="centered">
-        {Check?(
-        <form id = "signup_form" onSubmit={formikRegister.handleSubmit} style={{width: '400px', height: '500px', margin: '80px 0 0 0px', padding: '20px', background: 'white'}} >
-          <legend style={{textAlign:'center'}}>Register</legend>
+    <div className="split right">
+    <div className="centered">
+    {Check?(
+    <form id = "signup_form" onSubmit={formikRegister.handleSubmit} style={{width: '400px', height: '100%', margin: '20px 0 0 0px', padding: '20px', background: 'white'}} >
+      <h2 style={{margin:"0 0 30px 0", textAlign:'left'}}>Sign Up</h2>
+      <div className="form-group">
+                      <input type="text" className="form-control" onChange={formikRegister.handleChange} value={formikRegister.values.name} name="name" id="name" placeholder="Full Name" style={{width: '400', height: '40px', paddingLeft: '8px', backgroundColor:""}}/>
+                  </div>
+                  <div className="form-group">
+                      <input type="text" className="form-control" onChange={formikRegister.handleChange} value={formikRegister.values.username} name="username" id="username" placeholder="User Name" style={{width: '400', height: '40px', paddingLeft: '8px', backgroundColor:""}}/>
+                  </div>
+                  <div className="form-group">
+                      <input type="text" className="form-control" onChange={formikRegister.handleChange} value={formikRegister.values.address} name="address" id="address" placeholder="Address" style={{width: '400', height: '40px', paddingLeft: '8px', backgroundColor:""}}/>
+                  </div>
+                  <div className="form-group">
+                      <input type="text" className="form-control" onChange={formikRegister.handleChange} value={formikRegister.values.contact} name="contact" id="contact" placeholder="Contact Number" style={{width: '400', height: '40px', paddingLeft: '8px', backgroundColor:""}}/>
+                  </div>
+                  <div className="form-group">
+                      <input type="text" className="form-control" onChange={formikRegister.handleChange} value={formikRegister.values.email} name="email" id="email" placeholder="Email" style={{width: '400', height: '40px', paddingLeft: '8px', backgroundColor:""}}/>
+                  </div>
+                  <div className="form-group">
+                      <input type="password" className="form-control" onChange={formikRegister.handleChange} value={formikRegister.values.password} name="password" id="password" placeholder="password" style={{width: '400', height: '40px', paddingLeft: '8px', backgroundColor:""}}/>
+                  </div>
+
+          <button type="submit" id="log" className="btn" style={{color:"white",backgroundColor:"#a7ac38", width:"100px", display: "block", margin: '30px auto', textAlign: 'center'}}>SIGN UP</button>
+          <p>Already have an account? <a href="#" style={{color: '#a7ac38'}}>Sign In</a></p>
+
+    </form>
+    ):(
+    <form id = "login_form" onSubmit={formik.handleSubmit} style={{width: '400px', height: '500px', overflow: 'hidden', margin: '200px 0 0px 0px', padding: '20px', background: 'white'}} >
+          <h2 style={{margin:"0 0 30px 0",textAlign:'left'}}>Sign In</h2>
+      
           <div className="form-group">
-                  <input type="text" className="form-control" onChange={formikRegister.handleChange} value={formikRegister.values.name} name="name" id="name" placeholder="Full Name" style={{width: '400', height: '30px', border: 'none', borderRadius: '15px', paddingLeft: '8px', backgroundColor:"#69d2f1"}}/>
-              </div>
-              <div className="form-group">
-                  <input type="text" className="form-control" onChange={formikRegister.handleChange} value={formikRegister.values.username} name="username" id="username" placeholder="User Name" style={{width: '400', height: '30px', border: 'none', borderRadius: '15px', paddingLeft: '8px', backgroundColor:"#69d2f1"}}/>
-              </div>
-              <div className="form-group">
-                  <input type="text" className="form-control" onChange={formikRegister.handleChange} value={formikRegister.values.address} name="address" id="address" placeholder="Address" style={{width: '400', height: '30px', border: 'none', borderRadius: '15px', paddingLeft: '8px', backgroundColor:"#69d2f1"}}/>
-              </div>
-              <div className="form-group">
-                  <input type="text" className="form-control" onChange={formikRegister.handleChange} value={formikRegister.values.contact} name="contact" id="contact" placeholder="Contact Number" style={{width: '400', height: '30px', border: 'none', borderRadius: '15px', paddingLeft: '8px', backgroundColor:"#69d2f1"}}/>
-              </div>
-              <div className="form-group">
-                  <input type="text" className="form-control" onChange={formikRegister.handleChange} value={formikRegister.values.email} name="email" id="email" placeholder="Email" style={{width: '400', height: '30px', border: 'none', borderRadius: '15px', paddingLeft: '8px', backgroundColor:"#69d2f1"}}/>
-              </div>
-              <div className="form-group">
-                  <input type="password" className="form-control" onChange={formikRegister.handleChange} value={formikRegister.values.password} name="password" id="password" placeholder="password" style={{width: '400', height: '30px', border: 'none', borderRadius: '15px', paddingLeft: '8px', backgroundColor:"#69d2f1"}}/>
-              </div>
-
-              <button type="submit" id="log" className="btn btn-primary" style={{display: "block", margin: '0 auto', textAlign: 'center'}}>Submit</button>
-        </form>
-        ):(
-        <form id = "login_form" onSubmit={formik.handleSubmit} style={{width: '400px', height: '300px', overflow: 'hidden', margin: '0 0 0 0px', padding: '20px', background: 'white'}} >
-              <legend style={{textAlign:'center'}}>Login</legend>
-          
-              <div className="form-group">
-                  <input type="text" className="form-control" id="username" name="username" onChange={formik.handleChange} value={formik.values.username} placeholder="Username" style={{width: '400', height: '30px', border: 'none', borderRadius: '15px', paddingLeft: '8px', backgroundColor:"#69d2f1"}}/>
-              </div>
-              <div className="form-group">
-                  <input type="password" className="form-control" id="password" name="password" onChange={formik.handleChange} value={formik.values.password} placeholder="password" style={{width: '400', height: '30px', border: 'none', borderRadius: '15px', paddingLeft: '8px', backgroundColor:"#69d2f1"}}/>
-              </div>
-              <button type="submit" id="log" className="btn btn-primary" style={{display: "block", margin: '0 auto', textAlign: 'center'}}>Submit</button>
-              <br></br>
-              <a href="#" style={{color: 'black'}}><p>Forgot your password?</p></a>
-              <a href="#" style={{color: 'black'}} onClick={()=>{setCheck(true)}} ><p>Dont have an account yet?</p></a>
-          </form>)}    
-        </div>
-      </div>
+              <input type="text" className="form-control" name="username" id="username" onChange={formik.handleChange} value={formik.values.username} placeholder="Username" style={{width: '400', height: '40px', paddingLeft: '8px', backgroundColor:""}}/>
+          </div>
+          <div className="form-group">
+              <input type="password" className="form-control" id="password" name="password" onChange={formik.handleChange} value={formik.values.password} placeholder="Password" style={{width: '400', height: '40px', paddingLeft: '8px', backgroundColor:"white"}}/>
+          </div>
+          <a href="#" style={{color: '#a7ac38',textAlign:'right'}}><p>Forgot password?</p></a>
+          <br></br>
+          <button type="submit" id="log" className="btn" style={{width:"100px",display: "block", margin: '0 auto', textAlign: 'center',backgroundColor:"#a7ac38"}}>SIGN IN</button>
+          <br></br>
+          <p>Don't have an account? <a href="#" style={{color: '#a7ac38'}} onClick={()=>{setCheck(true)}} >Sign Up</a></p>
+      </form>)}    
+    </div>
+    </div>
+    </div>
     </div>
   )
 }

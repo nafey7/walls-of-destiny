@@ -6,10 +6,10 @@ import Avatar from '@mui/material/Avatar';
 function Contactus(){
     return(
         <div class= "contact-us">
-            <div class = "container" style = {{margin:"120px 100px 50px 180px", backgroundColor:"white",justifyContent:"center"}}>
-                <h1 style = {{textAlign: "center"}}>Let's Chat.</h1>
-                <p style = {{textAlign: "center"}}>We are here to help you and make your journey absolutely</p>
-                <p style = {{textAlign: "center"}}>hassle-free.</p>
+            <div class = "container" style = {{margin:"120px 100px 70px 180px", backgroundColor:"white",justifyContent:"center"}}>
+                <h1 style = {{textAlign: "center",fontSize:"50px"}}>Let's Chat <b style={{color:"#a7ac38"}}>.</b></h1>
+                <p style = {{textAlign: "center", fontSize:"18px"}}>We are here to help you and make your journey absolutely <br></br>hassle-free.</p>
+
             </div>
             <div class = "row">
             <div class = "col-4">
@@ -39,11 +39,10 @@ function Contactus(){
             
             <div class = "col-4" style={{margin:"0 0 0 430px"}}>
             <div class="mb-3">
-            <input type="text text-dark" style={{ height:"60px", backgroundColor:"#E5E5E5"}} class="form-control" id="subjectinput" placeholder="Subject"/>
+            <input type="text text-dark" style={{width:"450px", height:"60px", backgroundColor:"#E5E5E5"}} class="form-control" id="subjectinput" placeholder="Subject"/>
             </div>
             <div class="mb-3">
-            {/* <input type="text" style={{ height:"200px", backgroundColor:"black"}} class="form-control" id="queryinput" placeholder="Please write your query or the description of the problem you are facing."/> */}
-            <textarea class="form-control text-dark" id="queryinput" style={{width:"450px",margin:"25px 0 50px 0",backgroundColor:"#E5E5E5"}} rows="10" placeholder="Please write your query or the description of the problem you are facing."></textarea>
+            <textarea class="form-control text-dark" id="queryinput" style={{width:"450px",margin:"25px 0 50px 0",backgroundColor:"#E5E5E5"}} rows="8" placeholder="Please write your query or the description of the problem you are facing."></textarea>
             </div>
             </div>
             </div>

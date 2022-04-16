@@ -13,7 +13,8 @@ import Profile from './components/Profile';
 import Rewards from './components/Rewards';
 import About from './components/About';
 import Contactus from './components/ContactUs';
-
+// import Trackorder from './components/trackOrder';
+// import Orders from './components/orderhistory';
 
 function App() {
   
