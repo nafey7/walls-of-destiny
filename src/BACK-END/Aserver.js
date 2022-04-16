@@ -27,6 +27,11 @@ app.use(express.static('public'));
 app.use(bodyparser.json());
 app.use(morgan('dev'));
 
+//Spin the wheel Promocodes
+let discount_codes = {
+    
+};
+
 //Finding Products using categories
 app.post('/CategoryMenu', (req, res) => {
     Product.find({category: req.body.category}, (err, data) => {
@@ -129,9 +134,9 @@ app.post('/ViewCart', (req, res) => {
                     let result = await Product.find({name: name_product});
                     let variables = {
                         "name" : result[0].name,
-                        "price" : result[0].price,
+                        "price" : result[0].sales_price,
                         "id" : result[0]._id,
-                        "pic" : result[0].picture_url,
+                        "pic" : result[0].pic,
                         "color" : result[0].color,
                         "quantity" : data[i].quantity
                     }
@@ -210,6 +215,7 @@ app.post('/DiscountCust', (req, res) => {
                         res.send('Incorrect Promocode');
                     }
                     else {
+                        let amount =  (1 - (data[i].percentage / 100));
                         let final = {
                             "discount" : data[i].percentage
                         }
