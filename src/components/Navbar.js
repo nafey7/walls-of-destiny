@@ -3,7 +3,7 @@ import { ReactComponent as Logo } from './logo.svg';
 import {Link} from 'react-router-dom'
 
 function Navbar(props) {
-  const [Check, setCheck] = React.useState(true);
+  const [Check, setCheck] = React.useState(false);
 
   return (
       <>
