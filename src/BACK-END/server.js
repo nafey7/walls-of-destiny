@@ -94,9 +94,10 @@ app.post('/add_product', (req,res) => {
 // app.get('/order_one', (req, res) => {
 //     const order = new Order({
 //         customer_username: 'Arslan123',
-//         product_name: 'Fancy Wall Clock',
+//         product_name: 'Fancy Wall Clock ',
 //         quantity: 2,
-//         status: 'delivered',
+//         status: 'processing',
+//         discount: 10
 //     });
 
 //     order.save()
