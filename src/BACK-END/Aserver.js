@@ -58,7 +58,7 @@ app.post('/AddToCart', (req, res) => {
                 let id = data[0]._id;
                 total = total + quantity;
                 await Cart.updateOne({"_id": id}, {$set: {quantity: total}});
-                res.send("Product added")
+                res.send("Product added");
             }
             else {
                 Cart.insertMany({
