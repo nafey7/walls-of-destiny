@@ -281,10 +281,20 @@ app.get('/ViewSales', (req, res) => {
                 let order_count = data.length;
                 for (let i = 0; i < data.length; i++) {
                     let result = await Product.find({name: data[i].product_name});
-                    let sales = result[0].sales_price * data[i].quantity;
-                    let p = result[0].profit * data[i].quantity;
-                    income = income + sales;
-                    profit = profit + p;
+                    if (data[i].discount != 0) {
+                        let dis = (1 - (data[i].discount / 100));
+                        let sales = result[0].sales_price * data[i].quantity * dis;
+                        let cost = result[0].cost_price * data[i].quantity;
+                        let p = sales - cost;
+                        income = income + sales;
+                        profit = profit + p;
+                    }
+                    else {
+                        let sales = result[0].sales_price * data[i].quantity;
+                        let p = result[0].profit * data[i].quantity;
+                        income = income + sales;
+                        profit = profit + p;
+                    }
                 }
                 let final = {
                     "Income" : income,
