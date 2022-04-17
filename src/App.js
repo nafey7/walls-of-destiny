@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Block from './components/Block';
-// import ChatBot from './components/ChatBot';
+import ChatBot from './components/ChatBot';
 import ErrorPage from './components/ErrorPage';
 import AddProduct from './components/AddProductAdmin';
 import Cart from './components/Cart';
