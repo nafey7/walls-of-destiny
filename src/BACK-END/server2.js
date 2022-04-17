@@ -598,11 +598,11 @@ app.post('/Payment', async (req, res) => {
                     quantity: quantity,
                     status: "Processing",
                     discount: discount
-                }, (err, data) => {
+                }, async (err, data) => {
                     if (!err) {
                         console.log("Hogya");
                         console.log(data);
-                        
+                        await Cart.deleteMany({customer_username: cust_username});
                     }
                     else{
                         console.log("F");
