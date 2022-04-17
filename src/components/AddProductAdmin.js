@@ -23,6 +23,7 @@ function AddProduct() {
           featured: '1',
 
     })
+    
     function changesalep(e){
         let x = cust;
         x.sales_price = e;

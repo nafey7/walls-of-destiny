@@ -44,7 +44,7 @@ function AdminNavbar() {
           <Link to={{pathname: "/profile"}}
             ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>Profile</button></Link>
             <div className="dropdown-divider"></div>
-          <button className='btn btn-outline-success btn-sm' onClick={() =>{logout()}} style={{fontSize:"15px"}}>Add Manager</button>
+          <button className='btn btn-outline-success btn-sm' onClick={() =>{}} style={{fontSize:"15px"}}>Add Manager</button>
           <div className="dropdown-divider"></div>
           <button className='btn btn-outline-success btn-sm' onClick={() =>{logout()}} style={{fontSize:"15px"}}>Logout</button>
           </div>

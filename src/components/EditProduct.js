@@ -160,7 +160,7 @@ return (
             <br></br>
  
             <button type="button" class="btn" onClick={()=>{done()}} style = {{color:"white" ,width:"150px",margin: "0 0 0 70px", backgroundColor:"#aca738"}}>Confirm Changes</button>
-            <button type="button" class="btn btn-danger" onClick={()=>{done()}} style = {{color:"white" ,width:"150px",margin: "Auto 10px", backgroundColor:""}}>Delete Item</button>
+            <button type="button" class="btn btn-danger" onClick={()=>{deleteprod()}}  style = {{color:"white" ,width:"150px",margin: "Auto 10px", backgroundColor:""}}>Delete Item</button>
             
             </div>
             </div>
