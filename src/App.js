@@ -31,14 +31,14 @@ function App() {
       <div className="App" style={{height:"100%", backgroundColor:"white", position:"relative", width:"100%", backgroundSize: "cover"}}>
           
           <Routes>
-            <Route path="/" element={<><Navbar /> <Block featured={featured} title={"Featured Products"}/><Footer /></>}/>
-            <Route path="/clocks" element={ <><Navbar /> <Block featured={clocks} title={"Clocks"}/><Footer /></>}/>
-            <Route path="/decor" element={ <><Navbar /> <Block featured={decor} title={"Decorations"}/><Footer /></>}/>
-            <Route path="/art" element={ <><Navbar /> <Block featured={art} title={"Art"}/><Footer /></>}/>
-            <Route path="/lights" element={ <><Navbar /> <Block featured={lights} title={"Lights"}/><Footer /></>}/>
+            <Route path="/" element={<><Navbar /> <Block title={"Featured Products"}/><Footer /></>}/>
+            <Route path="/clocks" element={ <><Navbar /> <Block  title={"Clock"}/><Footer /></>}/>
+            <Route path="/decor" element={ <><Navbar /> <Block title={"Decor"}/><Footer /></>}/>
+            <Route path="/art" element={ <><Navbar /> <Block title={"Art"}/><Footer /></>}/>
+            <Route path="/lights" element={ <><Navbar /> <Block title={"Light"}/><Footer /></>}/>
             <Route path="/product" element={ <><Navbar /> <Product/><Footer /></>}/>
-            <Route path="/cart" element={<><Navbar /> <Cart featured={featured}/> <Footer /></>}/>
-            <Route path="/login" element={ <><Navbar /> <Login/><Footer /></>}/>
+            <Route path="/cart" element={<><Navbar /> <Cart /> <Footer /></>}/>
+            <Route path="/login" element={ <><Login/></>}/>
             <Route path="/checkout" element={ <><Navbar /> <Checkout/><Footer /></>}/>
             <Route path="/profile" element={ <><Navbar /> <Profile/><Footer /></>}/>
             <Route path="/rewards" element={ <><Navbar /> <Rewards/><Footer /></>}/>
@@ -52,10 +52,10 @@ function App() {
             <Route path= '/error' element={<ErrorPage/>}/>
 
             {/* Admin  */}
-            <Route path="/AddProduct" element={<AddProduct/>}/>
+            <Route path="/AddProduct" element={<><AdminNavbar /><AddProduct/></>}/>
             <Route path="/AdminHome" element={<><AdminNavbar /><AdminHome featured={featured} title={"Art"}/></>}/>
-            <Route path="/ViewOrders" element={<><Navbar /><ViewOrders/><Footer /></>}/>
-            <Route path="/Summary" element={<><Navbar /><Summary/><Footer /></>}/>
+            <Route path="/ViewOrders" element={<><AdminNavbar /><ViewOrders/><Footer /></>}/>
+            <Route path="/admin/summary" element={<><AdminNavbar /><Summary/><Footer /></>}/>
             <Route path="/12232OP43FF546TT765G768a53/435434234324253655756554/AdminLogin" element={<AdminLogin/>}/>
 
           </Routes>    

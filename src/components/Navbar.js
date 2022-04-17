@@ -91,26 +91,25 @@ function Navbar() {
           <Link to={{pathname: "/cart",}}>
             <button className='btn btn-outline-success' style={{fontSize:"20px"}}><i className="glyphicon glyphicon-shopping-cart" style={{fontSize:"20px",color:"white"}}></i></button></Link>
           {Check?(
-          <div className="btn-group">
+          <div className="btn-group dropleft">
           <button className='btn btn-outline-success dropdown-toggle' data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{fontSize:"20px"}}><i className="fa fa-user" style={{fontSize:"20px",color:"white"}}/></button>
-          <div className="dropdown-menu" style= {{left:"auto", right: "-1em"}}> 
-              <Link to={{pathname: "/profile"}}>
-                <button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>Profile</button></Link>
-              <div className="dropdown-divider"></div>
-              <Link to={{pathname: "/history"}}>
-                <button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>History</button></Link>
-              <div className="dropdown-divider"></div>
-              <Link to={{pathname: "/track"}}>
-                <button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>Track</button></Link>
-              <div className="dropdown-divider"></div>
-              <Link to={{pathname: "/rewards"}}>
-                <button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>Rewards</button></Link>
-              <div className="dropdown-divider"></div>
-              <Link to={{pathname: "/history"}}>
-                <button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>Logout</button></Link>
-              </div>
-              </div>):(<Link to={{pathname: "/login"}} style={{backgroundColor:"",margin:"0 20px", fontSize:"18px"}}>
-              <button className='btn btn-primary' style={{fontSize:"10px"}}>Sign In</button></Link>)}
+          <div className="dropdown-menu" style={{left:"auto",right:"-1em",align:"left"}}>
+          <Link to={{pathname: "/profile"}}
+            ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>Profile</button></Link>
+          <div className="dropdown-divider"></div>
+          <Link to={{pathname: "/history"}}
+            ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>History</button></Link>
+          <div className="dropdown-divider"></div>
+          <Link to={{pathname: "/track"}}
+            ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>Track</button></Link>
+          <div className="dropdown-divider"></div>
+          <Link to={{pathname: "/rewards"}}
+            ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>Rewards</button></Link>
+          <div className="dropdown-divider"></div>
+          <button className='btn btn-outline-success btn-sm' onClick={() =>{logout()}} style={{fontSize:"15px"}}>Logout</button>
+          </div>
+          </div>):(<Link to={{pathname: "/login"}} style={{backgroundColor:"",margin:"0 20px", fontSize:"18px"}}>
+          <button className='btn btn-primary' style={{fontSize:"10px"}}>Sign In</button></Link>)}
 
           </div>
         </div>

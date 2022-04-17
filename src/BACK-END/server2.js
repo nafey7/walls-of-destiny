@@ -39,6 +39,15 @@ app.use(cors(corsOptions));
 
 let user_data = {};
 let randomstring = '';
+//Spin the wheel Promocodes
+let discount_codes = {
+    "YSIND": 25,
+    "TUFND": 20,
+    "ABCDE": 20,
+    "FTYWI": 15,
+    "YDIEB": 15,
+    "GYDIE": 10
+};
 
 // Customer's Signup
 app.post('/signup_further', (req, res) => {
@@ -449,12 +458,12 @@ app.post('/update_admin_info', (req, res) => {
 app.post('/addproduct', (req, res) => {
     // handle username and email not repeat
 
-    if (typeof req.body.name === "undefined" || typeof req.body.pic === "undefined" || typeof req.body.cost_price === "undefined" || typeof req.body.sales_price === "undefined" || typeof req.body.details === "undefined" || typeof req.body.profit === "undefined" || typeof req.body.color === "undefined" || typeof req.body.dimensions === "undefined" || typeof req.body.category === "undefined" || typeof req.body.featured === "undefined") {
+    if (typeof req.body.name === "undefined" || typeof req.body.pic === "undefined" || typeof req.body.cost_price === "undefined" || typeof req.body.sales_price === "undefined" || typeof req.body.details === "undefined"  || typeof req.body.color === "undefined" || typeof req.body.dimensions === "undefined" || typeof req.body.category === "undefined" || typeof req.body.featured === "undefined") {
         res.send("Please fill all spaces");
         return;
     }
 
-
+    console.log(req.body)
     Product.insertMany({
         name: req.body.name,
         pic: req.body.pic,
@@ -867,5 +876,44 @@ app.post('/AddCode', async (req, res) => {
                 res.send("Something went wrong, please try again");
             }
         })
+    })
+});
+
+//Spin the Wheel
+app.post('SpinWheel', (req, res) => {
+    let promo = req.body.promocode;
+    let cust_username = req.body.username;
+    let discount = undefined;
+    if (promo == "TUFND") {
+        discount = discount_codes.TUFND;
+    }
+    if (promo == "YSIND") {
+        discount = discount_codes.YSIND;
+    }
+    if (promo == "FTYWI") {
+        discount = discount_codes.FTYWI;
+    }
+    if (promo == "YDIEB") {
+        discount = discount_codes.YDIEB;
+    }
+    if (promo == "GYDIE") {
+        discount = discount_codes.GYDIE;
+    }
+    if (promo == "ABCDE") {
+        discount = discount_codes.ABCDE;
+    }
+    Discount.insertMany({
+        percentage: discount,
+        promocode: promo,
+        customers: [cust_username]
+    }, (err, data) => {
+        if (err) {
+            console.log(err);
+            res.send("Something went wrong, please try again");
+        }
+        else {
+            console.log(data);
+            res.send("Success");
+        }
     })
 });

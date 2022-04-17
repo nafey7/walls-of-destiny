@@ -1,11 +1,151 @@
+import Navbar from './Navbar';
+import Footer from './Footer';
+import ImageUploadPreviewComponent from './ImageUploadPreview'
+import axios from 'axios';
+import { useFormik } from 'formik';
+import {useLocation, useNavigate} from "react-router-dom";
+import React from 'react'
+
+ 
 
 
 function AddProduct() {
+    let navigate = useNavigate();
+    const [cust, setCust] = React.useState({
+        cost_price: '',
+          sales_price: '',
+          details:"",
+          name: "", 
+          pic: "",
+          color: '',
+          category: '',
+          dimension: '',
+          featured: '1',
+
+    })
+    function changesalep(e){
+        let x = cust;
+        x.sales_price = e;
+        setCust(x)
+    }
+    function changecostp(e){
+        let x = cust;
+        x.cost_price= e;
+        setCust(x)
+    }
+    function changedetails(e){
+        let x = cust;
+        x.details = e;
+        setCust(x)
+    }
+    function changename(e){
+        let x = cust;
+        x.name = e;
+        setCust(x)
+    }
+    function changecolor(e){
+        let x = cust;
+        x.color = e;
+        setCust(x)
+    }
+    function changecategory(e){
+        let x = cust;
+        x.category = e;
+        setCust(x)
+    }
+    function changedimensions(e){
+        let x = cust;
+        x.dimension = e;
+        setCust(x)
+    }
+    function changefeatured(e){
+        let x = cust;
+        x.featured = e;
+        setCust(x)
+    }
+    function changepic(e){
+        let x = cust;
+        x.pic = e;
+        setCust(x)
+    }
+
+    // const formik = useFormik({
+    //     initialValues: {
+    //       cost_price: '',
+    //       sales_price: '',
+    //       details:"",
+    //       name: "", 
+    //       pic: "",
+    //       color: '',
+    //       category: '',
+    //       dimension: '',
+    //       featured: '',
+
+    //     },
+    //     onSubmit: values => {
+    //       // alert(JSON.stringify(values, null, 2));
+        //   axios.post('http://localhost:8000/addproduct', {
+        //   cost_price: values.cost_price,
+        //   sales_price: values.sales_price,
+        //   details: values.details,
+        //   name: values.name, 
+        //   pic: values.pic,
+        //   color: values.color,
+        //   category: values.category,
+        //   dimension: values.dimension,
+        //   featured: values.featured,
+        //   })
+        //   .then(function (response) {
+        //     alert("added")
+            
+        //   })
+        //   .catch(function (error) {
+        //     navigate('/error');
+        //   });
+        // },
+    //   });
+
+    function done(){
+        axios.post('http://localhost:8000/addproduct', {
+          cost_price: cust.cost_price,
+          sales_price: cust.sales_price,
+          details: cust.details,
+          name: cust.name, 
+          pic: cust.pic,
+          color: cust.color,
+          category: cust.category,
+          dimensions: cust.dimension,
+          featured: cust.featured,
+          })
+          .then(function (response) {
+            alert(response.data)
+            if(response.data==="Success"){
+            navigate('/adminHome')}
+            
+          })
+          .catch(function (error) {
+            navigate('/error');
+          });
+    }
+    
     return (
     <div className="Product" style={{height:"100%", backgroundColor:"white", position:"relative", width:"100%"}}>
-        <div className="container" style={{margin: "50px 150px", height:"100%", backgroundColor:"white", position:"relative", width:"100%"}}>
-            <div className="row align-items-center">
-                <div className="col-2">
+    <div class="container" style={{margin: "50px 150px", height:"100%", backgroundColor:"white", position:"relative", width:"100%"}}>
+        <div class="row align-items-center">
+        <div class="col-2">
+            
+            
+            </div>
+            <h1>Product Details:</h1>
+            <form  >
+                <div>
+            <div class="col-4">
+            {/* <ImageUploadPreviewComponent/> */}
+            {/* <form method="post" enctype="multipart/form-data">
+                <div>
+                    <label for="image_uploads">Choose image to upload (PNG, JPG)</label>
+                    <input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png"/>
+                    
                 </div>
                 <div className="col-4">
                     <form method="post" enctype="multipart/form-data">
@@ -38,8 +178,42 @@ function AddProduct() {
                     <button type="button" class="btn btn-dark" style ={{margin: "Auto 10px"}}>Back</button>
                     <button type="button" class="btn btn-success" style = {{margin: "Auto 10px"}}>Add</button>
                 </div>
+            </form> */}
+            <br></br>
+ 
+            <input class="form-control" type="text" placeholder="Name" id= "1" name ="1" onChange={(e)=>{changename(e.target.value)}}  aria-label="name"/>
+            <br></br>
+            <input class="form-control" type="text" placeholder="color" id= "2" name ="2" onChange={(e)=>{changecolor(e.target.value)}} aria-label="color"/>
+            <br></br>
+            <input class="form-control" type="text" placeholder="Dimensions(lxwxb)" id= "3" name ="4" onChange={(e)=>{changedimensions(e.target.value)}} aria-label="Dimensions"/>
+            <br></br>
+            <input class="form-control" type="text" placeholder="Product Description" id= "4" name ="4" onChange={(e)=>{changedetails(e.target.value)}} aria-label="Product Description"  rows="3"/>            
+            <br></br>
+            <input class="form-control" type="text" placeholder="url" aria-label="url" id= "5" onChange={(e)=>{changepic(e.target.value)}} name ="5" />
+
+                 
             </div>
-        </div> 
+            <div class="col-4">
+            
+            <br></br>
+            <input class="form-control" type="text" placeholder="cost price" aria-label="cost_price" onChange={(e)=>{changecostp(e.target.value)}} id= "6" name ="6" />
+            <br></br>
+            <input class="form-control" type="text" placeholder="sales price" aria-label="sales_price" onChange={(e)=>{changesalep(e.target.value)}} id= "7" name ="7" />
+            <br></br>
+            <input class="form-control" type="text" placeholder="Category" aria-label="Category" id= "8" onChange={(e)=>{changecategory(e.target.value)}} name ="8" />
+            <br></br>
+            <input class="form-control" type="text" placeholder="Featured" aria-label="Featured" rows="3" onChange={(e)=>{changefeatured(e.target.value)}} id= "9" name ="9" />            
+            <br></br>
+ 
+            <button type="button" class="btn btn-success" onClick={()=>{done()}} style = {{margin: "Auto 10px"}}>Add</button>
+            </div>
+            </div>
+            </form>
+        </div>
+        
+    </div> 
+    
+    
     </div>
     )
 }

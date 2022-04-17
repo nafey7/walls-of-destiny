@@ -1,9 +1,16 @@
 import React from 'react'
 import { ReactComponent as Logo } from './logo.svg';
 import {Link} from 'react-router-dom'
+import {reactLocalStorage} from 'reactjs-localstorage';
+import {useLocation, useNavigate} from "react-router-dom";
 
 
 function AdminNavbar() {
+  let navigate = useNavigate();
+  function logout(){
+    reactLocalStorage.remove('username');
+    navigate("/12232OP43FF546TT765G768a53/435434234324253655756554/AdminLogin")
+  }
 
   
 
@@ -21,10 +28,10 @@ function AdminNavbar() {
                 <Link to={{pathname: "/adminHome"}} style={{margin:"0 20px", fontSize:"18px", color: "white"}}>Products</Link>
               </li>
               <li className="nav-item">
-                <Link to={{pathname: "/clocks"}} style={{margin:"0 20px", fontSize:"18px", color: "white"}}>Summary</Link>
+                <Link to={{pathname: "/admin/summary"}} style={{margin:"0 20px", fontSize:"18px", color: "white"}}>Summary</Link>
               </li>
               <li className="nav-item">
-                <Link to={{pathname: "/decor"}} style={{margin:"0 20px", fontSize:"18px", color: "white"}}>Orders</Link>
+                <Link to={{pathname: "/admin/orders"}} style={{margin:"0 20px", fontSize:"18px", color: "white"}}>Orders</Link>
               </li>
             </ul>
             
@@ -32,22 +39,14 @@ function AdminNavbar() {
           
           <div>
           <div className="btn-group dropleft">
-          <button className='btn btn-outline-success dropdown-toggle' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{fontSize:"20px"}}><i className="fa fa-user" style={{fontSize:"20px",color:"white"}}/></button>
-          <div className="dropdown-menu">
+          <button className='btn btn-outline-success dropdown-toggle' data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{fontSize:"20px"}}><i className="fa fa-user" style={{fontSize:"20px",color:"white"}}/></button>
+          <div className="dropdown-menu" style={{left:"auto", right:"-1em"}}>
           <Link to={{pathname: "/profile"}}
             ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>Profile</button></Link>
+            <div className="dropdown-divider"></div>
+          <button className='btn btn-outline-success btn-sm' onClick={() =>{logout()}} style={{fontSize:"15px"}}>Add Manager</button>
           <div className="dropdown-divider"></div>
-          <Link to={{pathname: "/history"}}
-            ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>History</button></Link>
-          <div className="dropdown-divider"></div>
-          <Link to={{pathname: "/track"}}
-            ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>Track</button></Link>
-          <div className="dropdown-divider"></div>
-          <Link to={{pathname: "/rewards"}}
-            ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>Rewards</button></Link>
-          <div className="dropdown-divider"></div>
-          <Link to={{pathname: "/history"}}
-            ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>Logout</button></Link>
+          <button className='btn btn-outline-success btn-sm' onClick={() =>{logout()}} style={{fontSize:"15px"}}>Logout</button>
           </div>
           </div>
 
