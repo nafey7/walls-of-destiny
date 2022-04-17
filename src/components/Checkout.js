@@ -88,7 +88,7 @@ function Checkout() {
                 </div>
                 <div class="form-group" style={{margin:"0px 0px 20px 0px"}}>
                     <label htmlFor="email">Phone Number</label>
-                    <input type="text" className="form-control" name="number" id="number" onChange={confirm.handleChange} value={confirm.values.cpntact} placeholder="+92-XXX-XXXXXXX" style={{margin:"0px 0px 0px 20px", width: '350px', height: '30px', border: 'none', borderRadius: '3px', paddingLeft: '18px'}}/>
+                    <input type="text" className="form-control" name="number" id="number" onChange={confirm.handleChange} value={confirm.values.contact} placeholder="+92-XXX-XXXXXXX" style={{margin:"0px 0px 0px 20px", width: '350px', height: '30px', border: 'none', borderRadius: '3px', paddingLeft: '18px'}}/>
                 </div>
                 <button type="submit" onClick={()=>{confirm()}} id="log" className="btn btn-success" style={{display: "block", margin: '0 auto', textAlign: 'center'}}>Place Order</button>
                 </form>
