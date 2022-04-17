@@ -598,11 +598,11 @@ app.post('/Payment', async (req, res) => {
                     quantity: quantity,
                     status: "Processing",
                     discount: discount
-                }, (err, data) => {
+                }, async (err, data) => {
                     if (!err) {
                         console.log("Hogya");
                         console.log(data);
-                        res.send("Order has been placed");
+                        await Cart.deleteMany({customer_username: cust_username});
                     }
                     else{
                         console.log("F");
@@ -610,6 +610,7 @@ app.post('/Payment', async (req, res) => {
                     }
                 })
             }
+            res.send("Order has been placed");
         }
     })
 });
