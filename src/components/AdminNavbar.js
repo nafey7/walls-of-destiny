@@ -41,10 +41,11 @@ function AdminNavbar() {
           <div className="btn-group dropleft">
           <button className='btn btn-outline-success dropdown-toggle' data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{fontSize:"20px"}}><i className="fa fa-user" style={{fontSize:"20px",color:"white"}}/></button>
           <div className="dropdown-menu" style={{left:"auto", right:"-1em"}}>
-          <Link to={{pathname: "/profile"}}
+          <Link to={{pathname: "/AdminProfile"}}
             ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>Profile</button></Link>
             <div className="dropdown-divider"></div>
-          <button className='btn btn-outline-success btn-sm' onClick={() =>{}} style={{fontSize:"15px"}}>Add Manager</button>
+            <Link to={{pathname: "/addAdmin"}}>
+              <button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>Add Manager</button></Link>
           <div className="dropdown-divider"></div>
           <button className='btn btn-outline-success btn-sm' onClick={() =>{logout()}} style={{fontSize:"15px"}}>Logout</button>
           </div>

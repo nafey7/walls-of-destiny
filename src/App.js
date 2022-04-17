@@ -23,7 +23,8 @@ import ViewOrders from './components/ViewOrders';
 import Summary from './components/Summary';
 import AdminNavbar from './components/AdminNavbar';
 import EditProduct from './components/EditProduct';
-
+import AdminProfile from './components/AdminProfile';
+import AddAdmin from './components/AddAdmin';
 
 function App() {
   
@@ -32,7 +33,7 @@ function App() {
       <div className="App" style={{height:"100%", backgroundColor:"white", position:"relative", width:"100%", backgroundSize: "cover"}}>
           
           <Routes>
-            <Route path="/" element={<><Navbar /> <Block title={"Featured Products"}/><ChatBot/><Footer /></>}/>
+            <Route path="/" element={<><Navbar /> <Block title={"Featured Products"}/><Footer /></>}/>
             <Route path="/clocks" element={ <><Navbar /> <Block  title={"Clock"}/><Footer /></>}/>
             <Route path="/decor" element={ <><Navbar /> <Block title={"Decor"}/><Footer /></>}/>
             <Route path="/art" element={ <><Navbar /> <Block title={"Art"}/><Footer /></>}/>
@@ -46,7 +47,7 @@ function App() {
             {/* <Route path="/trackorders" element={ <><Navbar /> <Trackorder/><Footer /></>}/> */}
             <Route path="/orders" element={ <><Navbar /> <Orders/><Footer /></>}/>
             <Route path="/about" element={ <><Navbar /> <About/><Footer /></>}/>
-            <Route path="/ContactUs" element={<><Navbar /> <Contactus/><Footer /></>}/>
+            <Route path="/ContactUs" element={<><Navbar /> <Contactus/><ChatBot/><Footer /></>}/>
             <Route path="/verifyemail" element={<><Navbar /> <Verify/><Footer /></>}/>
             
             <Route path="*" element={<ErrorPage message={{message: "404 not found"}}/>}/>
@@ -54,6 +55,8 @@ function App() {
 
             {/* Admin  */}
             <Route path="/AddProduct" element={<><AdminNavbar /><AddProduct/></>}/>
+            <Route path="/AddAdmin" element={<><AdminNavbar /><AddAdmin/></>}/>
+            <Route path="/AdminProfile" element={<><AdminNavbar /><AdminProfile/></>}/>
             <Route path="/EditProduct" element={<><AdminNavbar /><EditProduct/></>}/>
             <Route path="/AdminHome" element={<><AdminNavbar /><AdminHome featured={featured} title={"Art"}/></>}/>
             <Route path="/ViewOrders" element={<><AdminNavbar /><ViewOrders/><Footer /></>}/>
