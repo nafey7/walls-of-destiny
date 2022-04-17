@@ -89,9 +89,6 @@ app.post('/signup', async (req, res) => {
     }
     // add email check
     if (req.body.email.slice(-10) == '@gmail.com' || req.body.email.slice(-10) == '@yahoo.com') {
-        // res.send("Enter a valid email address. Only Gmail and Yahoo email accounts are valid");
-        // return;
-        // }
 
         if (req.body.password.length <= 5) {
             res.send("Password should be greater than 5 characters");
@@ -270,37 +267,103 @@ app.post('/search_product', (req, res) => {
 
 
 // Update customer info (change username, password, etc)
+
+// app.post('/update_customer_info', (req, res) => {
+//     // req.body will be an object
+
+//     if (req.body.password == "password"){
+//         Customer.updateMany({username: req.body.username}, {$set: {name: req.body.name, address: req.body.address, contact: req.body.contact}}, (err,data) => {
+//             if (!err){
+//                 res.send("Success");
+//             }
+//             else{
+//                 res.send("Error");
+//             }
+            
+//         });
+//     }
+//     else{ 
+    
+//     if (req.body.password.length <= 5){
+//         res.send("Password should be greater than 5 characters");
+//         return;
+//     }
+
+//     Customer.updateMany({username: req.body.username}, {$set: {name: req.body.name, address: req.body.address, contact: req.body.contact, password: pbkdf2.pbkdf2Sync(req.body.password, 'habibi', 1, 32, 'sha512')}}, (err,data) => {
+//         if (!err){
+//             res.send("Success");
+//         }
+//         else {
+//             res.send("Error");
+//         }
+
+//     });
+// }
+        
+// });
+
 app.post('/update_customer_info', (req, res) => {
     // req.body will be an object
 
-    if (req.body.password == "password"){
-        Customer.updateMany({username: req.body.username}, {$set: {name: req.body.name, address: req.body.address, contact: req.body.contact}}, (err,data) => {
-            if (!err){
-                res.send("Success");
-            }
-            else{
-                res.send("Error");
-            }
-            
-        });
-    }
-    else{ 
-    
     if (req.body.password.length <= 5){
-        res.send("Password should be greater than 5 characters");
+        res.send("Password is too short");
         return;
     }
 
-    Customer.updateMany({username: req.body.username}, {$set: {name: req.body.name, address: req.body.address, contact: req.body.contact, password: pbkdf2.pbkdf2Sync(req.body.password, 'habibi', 1, 32, 'sha512')}}, (err,data) => {
-        if (!err){
-            res.send("Success");
-        }
-        else {
-            res.send("Error");
-        }
+    if (req.body.address !== ""){
+        Customer.updateMany({username: req.body.username}, {$set: {address: req.body.address}}, (err,data) => {
+            if (!err){
+                // res.send("Success");
+                console.log("Address is updated");
+            }
+            else {
+                res.send("Error");
+            }
+    
+        });
+    }
 
-    });
-}
+    if (req.body.contact !== ""){
+        Customer.updateMany({username: req.body.username}, {$set: {contact: req.body.contact}}, (err,data) => {
+            if (!err){
+                // res.send("Success");
+                console.log("Contact is updated");
+            }
+            else {
+                res.send("Error");
+            }
+    
+        });
+    }
+
+    if (req.body.name !== ""){
+        Customer.updateMany({username: req.body.username}, {$set: {name: req.body.name}}, (err,data) => {
+            if (!err){
+                // res.send("Success");
+                console.log("Name is updated");
+            }
+            else {
+                res.send("Error");
+            }
+    
+        });
+    }
+
+    if (req.body.password !== ""){
+
+        Customer.updateMany({username: req.body.username}, {$set: {password: pbkdf2.pbkdf2Sync(req.body.password, 'habibi', 1, 32, 'sha512')}}, (err,data) => {
+            if (!err){
+                console.log("Password is updated");
+                res.send("Success");
+            }
+            else {
+                res.send("Error");
+            }
+    
+        });
+    }
+    // res.send ("Updated");
+    return;
         
 });
 
