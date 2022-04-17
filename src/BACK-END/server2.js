@@ -458,12 +458,12 @@ app.post('/update_admin_info', (req, res) => {
 app.post('/addproduct', (req, res) => {
     // handle username and email not repeat
 
-    if (typeof req.body.name === "undefined" || typeof req.body.pic === "undefined" || typeof req.body.cost_price === "undefined" || typeof req.body.sales_price === "undefined" || typeof req.body.details === "undefined" || typeof req.body.profit === "undefined" || typeof req.body.color === "undefined" || typeof req.body.dimensions === "undefined" || typeof req.body.category === "undefined" || typeof req.body.featured === "undefined") {
+    if (typeof req.body.name === "undefined" || typeof req.body.pic === "undefined" || typeof req.body.cost_price === "undefined" || typeof req.body.sales_price === "undefined" || typeof req.body.details === "undefined"  || typeof req.body.color === "undefined" || typeof req.body.dimensions === "undefined" || typeof req.body.category === "undefined" || typeof req.body.featured === "undefined") {
         res.send("Please fill all spaces");
         return;
     }
 
-
+    console.log(req.body)
     Product.insertMany({
         name: req.body.name,
         pic: req.body.pic,
