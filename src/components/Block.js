@@ -10,7 +10,6 @@ const Block = () => {
   let navigate = useNavigate();
   function productScreen(Name){
     let index = props.findIndex( item => Name === item.name );
-    console.log(props[0])
     navigate("/product", {state: props[index]});
   }
 
