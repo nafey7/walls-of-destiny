@@ -146,7 +146,6 @@ app.post('/signup', async (req, res) => {
 
 // Customer's Login
 app.post('/login', (req, res) => {
-    console.log(req)
     if (typeof req.body.username === "undefined" || typeof req.body.password === "undefined") {
         res.send("Please fill all spaces");
         return;
