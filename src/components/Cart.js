@@ -5,7 +5,7 @@ import axios from 'axios';
 import {useNavigate} from 'react-router-dom'
 
 function Cart(props) {
-  const [items, setItems] = React.useState([{}])
+  const [items, setItems] = React.useState([])
   let navigate = useNavigate();
   React.useEffect(()=> {
     let username = reactLocalStorage.get('username', "", true);
@@ -14,7 +14,13 @@ function Cart(props) {
     })
     .then(function(res) {
       console.log(res)
-        setItems(res.data)          
+      if(res.data=="Cart is empty"){
+        alert("Cart is empty")
+      }
+      else{
+        setItems(res.data)
+      }
+                  
     }, items)
     .catch(function(err) {
         console.log(err);
