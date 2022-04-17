@@ -135,7 +135,7 @@ function Cart(props) {
   </div>
   <div class="card-body">
 
-<button className="btn btn-success " onClick={()=>{navigate("/checkout", {state: {total: total, items: items}})}}>Checkout</button>
+<button className="btn btn-success " onClick={()=>{navigate("/checkout", {state: total})}}>Checkout</button>
   
 
   </div>

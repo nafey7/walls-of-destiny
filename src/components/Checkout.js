@@ -7,7 +7,7 @@ import { useFormik } from 'formik';
 
 function Checkout() {
     const location = useLocation();
-    const x  = location.state.total;
+    const x  = location.state;
     const navigate = useNavigate();
     let username = reactLocalStorage.get('username', "", true);
     const [total, setTotal] = React.useState(x)
@@ -48,7 +48,6 @@ function Checkout() {
         console.log(location.items)
         axios.post('http://localhost:8000/Payment',{
             username: username,
-            items: location.items.total,
             total: total, 
             discount: discount
         })

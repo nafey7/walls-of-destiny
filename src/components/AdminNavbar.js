@@ -1,7 +1,6 @@
 import React from 'react'
 import { ReactComponent as Logo } from './logo.svg';
 import {Link} from 'react-router-dom'
-import {reactLocalStorage} from 'reactjs-localstorage';
 
 
 function AdminNavbar() {
