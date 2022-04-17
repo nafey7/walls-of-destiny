@@ -602,7 +602,7 @@ app.post('/Payment', async (req, res) => {
                     if (!err) {
                         console.log("Hogya");
                         console.log(data);
-                        res.send("Order has been placed");
+                        
                     }
                     else{
                         console.log("F");
@@ -610,6 +610,7 @@ app.post('/Payment', async (req, res) => {
                     }
                 })
             }
+            res.send("Order has been placed");
         }
     })
 });

@@ -26,7 +26,7 @@ function Checkout() {
           .then(function (response) {
             if(response.data.discount < 1 )
             {
-                console.log(response.data.discount)
+                console.log(response.data.discount);
                 setDiscount(response.data.discount);
                 setTotal(Math.round(total*discount));           
             }
@@ -37,13 +37,13 @@ function Checkout() {
             
           })
           .catch(function (error) {
-            console.log(error);
             navigate('/error');
           });
         },
       });
 
     const confirm = ()=>{
+
         console.log("items down")
         console.log(location.items)
         axios.post('http://localhost:8000/Payment',{
@@ -51,8 +51,9 @@ function Checkout() {
             total: total, 
             discount: discount
         })
-        .then(function() {
-        navigate("/")
+        .then(function(res) {
+            alert("Order Placed!");
+            navigate("/cart");
                      
         })
         .catch(function(err) {
@@ -67,7 +68,7 @@ function Checkout() {
                 <div className="card" style={{width: "400px", outline: "3px ridge grey", height:"400px"}}>
                 <h4><b>Bill: </b>{total} PKR</h4>
                 <h5><b>Enter Valid Promocode</b></h5>
-                <form className="row" onSubmit={formik.handleSubmit}>
+                <form className="row" id="promocode" onSubmit={formik.handleSubmit}>
                     <div class="form-group" style={{margin:"0px 0px 20px 0px"}}>
                     <input type="text" class="form-control" name="code" id="code" onChange={formik.handleChange} value={formik.values.code} placeholder="GhabranaNahi30" style={{margin:"0px 0px 0px 20px", display: "inline", width:"150px", border: 'none', borderRadius: '3px', paddingLeft: '18px'}}/>
                     <button type="submit" id="log" className="btn btn-dark" style={{display: "inline", margin: '0 auto', textAlign: 'center'}}>Verify</button>
