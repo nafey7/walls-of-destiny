@@ -12,7 +12,7 @@ function Profile() {
         address: '',
         contact: '',
         username: username,
-        password: '',
+        password: 'password',
         name: '',
     })
     // const formik = useFormik({
@@ -64,7 +64,8 @@ function Profile() {
     function done(){
         axios.post('http://localhost:8000/update_customer_info',cust)
             .then(function(res) {
-                alert("Change Successful!");                        
+                console.log(res)
+                alert(res);                        
             })
             .catch(function(err) {
                 console.log(err);

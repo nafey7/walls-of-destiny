@@ -304,7 +304,7 @@ app.post('/search_product', (req, res) => {
 
 app.post('/update_customer_info', (req, res) => {
     // req.body will be an object
-
+    console.log(req.body)
     if (req.body.password.length <= 5){
         res.send("Password is too short");
         return;
@@ -349,7 +349,7 @@ app.post('/update_customer_info', (req, res) => {
         });
     }
 
-    if (req.body.password !== ""){
+    if (req.body.password !== "password"){
 
         Customer.updateMany({username: req.body.username}, {$set: {password: pbkdf2.pbkdf2Sync(req.body.password, 'habibi', 1, 32, 'sha512')}}, (err,data) => {
             if (!err){
