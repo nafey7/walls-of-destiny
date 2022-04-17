@@ -2,11 +2,16 @@ import React from 'react'
 import { ReactComponent as Logo } from './logo.svg';
 import {Link} from 'react-router-dom'
 import {reactLocalStorage} from 'reactjs-localstorage';
+import {useLocation, useNavigate} from "react-router-dom";
 
 
 function Navbar(props) {
   const [Check, setCheck] = React.useState(false);
-
+  let navigate = useNavigate();
+  function logout(){
+    reactLocalStorage.remove('username');
+    navigate("/login")
+  }
   let username
   React.useEffect(() => {
     username = reactLocalStorage.get('username', "", true);
@@ -58,7 +63,7 @@ function Navbar(props) {
             ><button className='btn btn-outline-success' style={{fontSize:"20px"}}><i className="glyphicon glyphicon-shopping-cart" style={{fontSize:"20px",color:"white"}}></i></button></Link>
           {Check?(
           <div className="btn-group dropleft">
-          <button className='btn btn-outline-success dropdown-toggle' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{fontSize:"20px"}}><i className="fa fa-user" style={{fontSize:"20px",color:"white"}}/></button>
+          <button className='btn btn-outline-success dropdown-toggle' data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{fontSize:"20px"}}><i className="fa fa-user" style={{fontSize:"20px",color:"white"}}/></button>
           <div className="dropdown-menu">
           <Link to={{pathname: "/profile"}}
             ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>Profile</button></Link>
@@ -72,8 +77,7 @@ function Navbar(props) {
           <Link to={{pathname: "/rewards"}}
             ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>Rewards</button></Link>
           <div className="dropdown-divider"></div>
-          <Link to={{pathname: "/history"}}
-            ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>Logout</button></Link>
+<button className='btn btn-outline-success btn-sm' onClick={() =>{logout()}} style={{fontSize:"15px"}}>Logout</button>
           </div>
           </div>):(<Link to={{pathname: "/login"}} style={{backgroundColor:"",margin:"0 20px", fontSize:"18px"}}>
           <button className='btn btn-primary' style={{fontSize:"10px"}}>Sign In</button></Link>)}

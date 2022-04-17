@@ -1,37 +1,51 @@
 import React from 'react'
 import axios from 'axios';
-import {useNavigate} from 'react-router-dom'
+import {useLocation, useNavigate} from "react-router-dom";
 
 
 
-const Block = () => {
-  const [props,setProps] = React.useState([{}]);
+
+const Block = (props) => {
+  const [dataprops,setDataprops] = React.useState([{}]);
 
   let navigate = useNavigate();
   function productScreen(Name){
-    let index = props.findIndex( item => Name === item.name );
-    navigate("/product", {state: props[index]});
+    let index = dataprops.findIndex( item => Name === item.name );
+    navigate("/product", {state: dataprops[index]});
   }
-
+  
     React.useEffect(()=> {
-      axios.get('http://localhost:8000/home')
-      .then(function(res) {
-          setProps(res.data)          
-      }, props)
-      .catch(function(err) {
-          console.log(err);
-      })
+      if(props.title ==="Featured Products"){
+        axios.get('http://localhost:8000/home')
+        .then(function(res) {
+            setDataprops(res.data)          
+        }, dataprops)
+        .catch(function(err) {
+            console.log(err);
+        })
+      }else{
+        console.log("in categories")
+        axios.post('http://localhost:8000/product_category', {category: props.title})
+        .then(function(res) {
+            setDataprops(res.data)          
+        }, dataprops)
+        .catch(function(err) {
+            console.log(err);
+        })
+      }
+
     }, [])
+  
 
   return (
     <>
       <h2 style={{textAlign:"center"}}>{props.title}</h2>
-             <div class="row" style={{margin:"0 0 55px 0cm"}}>
-                 {props.map((item)=>{
+             <div className="row" style={{margin:"0 0 55px 0cm"}}>
+                 {dataprops.map((item)=>{
                    
                      return(
                        
-                        <div class="col-3" style={{textAlign: "center", padding: '2cm', margin:"0 0 0 3cm"}}>
+                        <div className="col-3" style={{textAlign: "center", padding: '2cm', margin:"0 0 0 3cm"}}>
                          <div className="card" style={{width: "22rem", outline: "3px ridge grey"}}>
                          <button onClick={()=>{productScreen(item.name)}}><img className="card-img-top" src={item.pic} alt="Card image cap"/></button>
                          <div className="card-body" style={{backgroundColor:"grey"}}>
