@@ -2,9 +2,11 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {reactLocalStorage} from 'reactjs-localstorage';
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom'
 
 function Cart(props) {
   const [items, setItems] = React.useState([{}])
+  let navigate = useNavigate();
   React.useEffect(()=> {
     let username = reactLocalStorage.get('username', "", true);
     axios.post('http://localhost:8000/ViewCart',{
@@ -132,14 +134,8 @@ function Cart(props) {
   <h5>Total:    PKR {total}</h5>
   </div>
   <div class="card-body">
-  <Link
-  to={{
-    pathname: "/checkout",
-  }}
-  state={total}
->
-<button className="btn btn-success">Checkout</button>
-</Link>
+
+<button className="btn btn-success " onClick={()=>{navigate("/checkout", {state: total, items: items})}}>Checkout</button>
   
 
   </div>
