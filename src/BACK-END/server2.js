@@ -454,7 +454,26 @@ app.post('/deleteproduct', (req, res) => {
 
 });
 
+//Finding Products using categories
+app.post('/CategoryMenu', (req, res) => {
+    Product.find({category: req.body.category}, (err, data) => {
+        if (err) {
+            res.send("Something went wrong");
+        }
+        if (data.length >= 1){
+            console.log("Products found");
+            console.log(data);
+            res.send(data);
+        }
+        else if (data.length == 0){
+            console.log("No product under this category");
+            res.send("Incorrect category");
+            return;
+        }
+    })
+});
 
+//Add to Cart
 app.post('/AddToCart', (req, res) => {
     let cust_username = req.body.username;
     let product_name = req.body.product_name;
@@ -652,5 +671,125 @@ app.post('/DiscountCust', (req, res) => {
                 res.send("Incorrect Promocode");
             }
         }
+    })
+});
+
+//View Orders Admin
+app.get('/ViewOrdersAd', (req, res) => {
+    Order.find({}, async (err, data) => {
+        if (err) {
+            console.log(err);
+            res.send('Something went wrong');
+        }
+        else {
+            if (data.length >= 1) {
+                let final = []
+                for (let i = 0; i < data.length; i++) {
+                    let result = await Product.find({name: data[i].product_name});
+                    let variables = {
+                        "name" : result[0].name,
+                        "sales_price" : result[0].sales_price,
+                        "pic" : result[0].pic,
+                        "quantity" : data[i].quantity,
+                        "status" : data[i].status,
+                        "order_id" : data[i]._id
+                    }
+                    final.push(variables);
+                }
+                console.log(final);
+                res.send(final);
+            }
+            else {
+                res.send('No orders yet')
+            }
+        }
+    })
+});
+
+//Sales Admin
+app.get('/ViewSales', (req, res) => {
+    Order.find({quantity : {$gte : 1}}, async (err, data) => {
+        if (err) {
+            console.log(err);
+            res.send('Something went wrong');
+        }
+        else {
+            if (data.length >= 1) {
+                let income = 0;
+                let profit = 0;
+                let customer_count = await Customer.count();
+                let order_count = data.length;
+                for (let i = 0; i < data.length; i++) {
+                    let result = await Product.find({name: data[i].product_name});
+                    if (data[i].discount != 0) {
+                        let dis = (1 - (data[i].discount / 100));
+                        let sales = result[0].sales_price * data[i].quantity * dis;
+                        let cost = result[0].cost_price * data[i].quantity;
+                        let p = sales - cost;
+                        income = income + sales;
+                        profit = profit + p;
+                    }
+                    else {
+                        let sales = result[0].sales_price * data[i].quantity;
+                        let p = result[0].profit * data[i].quantity;
+                        income = income + sales;
+                        profit = profit + p;
+                    }
+                }
+                let final = {
+                    "Income" : income,
+                    "Profit" : profit,
+                    "Users" : customer_count,
+                    "Orders" : order_count
+                }
+                console.log(final);
+                res.send(final);
+            }
+            else {
+                res.send('No orders yet')
+            }
+        }
+    })
+});
+
+//Add Promocode Admin
+app.post('/AddCode', async (req, res) => {
+    let promo = req.body.promocode;
+    let discount = req.body.percentage;
+    let customer_count = await Customer.count();
+    let num = Math.ceil(customer_count / 10);
+    let index = []
+    let customer_arr = []
+    for (let i = 0; i < num; i++) {
+        let number = Math.floor(Math.random() * (customer_count));
+        while (number in index) {
+            number = Math.floor(Math.random() * (customer_count));
+        }
+        index.push(number);
+    }
+    console.log(index);
+    Customer.find({}, (err, data) => {
+        for (let i = 0; i < data.length; i++) {
+            for (let j = 0; j < index.length; j++) {
+                if (i == index[j]) {
+                    customer_arr.push(data[i].username);
+                }
+            }
+        }
+        Discount.insertMany({
+            percentage: discount,
+            promocode: promo,
+            customers: customer_arr
+        }, (err, data) => {
+            if (!err) {
+                console.log("Hogya");
+                console.log(data);
+                res.send("Promocode Sent");
+            }
+            else{
+                console.log("F");
+                res.send("Something went wrong, please try again");
+            }
+        })
     })
 });
