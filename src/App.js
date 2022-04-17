@@ -15,6 +15,7 @@ import About from './components/About';
 import Contactus from './components/ContactUs';
 import Trackorder from './components/trackOrder';
 import Orders from './components/orderhistory';
+import Verify from './components/verifyemail';
 
 function App() {
   
@@ -38,13 +39,15 @@ function App() {
             <Route path="/ContactUs" element={<Contactus/>}/>
             <Route path="/trackOrder" element={<Trackorder/>}/>
             <Route path="/orderhistory" element={<Orders/>}/>
+            <Route path="/verifyemail" element={<Verify/>}/>
+
             <Route path="*" element={<ErrorPage message={{message: "404 not found"}}/>}/>
 
           </Routes>    
           
         </div>
-    </Router>        
-    // <Navbar />
+        
+    </Router>    
   );
 }
 // dummy data
