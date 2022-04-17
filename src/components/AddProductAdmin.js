@@ -130,8 +130,8 @@ function AddProduct() {
     }
     
     return (
-    <div className="Product" style={{height:"100vh",width:"100wh",backgroundColor:"#aca738"}}>
-    <div class="container" style={{margin: "50px 150px",backgroundSize:"cover",backgroundColor:"#aca738", position:"relative", width:"100%"}}>
+    <div className="Product" style={{height:"100vh",width:"100wh",backgroundColor:"white"}}>
+    <div class="container" style={{margin: "50px 150px",backgroundSize:"cover",backgroundColor:"white", position:"relative", width:"100%"}}>
         <div class="row align-items-center">
         <div class="col-2">
             
