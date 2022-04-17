@@ -17,6 +17,7 @@ import About from './components/About';
 import Contactus from './components/ContactUs';
 // import Trackorder from './components/trackOrder';
 import Orders from './components/orderhistory';
+import Verify from './components/verifyemail';
 import AdminHome from './components/AdminHome';
 import ViewOrders from './components/ViewOrders';
 import Summary from './components/Summary';
@@ -45,6 +46,8 @@ function App() {
             <Route path="/orders" element={ <><Navbar /> <Orders/><Footer /></>}/>
             <Route path="/about" element={ <><Navbar /> <About/><Footer /></>}/>
             <Route path="/ContactUs" element={<><Navbar /> <Contactus/><Footer /></>}/>
+            <Route path="/verifyemail" element={<><Navbar /> <Verify/><Footer /></>}/>
+            
             <Route path="*" element={<ErrorPage message={{message: "404 not found"}}/>}/>
             <Route path= '/error' element={<ErrorPage/>}/>
 
@@ -58,8 +61,8 @@ function App() {
           </Routes>    
           
         </div>
-    </Router>        
-    // <Navbar />
+        
+    </Router>    
   );
 }
 // dummy data
