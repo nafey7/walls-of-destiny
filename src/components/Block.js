@@ -34,7 +34,7 @@ const Block = (props) => {
         })
       }
 
-    }, [])
+    })
   
 
   return (

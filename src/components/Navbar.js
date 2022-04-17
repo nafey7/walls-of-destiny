@@ -64,7 +64,7 @@ function Navbar(props) {
           {Check?(
           <div className="btn-group dropleft">
           <button className='btn btn-outline-success dropdown-toggle' data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{fontSize:"20px"}}><i className="fa fa-user" style={{fontSize:"20px",color:"white"}}/></button>
-          <div className="dropdown-menu">
+          <div className="dropdown-menu" style={{left:"auto",right:"-1em",align:"left"}}>
           <Link to={{pathname: "/profile"}}
             ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>Profile</button></Link>
           <div className="dropdown-divider"></div>

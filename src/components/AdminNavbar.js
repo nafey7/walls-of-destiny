@@ -28,10 +28,10 @@ function AdminNavbar() {
                 <Link to={{pathname: "/adminHome"}} style={{margin:"0 20px", fontSize:"18px", color: "white"}}>Products</Link>
               </li>
               <li className="nav-item">
-                <Link to={{pathname: "/clocks"}} style={{margin:"0 20px", fontSize:"18px", color: "white"}}>Summary</Link>
+                <Link to={{pathname: "/admin/summary"}} style={{margin:"0 20px", fontSize:"18px", color: "white"}}>Summary</Link>
               </li>
               <li className="nav-item">
-                <Link to={{pathname: "/decor"}} style={{margin:"0 20px", fontSize:"18px", color: "white"}}>Orders</Link>
+                <Link to={{pathname: "/admin/orders"}} style={{margin:"0 20px", fontSize:"18px", color: "white"}}>Orders</Link>
               </li>
             </ul>
             
