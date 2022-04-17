@@ -19,7 +19,7 @@ function AdminNavbar() {
           <div className="collapse navbar-collapse" id="navbarNav" style= {{backgroundColor:"",margin:"0 40px 0px"}}>
             <ul className="navbar-nav"style= {{backgroundColor:"",margin:"0 225px 0px"}}>
               <li className="nav-item">
-                <Link to={{pathname: "/adminHome"}} style={{margin:"0 20px", fontSize:"18px", color: "#a7ac38"}}>Products</Link>
+                <Link to={{pathname: "/adminHome"}} style={{margin:"0 20px", fontSize:"18px", color: "white"}}>Products</Link>
               </li>
               <li className="nav-item">
                 <Link to={{pathname: "/clocks"}} style={{margin:"0 20px", fontSize:"18px", color: "white"}}>Summary</Link>

@@ -1,25 +1,74 @@
 import React from 'react'
-import { useLocation } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
+import {reactLocalStorage} from 'reactjs-localstorage';
+import axios from 'axios';
+import { useFormik } from 'formik';
 
 
-
-function Checkout(props) {
+function Checkout() {
     const location = useLocation();
-    const { x } = location.state;
-    console.log(x)
+    const x  = location.state;
+    const navigate = useNavigate();
+    let username = reactLocalStorage.get('username', "", true);
+    const [total, setTotal] = React.useState(x)
+    const [discount, setDiscount] = React.useState(0)
 
+    const formik = useFormik({
+        initialValues: {
+          code: '',
+        },
+        onSubmit: values => {
+          // alert(JSON.stringify(values, null, 2));
+          axios.post('http://localhost:8000/promo', {
+            username: username, 
+            promocode: values.code,
+          })
+          .then(function (response) {
+            if(response.data < 1 )
+            {
+                setDiscount(response.data);
+                setTotal(total*response.data);
+                
+            }
+            else
+            {
+              alert("Invalid Promo-code");
+            }
+            
+          })
+          .catch(function (error) {
+            console.log(error);
+            navigate('/error');
+          });
+        },
+      });
+
+    const confirm = ()=>{
+        axios.post('http://localhost:8000/Payment',{
+            username: username,
+            items: location.items,
+            total: total, 
+            discount: discount
+        })
+        .then(function() {
+        navigate("/")
+                     
+        })
+        .catch(function(err) {
+            console.log(err);
+        })
+    }
 
     return (
         <div className="row">
             <h2 style={{textAlign: "center", margin:"50px 100px 0px -35px"}}>Checkout</h2>
             <div className="col-sm-3" style={{textAlign: "center", padding: '2cm', margin:"0px 0px 0cm 30%"}}>
                 <div className="card" style={{width: "400px", outline: "3px ridge grey", height:"400px"}}>
-                {/* <img className="card-img-top" src={props.pic} alt="Card image cap" style={{height:"400px", width:"400px"}}/> */}
-                <h4><b>Bill: </b>{x} PKR</h4>
+                <h4><b>Bill: </b>{total} PKR</h4>
                 <h5><b>Enter Valid Promocode</b></h5>
-                <form className="row">
+                <form className="row" onSubmit={formik.handleSubmit}>
                     <div class="form-group" style={{margin:"0px 0px 20px 0px"}}>
-                    <input type="text" class="form-control" name="address" id="address" placeholder="GhabranaNahi30" style={{margin:"0px 0px 0px 20px", display: "inline", width:"250px", border: 'none', borderRadius: '3px', paddingLeft: '18px'}}/>
+                    <input type="text" class="form-control" name="code" id="code" onChange={formik.handleChange} value={formik.values.code} placeholder="GhabranaNahi30" style={{margin:"0px 0px 0px 20px", display: "inline", width:"150px", border: 'none', borderRadius: '3px', paddingLeft: '18px'}}/>
                     <button type="submit" id="log" className="btn btn-dark" style={{display: "inline", margin: '0 auto', textAlign: 'center'}}>Verify</button>
                     </div>
                 </form>
@@ -32,7 +81,7 @@ function Checkout(props) {
                     <label htmlFor="email">Phone Number</label>
                     <input type="text" className="form-control" name="number" id="number" placeholder="+92-XXX-XXXXXXX" style={{margin:"0px 0px 0px 20px", width: '350px', height: '30px', border: 'none', borderRadius: '3px', paddingLeft: '18px'}}/>
                 </div>
-                <button type="submit" id="log" className="btn btn-success" style={{display: "block", margin: '0 auto', textAlign: 'center'}}>Place Order</button>
+                <button type="submit" onClick={()=>{confirm()}} id="log" className="btn btn-success" style={{display: "block", margin: '0 auto', textAlign: 'center'}}>Place Order</button>
                 </form>
                 <br></br>
                 <br></br>

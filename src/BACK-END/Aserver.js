@@ -27,6 +27,11 @@ app.use(express.static('public'));
 app.use(bodyparser.json());
 app.use(morgan('dev'));
 
+//Spin the wheel Promocodes
+let discount_codes = {
+    
+};
+
 //Finding Products using categories
 app.post('/CategoryMenu', (req, res) => {
     Product.find({category: req.body.category}, (err, data) => {
@@ -129,9 +134,9 @@ app.post('/ViewCart', (req, res) => {
                     let result = await Product.find({name: name_product});
                     let variables = {
                         "name" : result[0].name,
-                        "price" : result[0].price,
+                        "price" : result[0].sales_price,
                         "id" : result[0]._id,
-                        "pic" : result[0].picture_url,
+                        "pic" : result[0].pic,
                         "color" : result[0].color,
                         "quantity" : data[i].quantity
                     }
@@ -157,32 +162,31 @@ app.post('/ClearCart', async (req, res) => {
 });
 
 //Payment Procedure
-app.post('/Payment', (req, res) => {
+app.post('/Payment', async (req, res) => {
     let cust_username = req.body.username;
-    Cart.find({customer_username: cust_username}, async (err, data) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            if (data.length >= 1) {
-                let array = []
-                let final = [];
-                for (let i = 0; i < data.length; i++) {
-                    let name_product = data[i].product_name;
-                    array.push(name_product);
-                    array.push(data[i].quantity);
-                    let result = await Product.find({name: name_product});
-                    array.push(result[0].price);
-                    final.push(array);
-                    array = [];
-                }
-                res.send(final);
+    let discount = (100 - (req.body.discount * 100));
+    let items = req.body.items;
+    for (let i = 0; i < items.length; i++) {
+        let product_name = items[i].name;
+        let quantity = items[i].quantity;
+        Order.insertMany({
+            customer_username: cust_username,
+            product_name: product_name,
+            quantity: quantity,
+            status: "Processing",
+            discount: discount
+        }, (err, data) => {
+            if (!err) {
+                console.log("Hogya");
+                console.log(data);
+                res.send("Order has been placed");
             }
-            else {
-                res.send("Cart empty");
+            else{
+                console.log("F");
+                res.send("Something went wrong, please try again");
             }
-        }
-    })
+        })
+    }
 });
 
 //Discount application customer
@@ -210,8 +214,9 @@ app.post('/DiscountCust', (req, res) => {
                         res.send('Incorrect Promocode');
                     }
                     else {
+                        let amount =  (1 - (data[i].percentage / 100));
                         let final = {
-                            "discount" : data[i].percentage
+                            "discount" : amount
                         }
                         if (cust_arr.length == 0) {
                             console.log("Here");

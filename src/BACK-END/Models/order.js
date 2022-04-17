@@ -5,7 +5,6 @@ const orderSchema = new Schema({
     customer_username: {
         type: String,
         required: true
-
     },
     product_name: {
         type: String,
