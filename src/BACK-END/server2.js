@@ -574,3 +574,31 @@ app.post('/ViewCart', (req, res) => {
         }
     })
 });
+
+//Payment Procedure
+app.post('/Payment', async (req, res) => {
+    let cust_username = req.body.username;
+    let discount = (100 - (req.body.discount * 100));
+    let items = req.body.items;
+    for (let i = 0; i < items.length; i++) {
+        let product_name = items[i].name;
+        let quantity = items[i].quantity;
+        Order.insertMany({
+            customer_username: cust_username,
+            product_name: product_name,
+            quantity: quantity,
+            status: "Processing",
+            discount: discount
+        }, (err, data) => {
+            if (!err) {
+                console.log("Hogya");
+                console.log(data);
+                res.send("Order has been placed");
+            }
+            else{
+                console.log("F");
+                res.send("Something went wrong, please try again");
+            }
+        })
+    }
+});
