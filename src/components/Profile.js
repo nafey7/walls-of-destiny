@@ -60,7 +60,7 @@ function Profile() {
     return (
         <div className="container" style={{ margin: "50px 150px", height:"50%", backgroundColor:"white", position:"relative", width:"100%"}}>
         <div className="row">
-            <h1 style={{textAlign: "center"}}>My Profile</h1>
+            <h1 style={{/*textAlign: "center",*/ color: '#a7ac38', margin: '0% 50% 0% 35%'}}>My Profile</h1>
         </div>
         <div className="row" style ={{ margin: "20px"}}>
             <Avatar
@@ -75,7 +75,7 @@ function Profile() {
             <div className="col">
             
             <label for="addressInput" className="form-label">House Address</label>
-            <input className="form-control" type="text" id = "addressInput" name= "addressInput" onChange={(e)=>{changeaddress(e.target.value)}}  placeholder="House#,City"/>
+            <input className="form-control" type="text" id = "addressInput" name= "addressInput" onChange={(e)=>{changeaddress(e.target.value)}}  placeholder="House#, City"/>
             <br></br>
             <label for="contactInput" className="form-label">Contact</label>
             <input className="form-control" id = "contactInput" name="contactInput" onChange={(e)=>{changecontact(e.target.value)}}  type="text" placeholder="+92 300 *******" />
@@ -94,7 +94,7 @@ function Profile() {
             <br></br>
             </div>
             <div className="col-4">
-            <button type="button" className="btn btn-danger" onClick={()=>{deleteaccount()}}>Delete My Account</button>
+            <button style = {{margin: '24px 0px 0px 0px'}}type="button" className="btn btn-danger" onClick={()=>{deleteaccount()}}>Delete My Account</button>
             </div>
         </div>
         </div>   
