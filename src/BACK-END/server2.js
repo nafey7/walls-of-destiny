@@ -503,7 +503,7 @@ app.post('/editproduct', (req, res) => {
             pic: req.body.pic,
             cost_price: req.body.cost_price,
             sales_price: req.body.sales_price,
-            profit: req.body.profit,
+            profit: req.body.sales_price - req.body.cost_price,
             details: req.body.details,
             color: req.body.color,
             dimensions: req.body.dimensions,
@@ -522,6 +522,203 @@ app.post('/editproduct', (req, res) => {
 
 });
 
+
+// app.post('/editproduct', (req, res) => {
+
+//     // handle case where cost_price might contain letters
+//     let temp_cost_price = 0;
+//     let temp_sales_price = 0;
+//     if (req.body.cost_price === ""){
+//         Product.find({name: req.body.name}, (err,data) =>{
+//             // temp_cost_price = data[0].cost_price;
+//             console.log(data[0].cost_price);
+//             // console.log(temp_cost_price);
+
+//             Product.updateMany({name: req.body.name}, {$set: {cost_price: data[0].cost_price}}, (err,data) => {
+//                 if (!err){
+//                     // res.send("Success");
+//                     console.log(`Cost1 Price is updated`);
+//                 }
+//                 else {
+//                     res.send("Error");
+//                 }
+        
+//             });
+
+//         });
+//         // Product.updateMany({name: req.body.name}, {$set: {cost_price: temp_cost_price}}, (err,data) => {
+//         //     if (!err){
+//         //         // res.send("Success");
+//         //         console.log("Cost Price is updated");
+//         //     }
+//         //     else {
+//         //         res.send("Error");
+//         //     }
+    
+//         // });
+//     }
+//     if (req.body.sales_price === ""){
+//         Product.find({name: req.body.name}, (err,data) =>{
+//             temp_sales_price = data[0].sales_price;
+//             console.log(data[0].sales_price);
+
+//         });
+//         Product.updateMany({name: req.body.name}, {$set: {sales_price: temp_sales_price}}, (err,data) => {
+//             if (!err){
+//                 // res.send("Success");
+//                 console.log("Cost Price is updated");
+//             }
+//             else {
+//                 res.send("Error");
+//             }
+    
+//         });
+//     }
+
+
+//     if (req.body.pic !== ""){
+//         Product.updateMany({name: req.body.name}, {$set: {pic: req.body.pic}}, (err,data) => {
+//             if (!err){
+//                 // res.send("Success");
+//                 console.log("Pic is updated");
+//             }
+//             else {
+//                 res.send("Error");
+//             }
+    
+//         });
+//     }
+
+//     if (req.body.cost_price !== ""){
+//         Product.updateMany({name: req.body.name}, {$set: {cost_price: req.body.cost_price}}, (err,data) => {
+//             if (!err){
+//                 // res.send("Success");
+//                 console.log("Cost Price is updated");
+//             }
+//             else {
+//                 res.send("Error");
+//             }
+    
+//         });
+//     }
+
+//     if (req.body.sales_price !== ""){
+//         Product.updateMany({name: req.body.name}, {$set: {sales_price: req.body.sales_price}}, (err,data) => {
+//             if (!err){
+//                 // res.send("Success");
+//                 console.log("Sales Price is updated");
+//             }
+//             else {
+//                 res.send("Error");
+//             }
+    
+//         });
+//     }
+
+
+//     if (req.body.dimensions !== ""){
+//         Product.updateMany({name: req.body.name}, {$set: {dimensions: req.body.dimensions}}, (err,data) => {
+//             if (!err){
+//                 // res.send("Success");
+//                 console.log("Dimensions is updated");
+//             }
+//             else {
+//                 res.send("Error");
+//             }
+    
+//         });
+//     }
+
+//     if (req.body.color !== ""){
+//         Product.updateMany({name: req.body.name}, {$set: {color: req.body.color}}, (err,data) => {
+//             if (!err){
+//                 // res.send("Success");
+//                 console.log("Color is updated");
+//             }
+//             else {
+//                 res.send("Error");
+//             }
+    
+//         });
+//     }
+
+//     if (req.body.details !== ""){
+//         Product.updateMany({name: req.body.name}, {$set: {details: req.body.details}}, (err,data) => {
+//             if (!err){
+//                 // res.send("Success");
+//                 console.log("Details is updated");
+//             }
+//             else {
+//                 res.send("Error");
+//             }
+    
+//         });
+//     }
+
+//     if (req.body.category !== ""){
+//         Product.updateMany({name: req.body.name}, {$set: {category: req.body.category}}, (err,data) => {
+//             if (!err){
+//                 // res.send("Success");
+//                 console.log("Category is updated");
+//             }
+//             else {
+//                 res.send("Error");
+//             }
+    
+//         });
+//     }
+
+//     if (req.body.featured !== ""){
+//         Product.updateMany({name: req.body.name}, {$set: {featured: req.body.featured}}, (err,data) => {
+//             if (!err){
+//                 // res.send("Success");
+//                 console.log("Featured is updated");
+//             }
+//             else {
+//                 res.send("Error");
+//             }
+    
+//         });
+//     }
+
+//     Product.updateMany({name: req.body.name}, {$set: {profit: (req.body.sales_price - req.body.cost_price)}}, (err,data) => {
+//         if (!err){
+//             // res.send("Success");
+//             console.log("Profit is updated");
+//         }
+//         else {
+//             res.send("Error");
+//         }
+
+//     });
+
+//     return;
+    
+
+
+    // Product.updateMany({ name: req.body.name }, {
+    //     $set: {
+    //         pic: req.body.pic,
+    //         cost_price: req.body.cost_price,
+    //         sales_price: req.body.sales_price,
+    //         profit: req.body.profit,
+    //         details: req.body.details,
+    //         color: req.body.color,
+    //         dimensions: req.body.dimensions,
+    //         category: req.body.category,
+    //         featured: req.body.featured
+    //     }
+    // }, (err, data) => {
+
+    //     if (!err) {
+    //         res.send(data);
+    //     }
+    //     else {
+    //         res.send("Make sure the formaat is right for all fields");
+    //     }
+    // });
+
+// });
 
 
 // Delete Product (Admin)
