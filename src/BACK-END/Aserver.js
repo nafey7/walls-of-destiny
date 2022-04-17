@@ -29,8 +29,52 @@ app.use(morgan('dev'));
 
 //Spin the wheel Promocodes
 let discount_codes = {
-    
+    "YSIND": 25,
+    "TUFND": 20,
+    "ABCDE": 20,
+    "FTYWI": 15,
+    "YDIEB": 15,
+    "GYDIE": 10
 };
+
+//Spin the Wheel
+app.post('SpinWheel', (req, res) => {
+    let promo = req.body.promocode;
+    let cust_username = req.body.username;
+    let discount = undefined;
+    if (promo == "TUFND") {
+        discount = discount_codes.TUFND;
+    }
+    if (promo == "YSIND") {
+        discount = discount_codes.YSIND;
+    }
+    if (promo == "FTYWI") {
+        discount = discount_codes.FTYWI;
+    }
+    if (promo == "YDIEB") {
+        discount = discount_codes.YDIEB;
+    }
+    if (promo == "GYDIE") {
+        discount = discount_codes.GYDIE;
+    }
+    if (promo == "ABCDE") {
+        discount = discount_codes.ABCDE;
+    }
+    Discount.insertMany({
+        percentage: discount,
+        promocode: promo,
+        customers: [cust_username]
+    }, (err, data) => {
+        if (err) {
+            console.log(err);
+            res.send("Something went wrong, please try again");
+        }
+        else {
+            console.log(data);
+            res.send("Success");
+        }
+    })
+});
 
 //Finding Products using categories
 app.post('/CategoryMenu', (req, res) => {
