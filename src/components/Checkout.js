@@ -7,11 +7,11 @@ import { useFormik } from 'formik';
 
 function Checkout() {
     const location = useLocation();
-    const x  = location.state;
+    const x  = location.state.total;
     const navigate = useNavigate();
     let username = reactLocalStorage.get('username', "", true);
     const [total, setTotal] = React.useState(x)
-    const [discount, setDiscount] = React.useState(0)
+    const [discount, setDiscount] = React.useState(1)
 
     const formik = useFormik({
         initialValues: {
@@ -19,16 +19,16 @@ function Checkout() {
         },
         onSubmit: values => {
           // alert(JSON.stringify(values, null, 2));
-          axios.post('http://localhost:8000/promo', {
+          axios.post('http://localhost:8000/DiscountCust', {
             username: username, 
             promocode: values.code,
           })
           .then(function (response) {
-            if(response.data < 1 )
+            if(response.data.discount < 1 )
             {
-                setDiscount(response.data);
-                setTotal(total*response.data);
-                
+                console.log(response.data.discount)
+                setDiscount(response.data.discount);
+                setTotal(Math.round(total*discount));           
             }
             else
             {
@@ -44,9 +44,11 @@ function Checkout() {
       });
 
     const confirm = ()=>{
+        console.log("items down")
+        console.log(location.items)
         axios.post('http://localhost:8000/Payment',{
             username: username,
-            items: location.items,
+            items: location.items.total,
             total: total, 
             discount: discount
         })

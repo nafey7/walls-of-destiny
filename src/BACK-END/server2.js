@@ -588,7 +588,7 @@ app.post('/Payment', async (req, res) => {
             console.log(err);
             res.send("Something went wrong, please try again");
         }
-        else{
+        else {
             for (let i = 0; i < data.length; i++) {
                 let product_name = data[i].product_name;
                 let quantity = data[i].quantity;
@@ -609,6 +609,56 @@ app.post('/Payment', async (req, res) => {
                         res.send("Something went wrong, please try again");
                     }
                 })
+            }
+        }
+    })
+});
+
+//Discount application customer
+app.post('/DiscountCust', (req, res) => {
+    let promo = req.body.promocode;
+    let cust_username = req.body.username;
+    Discount.find({promocode: promo}, async (err, data) => {
+        if (err) {
+            console.log(err);
+            res.send('Something went wrong');
+        }
+        else {
+            if (data.length >= 1) {
+                for (let i = 0; i < data.length; i++) {
+                    let cust_arr = data[i].customers;
+                    let length1 = cust_arr.length;
+                    let id = data[i]._id;
+                    for (let j = 0; j < cust_arr.length; j++) {
+                        if (cust_username == cust_arr[j]) {
+                            cust_arr.splice(j, 1);
+                        }
+                    }
+                    let length2 = cust_arr.length;
+                    if (length1 == length2) {
+                        res.send('Incorrect Promocode');
+                    }
+                    else {
+                        let amount =  (1 - (data[i].percentage / 100));
+                        let final = {
+                            "discount" : amount
+                        }
+                        if (cust_arr.length == 0) {
+                            console.log("Here");
+                            await Discount.deleteMany({promocode: promo});
+                            res.send(final);
+                        }
+                        else {
+                            console.log("ELSEHERE")
+                            await Discount.updateOne({"_id": id}, {$set: {customers: cust_arr}});
+                            res.send(final);
+                        }
+                    }
+                }
+            }
+            else {
+                console.log("Jhoot bolta saala");
+                res.send("Incorrect Promocode");
             }
         }
     })
