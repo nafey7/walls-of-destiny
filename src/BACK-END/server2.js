@@ -12,6 +12,7 @@ const Order = require('./Models/order');
 const generateString = require('./helperFunctions');
 const cors = require('cors');
 const nodemailer = require("nodemailer");
+const { WrongLocation } = require('@mui/icons-material');
 
 
 const app = express();
@@ -582,26 +583,33 @@ app.post('/Payment', async (req, res) => {
     if (req.body.discount == 1) {
         discount = 0;
     }
-    let items = req.body.items;
-    for (let i = 0; i < items.length; i++) {
-        let product_name = items[i].name;
-        let quantity = items[i].quantity;
-        Order.insertMany({
-            customer_username: cust_username,
-            product_name: product_name,
-            quantity: quantity,
-            status: "Processing",
-            discount: discount
-        }, (err, data) => {
-            if (!err) {
-                console.log("Hogya");
-                console.log(data);
-                res.send("Order has been placed");
+    Cart.find({customer_username: cust_username}, (err, data) => {
+        if (err) {
+            console.log(err);
+            res.send("Something went wrong, please try again");
+        }
+        else{
+            for (let i = 0; i < data.length; i++) {
+                let product_name = data[i].product_name;
+                let quantity = data[i].quantity;
+                Order.insertMany({
+                    customer_username: cust_username,
+                    product_name: product_name,
+                    quantity: quantity,
+                    status: "Processing",
+                    discount: discount
+                }, (err, data) => {
+                    if (!err) {
+                        console.log("Hogya");
+                        console.log(data);
+                        res.send("Order has been placed");
+                    }
+                    else{
+                        console.log("F");
+                        res.send("Something went wrong, please try again");
+                    }
+                })
             }
-            else{
-                console.log("F");
-                res.send("Something went wrong, please try again");
-            }
-        })
-    }
+        }
+    })
 });
