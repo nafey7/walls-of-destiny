@@ -2,15 +2,17 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const bodyparser = require('body-parser');
-// const passwordHash = require('password-hash');
+const pbkdf2 = require('pbkdf2');
 const Customer = require('./Models/customers');
 const Admin = require('./Models/admin');
 const Product = require('./Models/products');
 const Discount = require('./Models/discount');
 const Cart = require('./Models/cart');
 const Order = require('./Models/order');
+const generateString = require('./helperFunctions');
 const cors = require('cors');
-
+const nodemailer = require("nodemailer");
+const { WrongLocation } = require('@mui/icons-material');
 
 
 const app = express();
@@ -35,8 +37,50 @@ app.use(cors(corsOptions));
 
 // CUSTOMER USE CASES
 
+let user_data = {};
+let randomstring = '';
+
 // Customer's Signup
-app.post('/signup', (req,res) => {
+app.post('/signup_further', (req,res) => {
+    if (req.body.pin == randomstring){
+        // res.send("Success");
+
+        Customer.insertMany({
+            username: user_data.username,
+            name: user_data.name,
+            contact: user_data.contact,
+            email: user_data.email,
+            password:pbkdf2.pbkdf2Sync(user_data.password, 'habibi', 1, 32, 'sha512'),
+            address: user_data.address
+        }, (err,data) => {
+            if (!err){
+
+                delete user_data.username;
+                delete user_data.name;
+                delete user_data.address;
+                delete user_data.contact;
+                delete user_data.password;
+                delete user_data.email;
+
+                console.log("SAVE HOGYA HAI"); 
+                console.log(data);
+                res.send("SAVE HOGYA HAI");
+            }
+            else{
+                console.log("Error aggya hai");
+                console.log(err);
+                // username corner case handle
+                res.send("Username already taken");
+            }
+        })
+    }
+    else{
+        res.send("Failure");
+    }
+})
+
+
+app.post('/signup', async (req,res) => {
     // handle username and email not repeat
 
     if(typeof req.body.username === "undefined" || typeof req.body.password === "undefined" || typeof req.body.name === "undefined" || typeof req.body.contact === "undefined" || typeof req.body.address === "undefined" || typeof req.body.email === "undefined")
@@ -44,53 +88,79 @@ app.post('/signup', (req,res) => {
         res.send("Please fill all spaces");
         return;
     }
+    // add email check
+    if (req.body.email.slice(-10)=='@gmail.com' || req.body.email.slice(-10)=='@yahoo.com'){
+        // res.send("Enter a valid email address. Only Gmail and Yahoo email accounts are valid");
+        // return;
+    // }
 
     if (req.body.password.length <= 5){
         res.send("Password should be greater than 5 characters");
         return;
     }
-    
-    Customer.insertMany({
-        username: req.body.username,
-        name: req.body.name,
-        contact: req.body.contact,
-        email: req.body.email,
-        password: req.body.password,
-        address: req.body.address
-    }, (err,data) => {
-        if (!err){
-            console.log("SAVE HOGYA HAI"); 
-            console.log(data);
-            res.send(data[0]);
-        }
-        else{
-            console.log("Error aggya hai");
-            console.log(err);
-            // username corner case handle
-            res.send("Make sure username is unique");
-        }
-    })
 
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'wallsofdestiny123@gmail.com',
+          pass: 'wallsofdestiny'
+        }
+      });
+      randomstring = generateString();
+      
+      let mailOptions = {
+        from: 'wallsofdestiny123@gmail.com',
+        to: req.body.email,
+        subject: 'Welcome to the Walls of Destiny',
+        html: `<p>Enter the following pin for successful sign-up</p> <h2><b>${randomstring}</b></h2>`
+      };
+      
+      await transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+            console.log("yesss");
+            console.log("lololol");
+            user_data = {};
+            user_data.username = req.body.username;
+            user_data.name = req.body.name;
+            user_data.address = req.body.address;
+            user_data.contact = req.body.contact;
+            user_data.password = req.body.password;
+            user_data.email = req.body.email;
+            
+            
+            res.send("Email Sent");
+        }
+      });
     
+
+}
+else{
+        res.send("Enter a valid email address. Only Gmail and Yahoo email accounts are valid");
+        return;
+}
     });
 
 
 
 // Customer's Login
 app.post('/login', (req,res) => {
-
+    console.log(req)
     if(typeof req.body.username === "undefined" || typeof req.body.password === "undefined")
     {
         res.send("Please fill all spaces");
         return;
     }
 
-    Customer.find({username: req.body.username, password: req.body.password}, (err,data) => {
+
+    Customer.find({username: req.body.username, password: pbkdf2.pbkdf2Sync(req.body.password, 'habibi', 1, 32, 'sha512')}, (err,data) => {
 
         if (!err){
             if (data.length >= 1){
             console.log("USER HAS BEEN FOUND");
-            res.send(data);
+            res.send("USER HAS BEEN FOUND");
         }
         else if (data.length == 0){
             console.log("USER NOT FOUND");
@@ -119,12 +189,12 @@ app.post('/loginAdmin', (req,res) => {
         return;
     }
 
-    Admin.find({username: req.body.username, password: req.body.password}, (err,data) => {
+    Admin.find({username: req.body.username, password: pbkdf2.pbkdf2Sync(req.body.password, 'habibi', 1, 32, 'sha512')}, (err,data) => {
 
         if (!err){
             if (data.length >= 1){
             console.log("USER HAS BEEN FOUND");
-            res.send(data[0]);
+            res.send("In kara isko");
         }
         else if (data.length == 0){
             console.log("USER NOT FOUND");
@@ -221,9 +291,14 @@ app.post('/update_customer_info', (req,res) => {
         return;
     }
 
-    Customer.updateMany({username: req.body.username}, {$set: {name: req.body.name, address: req.body.address, contact: req.body.contact, email: req.body.email, password: req.body.password}}, (err,data) => {
-
-        res.send(data);
+    Customer.updateMany({username: req.body.username}, {$set: {name: req.body.name, address: req.body.address, contact: req.body.contact, email: req.body.email, password: pbkdf2.pbkdf2Sync(req.body.password, 'habibi', 1, 32, 'sha512')}}, (err,data) => {
+        if (!err){
+            res.send("Success");
+        }
+        else{
+            res.send("Error");
+        }
+        
     });
         
 });
@@ -258,7 +333,7 @@ app.post('/signupAdmin', (req,res) => {
     
     Admin.insertMany({
         username: req.body.username,
-        password: req.body.password
+        password: pbkdf2.pbkdf2Sync(req.body.password, 'habibi', 1, 32, 'sha512')
     }, (err,data) => {
         if (!err){
             console.log(data);
@@ -290,7 +365,7 @@ app.post('/deactivate_account_admin', (req,res) => {
 app.post('/update_admin_info', (req,res) => {
     // req.body will be an object
 
-    Admin.updateMany({username: req.body.username}, {$set: {password: req.body.password}}, (err,data) => {
+    Admin.updateMany({username: req.body.username}, {$set: {password: pbkdf2.pbkdf2Sync(req.body.password, 'habibi', 1, 32, 'sha512')}}, (err,data) => {
         if (req.body.password.length <= 5){
             res.send("Password should be greater than 5 characters");
             return;
@@ -387,4 +462,204 @@ app.post('/deleteproduct', (req,res) => {
         }
     });
         
+});
+
+
+app.post('/AddToCart', (req, res) => {
+    let cust_username = req.body.username;
+    let product_name = req.body.product_name;
+    let quantity = 1;
+    Cart.find({customer_username: cust_username, product_name: product_name}, async (err, data) => {
+        if (!err) {
+            if (data.length >= 1) {
+                let total = data[0].quantity;
+                let id = data[0]._id;
+                total = total + quantity;
+                await Cart.updateOne({"_id": id}, {$set: {quantity: total}});
+                res.send("Product added");
+            }
+            else {
+                Cart.insertMany({
+                    customer_username: cust_username,
+                    product_name: product_name,
+                    quantity: quantity
+                }, (err, data) => {
+                    if (!err) {
+                        console.log("Hogya");
+                        console.log(data);
+                        res.send("Product added to cart");
+                    }
+                    else{
+                        console.log("F");
+                        res.send("Something went wrong, please try again");
+                    }
+                })
+            }
+        }
+        else {
+            console.log("F");
+            res.send("Something went wrong");
+        }
+    })
+});
+
+app.post('/DeleteFromCart', (req, res) => {
+    let cust_username = req.body.username;
+    let product_name = req.body.product_name;
+    Cart.find({customer_username: cust_username, product_name: product_name}, async (err, data) => {
+        if (!err) {
+            if (data != null) {
+                let total = data[0].quantity;
+                let id = data[0]._id;
+                if (total > 1) {
+                    total = total - 1;
+                    await Cart.updateOne({"_id": id}, {$set: {quantity: total}});
+                    res.send("Success");
+                }
+                else {
+                    await Cart.deleteMany({customer_username: cust_username, product_name: product_name});
+                    res.send("Deleted Product");
+                }
+            }
+        }
+        else {
+            console.log("F");
+            res.send("Something went wrong");
+        }
+    })
+});
+
+//Deleting Item Completely From Cart
+app.post('/DeleteItem', async (req, res) => {
+    let cust_username = req.body.username;
+    let product_name = req.body.product_name;
+    await Cart.deleteMany({customer_username: cust_username, product_name: product_name});
+    res.send("Item Deleted Successfully");
+});
+
+// View Cart
+app.post('/ViewCart', (req, res) => {
+    let cust_username = req.body.username;
+    console.log(req.body.username)
+    Cart.find({customer_username: cust_username}, async (err, data) => {
+        if (err) {
+            console.log("F");
+            console.log(err);
+            res.send("Error");
+        }
+        else {
+            if (data.length >= 1) {
+                let final = []
+                for (let i = 0; i < data.length; i++) {
+                    let name_product = data[i].product_name;
+                    let result = await Product.find({name: name_product});
+                    let variables = {
+                        "name" : result[0].name,
+                        "price" : result[0].sales_price,
+                        "id" : result[0]._id,
+                        "pic" : result[0].pic,
+                        "color" : result[0].color,
+                        "quantity" : data[i].quantity
+                    }
+                    console.log(variables);
+                    final.push(variables);
+                }
+                console.log("Hogya");
+                res.send(final);
+                
+            }
+            else {
+                console.log("here")
+                res.send("Cart is empty");
+            }
+        }
+    })
+});
+
+//Payment Procedure
+app.post('/Payment', async (req, res) => {
+    let cust_username = req.body.username;
+    let discount = (100 - (req.body.discount * 100));
+    if (req.body.discount == 1) {
+        discount = 0;
+    }
+    Cart.find({customer_username: cust_username}, (err, data) => {
+        if (err) {
+            console.log(err);
+            res.send("Something went wrong, please try again");
+        }
+        else {
+            for (let i = 0; i < data.length; i++) {
+                let product_name = data[i].product_name;
+                let quantity = data[i].quantity;
+                Order.insertMany({
+                    customer_username: cust_username,
+                    product_name: product_name,
+                    quantity: quantity,
+                    status: "Processing",
+                    discount: discount
+                }, (err, data) => {
+                    if (!err) {
+                        console.log("Hogya");
+                        console.log(data);
+                        res.send("Order has been placed");
+                    }
+                    else{
+                        console.log("F");
+                        res.send("Something went wrong, please try again");
+                    }
+                })
+            }
+        }
+    })
+});
+
+//Discount application customer
+app.post('/DiscountCust', (req, res) => {
+    let promo = req.body.promocode;
+    let cust_username = req.body.username;
+    Discount.find({promocode: promo}, async (err, data) => {
+        if (err) {
+            console.log(err);
+            res.send('Something went wrong');
+        }
+        else {
+            if (data.length >= 1) {
+                for (let i = 0; i < data.length; i++) {
+                    let cust_arr = data[i].customers;
+                    let length1 = cust_arr.length;
+                    let id = data[i]._id;
+                    for (let j = 0; j < cust_arr.length; j++) {
+                        if (cust_username == cust_arr[j]) {
+                            cust_arr.splice(j, 1);
+                        }
+                    }
+                    let length2 = cust_arr.length;
+                    if (length1 == length2) {
+                        res.send('Incorrect Promocode');
+                    }
+                    else {
+                        let amount =  (1 - (data[i].percentage / 100));
+                        let final = {
+                            "discount" : amount
+                        }
+                        if (cust_arr.length == 0) {
+                            console.log("Here");
+                            await Discount.deleteMany({promocode: promo});
+                            res.send(final);
+                        }
+                        else {
+                            console.log("ELSEHERE")
+                            await Discount.updateOne({"_id": id}, {$set: {customers: cust_arr}});
+                            res.send(final);
+                        }
+                    }
+                }
+            }
+            else {
+                console.log("Jhoot bolta saala");
+                res.send("Incorrect Promocode");
+            }
+        }
+    })
 });

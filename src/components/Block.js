@@ -1,32 +1,42 @@
 import React from 'react'
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom'
 
-import Product from './product';
 
 
+const Block = () => {
+  const [props,setProps] = React.useState([{}]);
 
-const Block = (props) => {
-  const [Check, setCheck] = React.useState(true);
-  const [Index, setIndex] = React.useState(-1);
-  function productScreen(id){
-    console.log(props.featured[id])
-    setIndex(id);
-    setCheck(false);
+  let navigate = useNavigate();
+  function productScreen(Name){
+    let index = props.findIndex( item => Name === item.name );
+    navigate("/product", {state: props[index]});
   }
+
+    React.useEffect(()=> {
+      axios.get('http://localhost:8000/home')
+      .then(function(res) {
+          setProps(res.data)          
+      }, props)
+      .catch(function(err) {
+          console.log(err);
+      })
+    }, [])
+
   return (
-    Check?(
     <>
       <h2 style={{textAlign:"center"}}>{props.title}</h2>
              <div class="row" style={{margin:"0 0 55px 0cm"}}>
-                 {props.featured.map((item)=>{
+                 {props.map((item)=>{
                    
                      return(
                        
                         <div class="col-3" style={{textAlign: "center", padding: '2cm', margin:"0 0 0 3cm"}}>
                          <div className="card" style={{width: "22rem", outline: "3px ridge grey"}}>
-                         <button onClick={()=>{productScreen(item.id)}}><img className="card-img-top" src={item.pic} alt="Card image cap"/></button>
+                         <button onClick={()=>{productScreen(item.name)}}><img className="card-img-top" src={item.pic} alt="Card image cap"/></button>
                          <div className="card-body" style={{backgroundColor:"grey"}}>
                            <p className="card-text"><h4><b>{item.name}</b></h4></p>
-                           <h4><b>Rs: {item.price} /-</b></h4>
+                           <h4><b>Rs: {item.sales_price} /-</b></h4>
                          </div>
                        </div>
                        </div>
@@ -34,7 +44,7 @@ const Block = (props) => {
                  })}
             </div>
       
-    </>):(<><Product props={props.featured[Index]}></Product></>)
+    </>
   )
 }
 

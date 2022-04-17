@@ -5,7 +5,6 @@ const orderSchema = new Schema({
     customer_username: {
         type: String,
         required: true
-
     },
     product_name: {
         type: String,
@@ -17,6 +16,10 @@ const orderSchema = new Schema({
     },
     status: {
         type: String,
+        required: true
+    },
+    discount: {
+        type: Number,
         required: true
     }
 
