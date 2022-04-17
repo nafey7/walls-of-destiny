@@ -11,11 +11,13 @@ import Checkout from './components/Checkout';
 import Login from './components/Login';
 import AdminLogin from './components/AdminLogin';
 import Profile from './components/Profile';
+import Product from './components/product';
 import Rewards from './components/Rewards';
 import About from './components/About';
 import Contactus from './components/ContactUs';
 // import Trackorder from './components/trackOrder';
 import Orders from './components/orderhistory';
+import Verify from './components/verifyemail';
 import AdminHome from './components/AdminHome';
 import ViewOrders from './components/ViewOrders';
 import Summary from './components/Summary';
@@ -34,6 +36,7 @@ function App() {
             <Route path="/decor" element={ <><Navbar /> <Block featured={decor} title={"Decorations"}/><Footer /></>}/>
             <Route path="/art" element={ <><Navbar /> <Block featured={art} title={"Art"}/><Footer /></>}/>
             <Route path="/lights" element={ <><Navbar /> <Block featured={lights} title={"Lights"}/><Footer /></>}/>
+            <Route path="/product" element={ <><Navbar /> <Product/><Footer /></>}/>
             <Route path="/cart" element={<><Navbar /> <Cart featured={featured}/> <Footer /></>}/>
             <Route path="/login" element={ <><Navbar /> <Login/><Footer /></>}/>
             <Route path="/checkout" element={ <><Navbar /> <Checkout/><Footer /></>}/>
@@ -43,6 +46,8 @@ function App() {
             <Route path="/orders" element={ <><Navbar /> <Orders/><Footer /></>}/>
             <Route path="/about" element={ <><Navbar /> <About/><Footer /></>}/>
             <Route path="/ContactUs" element={<><Navbar /> <Contactus/><Footer /></>}/>
+            <Route path="/verifyemail" element={<><Navbar /> <Verify/><Footer /></>}/>
+            
             <Route path="*" element={<ErrorPage message={{message: "404 not found"}}/>}/>
             <Route path= '/error' element={<ErrorPage/>}/>
 
@@ -56,8 +61,8 @@ function App() {
           </Routes>    
           
         </div>
-    </Router>        
-    // <Navbar />
+        
+    </Router>    
   );
 }
 // dummy data

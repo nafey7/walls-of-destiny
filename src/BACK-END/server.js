@@ -53,24 +53,24 @@ app.post('/add_product', (req,res) => {
 
 })
 
-// app.get('/discount', (req,res) => {
-//     // let username = req.body.username;
-//     // let name = req.body.name;
-//     const discount = new Discount({
-//         percentage: 69,
-//         promocode: "MUFTA",
-//         customers: ['Arslan123', 'Mahad123', 'silal123']
-//     });
+app.get('/discount', (req,res) => {
+    // let username = req.body.username;
+    // let name = req.body.name;
+    const discount = new Discount({
+        percentage: 69,
+        promocode: "MUFTA2",
+        customers: ['silalsexy']
+    });
 
-//     discount.save()
-//     .then ((res) => {
-//         console.log(res);
-//     })
-//     .catch ((err) => {
-//         console.log(err);
-//     });
+    discount.save()
+    .then ((res) => {
+        console.log(res);
+    })
+    .catch ((err) => {
+        console.log(err);
+    });
 
-// })
+})
 
 // app.get('/cart', (req,res) => {
 //     // let username = req.body.username;

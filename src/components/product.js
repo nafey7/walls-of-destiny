@@ -1,6 +1,22 @@
-import React from 'react'
+import React from 'react';
+import axios from 'axios';
+import {reactLocalStorage} from 'reactjs-localstorage';
+import {useLocation} from 'react-router-dom';
 
-function Product({props}) {
+function Product() {
+  const location = useLocation();
+  const [props, setProps] = React.useState(location.state)
+  console.log(props)
+  const addCart = () =>{
+
+    let username = reactLocalStorage.get('username', "", true);
+    axios.post('http://localhost:8000/AddToCart', {
+        username: username,
+        product_name: location.state.name
+      })
+    alert("Product added successfully")
+  }
+
     return (
     <div className="small-container">
     
@@ -26,7 +42,7 @@ function Product({props}) {
       </div>
     </div>
     <div className='d-flex justify-content-center'>
-      <button type="button" className="btn btn-dark btn-lg" style={{ margin:"10px"}}><b>Add to Cart</b></button>
+      <button type="button" className="btn btn-dark btn-lg" onClick={()=>{addCart()}} style={{ margin:"10px"}}><b>Add to Cart</b></button>
       <button type="button" className="btn btn-success btn-lg" style={{ margin:"10px"}}><b>Buy Now</b></button>
       </div>
   </div>
