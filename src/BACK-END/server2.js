@@ -119,8 +119,7 @@ app.post('/signup', async (req,res) => {
             console.log(error);
         } else {
             console.log('Email sent: ' + info.response);
-            console.log("yesss");
-            console.log("lololol");
+
             user_data = {};
             user_data.username = req.body.username;
             user_data.name = req.body.name;
@@ -155,7 +154,7 @@ app.post('/login', (req,res) => {
 
 
     Customer.find({username: req.body.username, password: pbkdf2.pbkdf2Sync(req.body.password, 'habibi', 1, 32, 'sha512')}, (err,data) => {
-
+        console.log(typeof(pbkdf2.pbkdf2Sync(req.body.password, 'habibi', 1, 32, 'sha512')));
         if (!err){
             if (data.length >= 1){
             console.log("USER HAS BEEN FOUND");
@@ -285,12 +284,25 @@ app.post('/search_product', (req,res) => {
 app.post('/update_customer_info', (req,res) => {
     // req.body will be an object
 
+    if (req.body.password == "password"){
+        Customer.updateMany({username: req.body.username}, {$set: {name: req.body.name, address: req.body.address, contact: req.body.contact}}, (err,data) => {
+            if (!err){
+                res.send("Success");
+            }
+            else{
+                res.send("Error");
+            }
+            
+        });
+    }
+    else{ 
+    
     if (req.body.password.length <= 5){
         res.send("Password should be greater than 5 characters");
         return;
     }
 
-    Customer.updateMany({username: req.body.username}, {$set: {name: req.body.name, address: req.body.address, contact: req.body.contact, email: req.body.email, password: pbkdf2.pbkdf2Sync(req.body.password, 'habibi', 1, 32, 'sha512')}}, (err,data) => {
+    Customer.updateMany({username: req.body.username}, {$set: {name: req.body.name, address: req.body.address, contact: req.body.contact, password: pbkdf2.pbkdf2Sync(req.body.password, 'habibi', 1, 32, 'sha512')}}, (err,data) => {
         if (!err){
             res.send("Success");
         }
@@ -299,6 +311,7 @@ app.post('/update_customer_info', (req,res) => {
         }
         
     });
+}
         
 });
 
