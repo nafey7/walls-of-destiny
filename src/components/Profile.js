@@ -8,6 +8,7 @@ import { useFormik } from 'formik';
 
 function Profile() {
     let username = reactLocalStorage.get('username', "", true);
+    const navigate = useNavigate();
     const [cust, setCust] = React.useState({
         address: '',
         contact: '',
@@ -15,31 +16,16 @@ function Profile() {
         password: 'password',
         name: '',
     })
-    // const formik = useFormik({
-    //     initialValues: {
-    //         address: '',
-    //         contact: '',
-    //         username: '',
-    //         password: '',
-    //         name: '',
-    //       },
-    //       enableReinitialize: true,
-    //       onSubmit: values =>{
 
-    //         axios.post('http://localhost:8000/update_customer_info',{
-    //             username: username,
-    //             password: values.password, 
-    //             name: values.name,
-    //             address: values.address, 
-    //             contact: values.contact
-    //         })
-    //         .then(function(res) {
-    //             alert("Change Successful!");                        
-    //         })
-    //         .catch(function(err) {
-    //             console.log(err);
-    //     })}
-    // })
+    function deleteaccount() {
+        axios.post('http://localhost:8000/deactivate_account',{username: username})
+            .then(function(res) {
+                reactLocalStorage.remove('username');
+                navigate("/")
+                alert(res);                       
+            })
+            
+    }
 
     function changepassword(e){
         let x = cust;
@@ -81,9 +67,7 @@ function Profile() {
                 alt="Remy Sharp"
                 // src="https://via.placeholder.com/150"
                 sx={{ width: 128, height: 128 }}>H</Avatar>
-            <div className= "col" style ={{ margin: "50px"}}>
-                <button type="button" className="btn btn-success btn-sm">Upload New Avatar</button>
-            </div>
+
             
         </div>
         
@@ -96,8 +80,7 @@ function Profile() {
             <label for="contactInput" className="form-label">Contact</label>
             <input className="form-control" id = "contactInput" name="contactInput" onChange={(e)=>{changecontact(e.target.value)}}  type="text" placeholder="+92 300 *******" />
             <br></br>
-            <Link to={{pathname: "/"}} style={{backgroundColor:"",margin:"0 20px", fontSize:"18px"}}>
-            <button type="button" className="btn btn-dark">Back</button></Link>
+
             <br></br>
             </div>
             <div className="col" style ={{ margin: "0 50px"}}>
@@ -105,13 +88,13 @@ function Profile() {
             <input className="form-control" type="text" id = "nameInput" name= "nameInput" onChange={(e)=>{changename(e.target.value)}} placeholder="firstname lastname"/>
             <br></br>
             <label for="passwordInput" className="form-label">Password</label>
-            <input className="form-control" type="text" id = "passwordInput" name= "passwordInput" oonChange={(e)=>{changepassword(e.target.value)}} placeholder="********"/>
+            <input className="form-control" type="password" id = "passwordInput" name= "passwordInput" onChange={(e)=>{changepassword(e.target.value)}} placeholder="********"/>
             <br></br>
             <button type="button" onClick={done} className="btn btn-success">Apply</button>
             <br></br>
             </div>
             <div className="col-4">
-            <button type="button" className="btn btn-danger">Delete My Account</button>
+            <button type="button" className="btn btn-danger" onClick={()=>{deleteaccount()}}>Delete My Account</button>
             </div>
         </div>
         </div>   
