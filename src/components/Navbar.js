@@ -1,29 +1,58 @@
 import React from 'react'
 import { ReactComponent as Logo } from './logo.svg';
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import {reactLocalStorage} from 'reactjs-localstorage';
-import {useLocation, useNavigate} from "react-router-dom";
+import { useFormik } from 'formik';
+import axios from 'axios';
 
 
-function Navbar(props) {
-  const [Check, setCheck] = React.useState(false);
-  let navigate = useNavigate();
-  function logout(){
-    reactLocalStorage.remove('username');
-    navigate("/login")
-  }
-  let username
+function Navbar() {
+  const [props,setProps] = React.useState([{}]);
+  const [Check, setCheck] = React.useState();
+
+  let username = reactLocalStorage.get('username', "", true);
   React.useEffect(() => {
-    username = reactLocalStorage.get('username', "", true);
     if(username !== ""){
       setCheck(true);
     }
 
   }, username)
+
+  let navigate = useNavigate();
+  function productScreen(Name){
+    let index = props.findIndex( item => Name === item.name );
+    navigate("/product", {state: props[index]});
+  }
+  
+  const formik = useFormik({
+    initialValues: {
+      search: '',
+    },
+    onSubmit: values => {
+      axios.post('http://localhost:8000/search_product', {
+        name: values.search, 
+      })
+      .then(function (response) {
+        if(response.data)
+        {
+          productScreen(response.data.name);          
+        }
+        else
+        {
+          alert("No product with your search exists.");
+        }
+        
+      })
+      .catch(function (error) {
+        console.log(error);
+        navigate('/error');
+      });
+    },
+  });
+
   
 
   return (
-      <>
       <nav className="navbar sticky-top navbar-expand-lg navbar-dark" style={{backgroundColor:"black"}}>
         <div className="container-fluid">
           <Logo width="99" height="59" className="d-inline-block" style={{backgroundColor:"#a7ac38"}}/>
@@ -31,7 +60,7 @@ function Navbar(props) {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav" style= {{backgroundColor:"",margin:"0 40px 0px"}}>
-            <ul className="navbar-nav"style= {{backgroundColor:"",margin:"0 225px 0px"}}>
+            <ul className="navbar-nav" style= {{backgroundColor:"",margin:"0 225px 0px"}}>
               <li className="nav-item">
                 <Link to={{pathname: "/"}} style={{margin:"0 20px", fontSize:"18px", color: "#a7ac38"}}>Home</Link>
               </li>
@@ -52,15 +81,15 @@ function Navbar(props) {
           </div>
           
           <div className='justify-content-end'>
-          <form  id="search" className="d-flex" style={{display:'inline-flex'}}>
-                <input id="searchbar" className="form-control me-2" type="search" placeholder="Search" aria-label="Search" style={{borderRadius: '15px', margin: "5px 0px 0px 0px"}}/>
+          <form  id="searchbar" className="d-flex" style={{display:'inline-flex'}} onSubmit={formik.handleSubmit}>
+                <input id="searchbar" className="form-control me-2" type="search" onChange={formik.handleChange} value={formik.values.search} placeholder="Search" style={{borderRadius: '15px', margin: "5px 0px 0px 0px"}}/>
                 <button className="btn btn-outline-success" type="submit"><i className="material-icons" style={{fontSize:"25px",color:"white"}}>search</i></button>
-                
+          
           </form>
           </div>
           <div>
-          <Link to={{pathname: "/cart",}}
-            ><button className='btn btn-outline-success' style={{fontSize:"20px"}}><i className="glyphicon glyphicon-shopping-cart" style={{fontSize:"20px",color:"white"}}></i></button></Link>
+          <Link to={{pathname: "/cart",}}>
+            <button className='btn btn-outline-success' style={{fontSize:"20px"}}><i className="glyphicon glyphicon-shopping-cart" style={{fontSize:"20px",color:"white"}}></i></button></Link>
           {Check?(
           <div className="btn-group dropleft">
           <button className='btn btn-outline-success dropdown-toggle' data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{fontSize:"20px"}}><i className="fa fa-user" style={{fontSize:"20px",color:"white"}}/></button>
@@ -77,7 +106,7 @@ function Navbar(props) {
           <Link to={{pathname: "/rewards"}}
             ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>Rewards</button></Link>
           <div className="dropdown-divider"></div>
-<button className='btn btn-outline-success btn-sm' onClick={() =>{logout()}} style={{fontSize:"15px"}}>Logout</button>
+          <button className='btn btn-outline-success btn-sm' onClick={() =>{logout()}} style={{fontSize:"15px"}}>Logout</button>
           </div>
           </div>):(<Link to={{pathname: "/login"}} style={{backgroundColor:"",margin:"0 20px", fontSize:"18px"}}>
           <button className='btn btn-primary' style={{fontSize:"10px"}}>Sign In</button></Link>)}
@@ -85,8 +114,6 @@ function Navbar(props) {
           </div>
         </div>
       </nav>
-
-    </>
   )
 }
 
