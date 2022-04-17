@@ -579,6 +579,9 @@ app.post('/ViewCart', (req, res) => {
 app.post('/Payment', async (req, res) => {
     let cust_username = req.body.username;
     let discount = (100 - (req.body.discount * 100));
+    if (req.body.discount == 1) {
+        discount = 0;
+    }
     let items = req.body.items;
     for (let i = 0; i < items.length; i++) {
         let product_name = items[i].name;
