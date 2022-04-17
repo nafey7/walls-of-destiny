@@ -77,7 +77,7 @@ function Navbar(props) {
           <Link to={{pathname: "/rewards"}}
             ><button className='btn btn-outline-success btn-sm' style={{fontSize:"15px"}}>Rewards</button></Link>
           <div className="dropdown-divider"></div>
-<button className='btn btn-outline-success btn-sm' onClick={() =>{logout()}} style={{fontSize:"15px"}}>Logout</button>
+          <button className='btn btn-outline-success btn-sm' onClick={() =>{logout()}} style={{fontSize:"15px"}}>Logout</button>
           </div>
           </div>):(<Link to={{pathname: "/login"}} style={{backgroundColor:"",margin:"0 20px", fontSize:"18px"}}>
           <button className='btn btn-primary' style={{fontSize:"10px"}}>Sign In</button></Link>)}

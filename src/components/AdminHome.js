@@ -28,11 +28,11 @@ function AdminHome() {
     return (
       <>
     <Link to={{pathname: "/AddProduct"}}>
-    <button className="btn btn-dark">Add Product</button>
+    <button className="btn" style={{margin:"50px 0 0 79%",width:"200px",fontSize:"20px",color:"white",backgroundColor:"#aca738"}}>Add Product</button>
     </Link>
     
 
-        <h2 style={{textAlign:"center"}}>All Products</h2>
+        <h2 style={{margin:"0 0 0 80px",textAlign:"center"}}>All Products</h2>
                <div class="row" style={{margin:"0 0 55px 0cm"}}>
                    {prod.map((item)=>{
                      

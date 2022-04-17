@@ -130,17 +130,16 @@ function AddProduct() {
     }
     
     return (
-    <div className="Product" style={{height:"100%", backgroundColor:"white", position:"relative", width:"100%"}}>
-    <div class="container" style={{margin: "50px 150px", height:"100%", backgroundColor:"white", position:"relative", width:"100%"}}>
+    <div className="Product" style={{height:"100vh",width:"100wh",backgroundColor:"#aca738"}}>
+    <div class="container" style={{margin: "50px 150px",backgroundSize:"cover",backgroundColor:"#aca738", position:"relative", width:"100%"}}>
         <div class="row align-items-center">
         <div class="col-2">
             
             
             </div>
-            <h1>Product Details:</h1>
+            <h1 style={{margin:"70px 0 0 200px"}}>Product Details:</h1>
             <form  >
-                <div>
-            <div class="col-4">
+                
             {/* <ImageUploadPreviewComponent/> */}
             {/* <form method="post" enctype="multipart/form-data">
                 <div>
@@ -181,6 +180,9 @@ function AddProduct() {
                 </div>
             </form> */}
             <br></br>
+            <div className='container' style={{height:"55vh", width:"60vw",backgroundColor:"#E5E5E5", borderRadius:"15px", margin:"0 0 100px 200px"}}>
+            <div className='row' style={{margin:"70px 0 0 70px "}}>
+            <div class="col-5">
  
             <input class="form-control" type="text" placeholder="Name" id= "1" name ="1" onChange={(e)=>{changename(e.target.value)}}  aria-label="name"/>
             <br></br>
@@ -194,9 +196,8 @@ function AddProduct() {
 
                  
             </div>
-            <div class="col-4">
+            <div class="col-5" style={{margin:"0px 0 0 40px "}}>
             
-            <br></br>
             <input class="form-control" type="text" placeholder="cost price" aria-label="cost_price" onChange={(e)=>{changecostp(e.target.value)}} id= "6" name ="6" />
             <br></br>
             <input class="form-control" type="text" placeholder="sales price" aria-label="sales_price" onChange={(e)=>{changesalep(e.target.value)}} id= "7" name ="7" />
@@ -206,7 +207,8 @@ function AddProduct() {
             <input class="form-control" type="text" placeholder="Featured" aria-label="Featured" rows="3" onChange={(e)=>{changefeatured(e.target.value)}} id= "9" name ="9" />            
             <br></br>
  
-            <button type="button" class="btn btn-success" onClick={()=>{done()}} style = {{margin: "Auto 10px"}}>Add</button>
+            <button type="button" class="btn" onClick={()=>{done()}} style = {{fontSize:"18px",backgroundColor:"#aca738",color:"white",margin: "Auto 0 auto 200px"}}>Add Product</button>
+            </div>
             </div>
             </div>
             </form>
