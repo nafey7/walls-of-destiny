@@ -22,6 +22,7 @@ import AdminHome from './components/AdminHome';
 import ViewOrders from './components/ViewOrders';
 import Summary from './components/Summary';
 import AdminNavbar from './components/AdminNavbar';
+import EditProduct from './components/EditProduct';
 
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
       <div className="App" style={{height:"100%", backgroundColor:"white", position:"relative", width:"100%", backgroundSize: "cover"}}>
           
           <Routes>
-            <Route path="/" element={<><Navbar /> <Block title={"Featured Products"}/><Footer /></>}/>
+            <Route path="/" element={<><Navbar /> <Block title={"Featured Products"}/><ChatBot/><Footer /></>}/>
             <Route path="/clocks" element={ <><Navbar /> <Block  title={"Clock"}/><Footer /></>}/>
             <Route path="/decor" element={ <><Navbar /> <Block title={"Decor"}/><Footer /></>}/>
             <Route path="/art" element={ <><Navbar /> <Block title={"Art"}/><Footer /></>}/>
@@ -53,6 +54,7 @@ function App() {
 
             {/* Admin  */}
             <Route path="/AddProduct" element={<><AdminNavbar /><AddProduct/></>}/>
+            <Route path="/EditProduct" element={<><AdminNavbar /><EditProduct/></>}/>
             <Route path="/AdminHome" element={<><AdminNavbar /><AdminHome featured={featured} title={"Art"}/></>}/>
             <Route path="/ViewOrders" element={<><AdminNavbar /><ViewOrders/><Footer /></>}/>
             <Route path="/admin/summary" element={<><AdminNavbar /><Summary/><Footer /></>}/>
